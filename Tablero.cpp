@@ -18,3 +18,11 @@ Tablero::Tablero(unsigned int x, unsigned int y) {
 Tablero::~Tablero() {
 
 }
+
+Casillero * Tablero::getCasillero(unsigned int x, unsigned int y) {
+    return this->casilleros->obtener(x)->obtener(y);
+}
+
+void Tablero::setCasillero(unsigned int x, unsigned int y, Ficha *ficha) {
+    this->casilleros->obtener(x)->obtener(y)->setFicha(ficha);
+}

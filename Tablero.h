@@ -3,6 +3,7 @@
 
 #include "Lista.h"
 #include "Casillero.h"
+#include "Ficha.h"
 
 class Tablero{
 private:
@@ -27,9 +28,10 @@ public:
     Casillero * getCasillero(unsigned int x, unsigned int y);
 
     /*
-     *
+     * Pre: recibe las coordenadas x,y donde se desea colocar la ficha pasada como argumento
+     * Post: se coloca la ficha recibida en el casillero de la coordenada indicada
      */
-    void setCasillero(unsigned int x, unsigned int y, Casillero * casillero)
+    void setCasillero(unsigned int x, unsigned int y, Ficha * ficha)
 };
 
 #endif //TATETI_2_0_TABLERO_H
