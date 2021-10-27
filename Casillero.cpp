@@ -1,5 +1,5 @@
-#include "casillero.h"
-#include "ficha.h"
+#include "Casillero.h"
+#include "Ficha.h"
 using namespace std;
 
 Casillero::Casillero(){

@@ -1,5 +1,5 @@
-#include "ficha.h"
-#include "casillero.h"
+#include "Ficha.h"
+#include "Casillero.h"
 #include "jugador.h"
 
 

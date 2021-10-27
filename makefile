@@ -13,13 +13,13 @@ tp2: ficha.o casillero.o jugador.o main.o
 main.o: main.cpp 
 	$(CC) $(CFLAGS) -o main.o  -c main.cpp
 
-casillero.o: casillero.cpp casillero.h 
+casillero.o: Casillero.cpp Casillero.h
 	$(CC) $(CFLAGS) -o casillero.o  -c casillero.cpp
 
 jugador.o: jugador.cpp  jugador.h 
 	$(CC) $(CFLAGS) -o jugador.o  -c jugador.cpp
 
-ficha.o: ficha.cpp  ficha.h 
+ficha.o: Ficha.cpp  Ficha.h
 	$(CC) $(CFLAGS) -o ficha.o  -c ficha.cpp
 
 #Make Clear

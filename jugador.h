@@ -1,7 +1,7 @@
 #ifndef _JUGADOR_H_INCLUDED_
 #define _JUGADOR_H_INCLUDED_
 #include <iostream>
-#include "ficha.h"
+#include "Ficha.h"
 
 class Jugador
 {

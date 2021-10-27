@@ -1,6 +1,6 @@
 #ifndef _CASILLERO_H_INCLUDED_
 #define _CASILLERO_H_INCLUDED_
-#include "ficha.h"
+#include "Ficha.h"
 
 class Casillero
 {
