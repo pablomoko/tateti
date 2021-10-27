@@ -11,6 +11,16 @@ public:
     Casillero();//CONSTRUCTOR POR DEFECTO
     ~Casillero();//DESTRUCTOR
     Casillero(Ficha * ficha);//CONSTRUCTOR PARAMETRIZADO
+
+    /*
+     * Post: devuelve la ficha del casillero
+     */
+    Ficha * getFicha();
+
+    /*
+     * Post: establece la ficha indicada en el casillero
+     */
+    void setFicha(Ficha * nuevaFicha);
 };
 
 #endif
