@@ -1,5 +1,4 @@
 #include "Ficha.h"
-#include <iostream>
 #include <string>
 
 Ficha::Ficha(char simbolo){
@@ -7,7 +6,13 @@ Ficha::Ficha(char simbolo){
     this->simbolo = simbolo;
 }
 
-Ficha::~Ficha(){}
+Ficha::~Ficha(){
+
+}
+
+char Ficha::getSimbolo() {
+    return this->simbolo;
+}
 
 void Ficha::validar(char simbolo){
     if ((simbolo == '\0') || 

@@ -22,7 +22,6 @@ public:
     ~Ficha();
 
     /**
-     * pre:-
      * post: Devuelve valor del simbolo(char).
      **/
     char getSimbolo();
