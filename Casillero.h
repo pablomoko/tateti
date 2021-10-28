@@ -2,23 +2,33 @@
 #define _CASILLERO_H_INCLUDED_
 #include "Ficha.h"
 
-class Casillero
-{
-friend class Ficha;
+class Casillero{
 private:
-    Ficha *ficha;
+    Ficha * ficha;
+
 public:
-    Casillero();//CONSTRUCTOR POR DEFECTO
-    ~Casillero();//DESTRUCTOR
-    Casillero(Ficha * ficha);//CONSTRUCTOR PARAMETRIZADO
+    /*
+     * Post: crea un Casillero con la Ficha vacia
+     */
+    Casillero();
 
     /*
-     * Post: devuelve la ficha del casillero
+     * Post: crea un Casillero con la Ficha indicadas
+     */
+    Casillero(Ficha * ficha);
+
+    /*
+     * Post: libera toda la memoria solicitada para el Casillero
+     */
+    ~Casillero();
+
+    /*
+     * Post: devuelve la Ficha del Casillero
      */
     Ficha * getFicha();
 
     /*
-     * Post: establece la ficha indicada en el casillero
+     * Post: establece la Ficha indicada en el Casillero
      */
     void setFicha(Ficha * nuevaFicha);
 };
