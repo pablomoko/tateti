@@ -31,16 +31,7 @@ public:
      * pre:
      * post:
      **/
-    bool esIgual(Ficha * ficha1,Ficha * ficha2){
-
-        try{
-            return (ficha1->getSimbolo() == ficha2->getSimbolo()); 
-        }
-        catch(...){
-        }
-        
-        return false;
-    }
+    bool sonIguales(Ficha * ficha1,Ficha * ficha2);
 
 private:
 
@@ -51,12 +42,5 @@ private:
     void validar(char simbolo); 
     
 };
-
-
-
-
-
-
-
 
 #endif

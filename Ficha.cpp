@@ -17,7 +17,14 @@ void Ficha::validar(char simbolo){
     }    
 }
 
-
+bool Ficha::sonIguales(Ficha * ficha1, Ficha * ficha2){
+    try {
+        return (ficha1->getSimbolo() == ficha2->getSimbolo());
+    } catch (...) {
+        //si los punteros son nulos salta la excepcion
+        return false;
+    }
+}
 
 
 
