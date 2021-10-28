@@ -1,13 +1,16 @@
 #include "Casillero.h"
-#include "Ficha.h"
 using namespace std;
 
 Casillero::Casillero(){
-    ficha = nullptr;
+    this->ficha = new Ficha(VACIO); //definir VACIO
 }
 
 Casillero::Casillero(Ficha * ficha){
     this->ficha = ficha;
+}
+
+void Casillero::~Casillero() {
+    
 }
 
 Ficha * Casillero::getFicha(){
