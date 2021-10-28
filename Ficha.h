@@ -6,37 +6,33 @@ class Ficha{
 private:
     char simbolo;
 
-
 public:
 
-    /**
-     * pre:
-     * post:
+    /*
+     * Post: crea una ficha con el simbolo indicado
      * */
     Ficha(char simbolo);
 
-    /**
-     * pre:
-     * post:
+    /*
+     * Post: libera toda la memoria solicitada para la Ficha
      * */
     ~Ficha();
 
-    /**
-     * post: Devuelve valor del simbolo(char).
+    /*
+     * Post: devuelve el simbolo de la Ficha
      **/
     char getSimbolo();
 
-    /**
-     * pre:
-     * post:
+    /*
+     * Post: devuelve true si los simbolos de las Fichas recibidas son iguales
+     * y false si no lo son
      **/
-    bool sonIguales(Ficha * ficha1,Ficha * ficha2);
+    bool sonIguales(Ficha * ficha1, Ficha * ficha2);
 
 private:
 
-    /**
-     * pre:-
-     * post:valida que el simbolo ingresado no sea '\0  o ' ' o lanza un excepcion en caso contrario.
+    /*
+     * Post:valida que el simbolo ingresado no sea '\0  o ' ' o lanza un excepcion en caso contrario.
      **/
     void validar(char simbolo); 
     
