@@ -26,3 +26,19 @@ Casillero * Tablero::getCasillero(unsigned int x, unsigned int y) {
 void Tablero::setCasillero(unsigned int x, unsigned int y, Ficha *ficha) {
     this->casilleros->obtener(x)->obtener(y)->setFicha(ficha);
 }
+
+void Tablero::moverFicha(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2) {
+    //valida si las coordenadas ingresadas son válidas
+    if(x1 > casilleros->contarElementos() ||
+       x2 > casilleros->contarElementos() ||
+       y1 > casilleros->obtener(1)->contarElementos() ||  //la posicion escogida es arbitraria, ya que el tablero es cuadrado
+       y2 > casilleros->obtener(1)->contarElementos()){
+        throw "Una de las coordenadas ingresadas esta fuera de los limites del tablero"
+    }
+
+    //intercambia fichas, se podria implementar usando anterior y siguiente?
+    Ficha * ficha1 = casilleros->obtener(x1)->obtener(y1)->getFicha();
+    Ficha * ficha2 = casilleros->obtener(x2)->obtener(y2)->getFicha();
+    casilleros->obtener(x2)->obtener(y2)->setFicha(ficha1);
+    casilleros->obtener(x1)->obtener(y1)->setFicha(ficha2);
+}
