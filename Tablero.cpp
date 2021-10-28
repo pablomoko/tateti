@@ -36,7 +36,7 @@ void Tablero::moverFicha(unsigned int x1, unsigned int y1, unsigned int x2, unsi
         throw "Una de las coordenadas ingresadas esta fuera de los limites del tablero"
     }
 
-    //intercambia fichas, se podria implementar usando anterior y siguiente?
+    //intercambia fichas, se podría implementar usando anterior y siguiente?
     Ficha * ficha1 = casilleros->obtener(x1)->obtener(y1)->getFicha();
     Ficha * ficha2 = casilleros->obtener(x2)->obtener(y2)->getFicha();
     casilleros->obtener(x2)->obtener(y2)->setFicha(ficha1);
