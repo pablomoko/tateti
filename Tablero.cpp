@@ -1,17 +1,23 @@
 #include "Tablero.h"
 
-Tablero::Tablero(unsigned int x, unsigned int y) {
-    this->casilleros = new Lista<Lista<Casillero *> *>();
+Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
+    this->casilleros = new Lista<Lista<Lista<Casillero *> *> *>();
 
-    for (int i = 0; i < x; i++) {   //Se crea la lista perteneciente a las columnas
-        Lista<Casillero *> * columna = new Lista<Casillero *>();
+    for (int k = 0; k < z; k++) {   //Se crea la lista perteneciente a las filas del tablero
+        Lista<Lista<Casillero *> *> * fila = new Lista<Lista<Casillero *> *>();
 
-        for (int j = 0; j < y; ++j) {   //Se crean los casilleros apuntados por cada columna
-            Casillero * casillero = new Casillero();
-            columna->altaFinal(casillero)
+        for (int i = 0; i < x; i++) {   //Se crea la lista perteneciente a las columnas del plano x,y
+            Lista<Casillero *> * columna = new Lista<Casillero *>();
+
+            for (int j = 0; j < y; j++) {   //Se crean los casilleros apuntados por cada columna del plano
+                Casillero * casillero = new Casillero();
+                columna->altaFinal(casillero)
+            }
+            //Una vez creadas las columnas del plano, se agregan a la lista de columnas que luego representara una fila del trablero
+            fila->altaFinal(columna);
         }
-        //Una vez creadas las columnas con sus respectivos casilleros, son agregadas al tablero
-        this->casilleros->altaFinal(columna);
+        //Cada vez que el primer for ejecuta su bloque, se le agrega un plano de *Casillero al tablero en el nivel k
+        this->casilleros->altaFinal(fila);
     }
 }
 
