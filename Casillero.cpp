@@ -3,6 +3,7 @@ using namespace std;
 
 Casillero::Casillero(){
     this->ficha = new Ficha(VACIO); //definir VACIO
+    this->casillerosAdyacentes = new Casillero * [3][3][3];
 }
 
 Casillero::Casillero(Ficha * ficha){
