@@ -5,6 +5,7 @@
 class Casillero{
 private:
     Ficha * ficha;
+    Casillero **** casillerosAdyacentes;
 
 public:
     /*
