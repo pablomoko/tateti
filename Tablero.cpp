@@ -44,15 +44,15 @@ Tablero::~Tablero() {
 
 }
 
-Casillero * Tablero::getCasillero(unsigned int x, unsigned int y) {
-    return this->casilleros->obtener(x)->obtener(y);
+Casillero * Tablero::getCasillero(unsigned int x, unsigned int y, unsigned int z) {
+    return this->casilleros->obtener(z)->obtener(x)->obtener(y);
 }
 
-void Tablero::setCasillero(unsigned int x, unsigned int y, Ficha * ficha) {
-    this->casilleros->obtener(x)->obtener(y)->setFicha(ficha);
+void Tablero::setCasillero(unsigned int x, unsigned int y, unsigned int z, Ficha * ficha) {
+    this->casilleros->obtener(z)->obtener(x)->obtener(y)->setFicha(ficha);
 }
 
-void Tablero::moverFicha(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2) {
+void Tablero::moverFicha(unsigned int x1, unsigned int y1, unsigned int z1, unsigned int x2, unsigned int y2, unsigned int z2) {
     //Valida si las coordenadas ingresadas son válidas
     if(x1 > casilleros->contarElementos() ||
        x2 > casilleros->contarElementos() ||
