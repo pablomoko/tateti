@@ -12,7 +12,8 @@ private:
 public:
     /*
      * Pre: recibe las longitudes de las tres dimensiones con las que se desea crear el tablero
-     * Post: inicializa un tablero de x ancho, y alto, z profundidad de casilleros vacios
+     * Post: inicializa un tablero de x ancho, y alto, z profundidad de casilleros vacios y
+     * asigna sus respectivos casilleros adyacentes
      */
     Tablero(unsigned int x, unsigned int y, unsigned int z);
 

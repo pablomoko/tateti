@@ -1,6 +1,7 @@
 #include "Tablero.h"
 
 Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
+    //Se crea el tablero
     this->casilleros = new Lista<Lista<Lista<Casillero *> *> *>();
 
     for (int k = 0; k < z; k++) {   //Se crea la lista perteneciente a las filas del tablero
@@ -18,6 +19,24 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
         }
         //Cada vez que el primer for ejecuta su bloque, se le agrega un plano de *Casillero al tablero en el nivel k
         this->casilleros->altaFinal(fila);
+    }
+
+    //Con el tablero ya creado, se asignan los vecinos de los casilleros
+    for (int k = 0; k < z; k++) {
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {   //Itera los casilleros del tablero uno por uno
+                Casillero * casillero = this->getCasillero(x, y, z);
+                //pensar mejor disenio y evitar codigo flecha
+                for (int l = -1; l < 2; l++) {
+                    for (int m = -1; m < 2; m++) {
+                        for (int n = -1; n < 2; n++) {  //Itera matriz con origen en casillero
+                            Casillero * casilleroAdyacente = this->getCasillero(i+l, j+m, k+n);
+                            casillero->asignarCasilleroAdyacente(l, m, n, casilleroAdyacente)
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
