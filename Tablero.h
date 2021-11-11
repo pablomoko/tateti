@@ -23,6 +23,14 @@ public:
     ~Tablero();
 
     /*
+     * Pre: recibe las coordenadas x,y,z del Casillero que se desea verificar
+     * Post: devuelve true si existe un Casillero en el Tablero ubicado en las
+     * coordenadas recibidas, devuelve false si no existe y lanza una excepcion
+     * si las coordenadas son inválidas
+     */
+    bool existeCasillero(unsigned int x, unsigned int y, unsigned int z);
+
+    /*
      * Pre: recibe las coordenadas x,y,z del casillero que se desea obtener
      * Post: devuelve el casillero que se encuentra en la coordenada recibida
      */

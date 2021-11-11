@@ -30,8 +30,10 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
                 for (int l = -1; l < 2; l++) {
                     for (int m = -1; m < 2; m++) {
                         for (int n = -1; n < 2; n++) {  //Itera matriz con origen en casillero
-                            Casillero * casilleroAdyacente = this->getCasillero(i+l, j+m, k+n);
-                            casillero->asignarCasilleroAdyacente(l, m, n, casilleroAdyacente)
+                            if (existeCasillero(i+l, j+m, k+n)) {
+                                Casillero *casilleroAdyacente = this->getCasillero(i+l, j+m, k+n);
+                                casillero->asignarCasilleroAdyacente(l, m, n, casilleroAdyacente)
+                            }
                         }
                     }
                 }
@@ -42,6 +44,10 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
 
 Tablero::~Tablero() {
 
+}
+
+bool Tablero::existeCasillero(unsigned int x, unsigned int y, unsigned int z) {
+    
 }
 
 Casillero * Tablero::getCasillero(unsigned int x, unsigned int y, unsigned int z) {
