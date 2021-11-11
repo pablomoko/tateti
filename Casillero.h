@@ -9,7 +9,8 @@ private:
 
 public:
     /*
-     * Post: crea un Casillero con la Ficha vacia
+     * Post: crea un Casillero con la Ficha vacia e inicializa
+     * sus 27 casillerosAdyacentes
      */
     Casillero();
 
@@ -22,6 +23,14 @@ public:
      * Post: libera toda la memoria solicitada para el Casillero
      */
     ~Casillero();
+
+    /*
+     * Pre: recibe las coordenadas respecto del mismo casillero tomando como referencia
+     * que el origen es la posicion del casillero.
+     * Post: asigna el casillero recibido como adyacente en la posicion recibida respecto
+     * del mismo casillero. Lanza una excepcion si las coordenadas son inválidas
+     */
+    void asignarCasilleroAdyacente(int x, int y, int z, Casillero * casilleroAdyacente);
 
     /*
      * Post: devuelve la Ficha del Casillero

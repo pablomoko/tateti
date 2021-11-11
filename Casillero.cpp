@@ -14,6 +14,15 @@ void Casillero::~Casillero() {
     
 }
 
+void Casillero::asignarCasilleroAdyacente(int x, int y, int z, Casillero * casilleroAdyacente) {
+    if ((x < -1 || x > 2) || (y < -1 || y > 2) || (z < -1 || z > 2)){
+        throw "Coordenadas invalidas. Se coma el mismo casillero como origen por lo tanto"
+              "las coordenadas deben estan comprendidas entre -1 y 2";
+    }
+
+    this->casillerosAdyacentes[x][y][z] = casilleroAdyacente;
+}
+
 Ficha * Casillero::getFicha(){
     return this->ficha;
 }
