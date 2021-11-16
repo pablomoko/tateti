@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "Ficha.h"
-#include "carta.h"
+#include "Carta.h"
 #include "Lista.h"
 
 class Jugador

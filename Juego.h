@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 #include "Tablero.h"
-#include "jugador.h"
-#include "carta.h"
-#include "pila.h"
+#include "Jugador.h"
+#include "Carta.h"
+#include "Pila.h"
 
 
 class Juego {

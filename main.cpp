@@ -1,6 +1,6 @@
 #include "Ficha.h"
 #include "Casillero.h"
-#include "jugador.h"
+#include "Jugador.h"
 
 
 int main(){
