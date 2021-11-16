@@ -14,13 +14,13 @@ main.o: main.cpp
 	$(CC) $(CFLAGS) -o main.o  -c main.cpp
 
 casillero.o: Casillero.cpp Casillero.h
-	$(CC) $(CFLAGS) -o casillero.o  -c casillero.cpp
+	$(CC) $(CFLAGS) -o casillero.o  -c Casillero.cpp
 
 jugador.o: jugador.cpp  jugador.h 
 	$(CC) $(CFLAGS) -o jugador.o  -c jugador.cpp
 
 ficha.o: Ficha.cpp  Ficha.h
-	$(CC) $(CFLAGS) -o ficha.o  -c ficha.cpp
+	$(CC) $(CFLAGS) -o ficha.o  -c Ficha.cpp
 
 #Make Clear
 

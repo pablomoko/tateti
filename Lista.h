@@ -92,6 +92,11 @@ public:
      */
     unsigned int contarElementos();
 
+    /*
+     * Post: devuelve -1 si el elemento no esta en la lista, si no devuelve el indice de su primer aparicion
+     */
+    int elementoPertenece( T elemento );
+
 private:
     /*
      * Pre: posicion pertenece al intervalo [1, contarElementos()]
@@ -158,8 +163,8 @@ template<class T>void Lista<T>::altaPosicion(T elemento, unsigned int posicion){
          */
         else{
             Nodo<T> * anterior = this->obtenerNodo(posicion - 1);
-            nuevo->cambiarSiguiente(anterior->obtenerSiguiente());
-            anterior->cambiarSiguiente(nuevo);
+            nuevo->setSiguiente(anterior->getSiguiente());
+            anterior->setSiguiente(nuevo);
         }
 
         this->tamanio++;
@@ -225,7 +230,6 @@ template<class T> bool Lista<T>::avanzarCursor(){
     return (this->cursor != NULL);
 }
 
-
 template<class T> T Lista<T>::obtenerCursor(){
     T elemento;
     if (this->cursor != NULL){
@@ -246,5 +250,27 @@ template<class T> Nodo<T>* Lista<T>::obtenerNodo(unsigned int posicion){
     return actual;
 }
 
+/*
+template<class T> int Lista<T>::elementoPertenece(T elemento) {
 
+    bool pertenece = false;
+    int indice = 0;
+    Nodo<T> * aux = this->primero;
+    while ( aux && !pertenece ) {
+        if ( aux->getDato() == elemento) {
+            pertenece = true;
+        }
+        else {
+            aux = aux->setSiguiente();
+            ++indice;
+        }
+    }
+
+    if ( !pertenece ) {
+        indice = -1;
+    }
+
+    return indice;
+}
+*/
 #endif //TATETI_2_0_LISTA_H

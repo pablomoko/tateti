@@ -3,14 +3,23 @@ using namespace std;
 
 Casillero::Casillero(){
     this->ficha = new Ficha(VACIO); //definir VACIO
-    this->casillerosAdyacentes = new Casillero * [3][3][3];
+    //this->casillerosAdyacentes = new Casillero * [3][3][3];
+
+    this->casillerosAdyacentes = new Casillero *** [3];
+    for (int i = 0; i < 3; ++i) {
+        this->casillerosAdyacentes[i] = new Casillero ** [3];
+
+        for (int j = 0; j < 3; ++j) {
+            this->casillerosAdyacentes[i][j] = new Casillero * [3];
+        }
+    }
 }
 
 Casillero::Casillero(Ficha * ficha){
     this->ficha = ficha;
 }
 
-void Casillero::~Casillero() {
+Casillero::~Casillero() {
     
 }
 
@@ -27,9 +36,9 @@ Ficha * Casillero::getFicha(){
     return this->ficha;
 }
 
-void Casillero::setFicha(Ficha * nuevaFicha){
+void Casillero::setFicha(Ficha * nuevaFicha) {
     this->ficha = nuevaFicha;
-
+}
 
 
 

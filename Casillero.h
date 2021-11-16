@@ -2,6 +2,8 @@
 #define _CASILLERO_H_INCLUDED_
 #include "Ficha.h"
 
+const char VACIO = 'Z';
+
 class Casillero{
 private:
     Ficha * ficha;
