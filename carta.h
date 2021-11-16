@@ -11,7 +11,7 @@ public:
     int getNumero();
 };
 
-
+/*
 Carta::Carta( unsigned int numeroDeCarta ) {
     this->numero = numeroDeCarta;
 }
@@ -19,5 +19,5 @@ Carta::Carta( unsigned int numeroDeCarta ) {
 int Carta::getNumero() {
     return this->numero;
 }
-
+*/
 #endif //__CARTA_H__

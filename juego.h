@@ -2,7 +2,7 @@
 #include <string>
 #include "Tablero.h"
 #include "jugador.h"
-//#include "carta.h"
+#include "carta.h"
 #include "pila.h"
 
 
@@ -36,30 +36,30 @@ public:
 	/*
 	 * recibe coordenadas en el tablero; el jugador es el actual
 	 */
-	ponerFicha();
+	void ponerFicha();
 	// con try - except
 
 	/*
 	 * recibe 2 coordenadas en el tablero; el jugador es el actual
 	 */
-	moverFicha();
+	void moverFicha();
 	// con try - except
 
 
-	activarCarta();
+	void activarCarta();
 
 private:
     std::string pedirNombre( int );
-    bool validarCantidadJugadores();
-    bool validarCantidadCartas();
-    bool validarDimensiones();
+    bool validarCantidadJugadores(int);
+    bool validarCantidadCartas(int);
+    bool validarDimensiones(int, int, int);
 
 };
 
 std::string pedirNombre( int jugadorNumero ) {
 	std::string nombre[50];
-	std:cout<<"Jugador "<<jugadorNumero<<" - Ingrese su nombre (max 10 caracteres) :";
-	std::cin<<nombre;
+	std::cout<<"Jugador "<<jugadorNumero<<" - Ingrese su nombre (max 10 caracteres) :";
+	std::cin>>nombre;
 
 	return nombre;
 }

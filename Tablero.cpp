@@ -12,7 +12,7 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
 
             for (int j = 0; j < y; j++) {   //Se crean los casilleros apuntados por cada columna del plano
                 Casillero * casillero = new Casillero();
-                columna->altaFinal(casillero)
+                columna->altaFinal(casillero);
             }
             //Una vez creadas las columnas del plano, se agregan a la lista de columnas que luego representara una fila del trablero
             fila->altaFinal(columna);
@@ -32,7 +32,7 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
                         for (int n = -1; n < 2; n++) {  //Itera matriz con origen en casillero
                             if (existeCasillero(i+l, j+m, k+n)) {
                                 Casillero *casilleroAdyacente = this->getCasillero(i+l, j+m, k+n);
-                                casillero->asignarCasilleroAdyacente(l, m, n, casilleroAdyacente)
+                                casillero->asignarCasilleroAdyacente(l, m, n, casilleroAdyacente);
                             }
                         }
                     }
@@ -64,12 +64,12 @@ void Tablero::moverFicha(unsigned int x1, unsigned int y1, unsigned int z1, unsi
        x2 > casilleros->contarElementos() ||
        y1 > casilleros->obtener(1)->contarElementos() ||  //La posicion escogida es arbitraria, ya que el tablero es cuadrado
        y2 > casilleros->obtener(1)->contarElementos()){
-        throw "Una de las coordenadas ingresadas esta fuera de los limites del tablero"
+        throw "Una de las coordenadas ingresadas esta fuera de los limites del tablero";
     }
 
     //Intercambia fichas, se podría implementar usando anterior y siguiente?
-    Ficha * ficha1 = casilleros->obtener(x1)->obtener(y1)->getFicha();
-    Ficha * ficha2 = casilleros->obtener(x2)->obtener(y2)->getFicha();
-    casilleros->obtener(x2)->obtener(y2)->setFicha(ficha1);
-    casilleros->obtener(x1)->obtener(y1)->setFicha(ficha2);
+    Ficha * ficha1 = casilleros->obtener(x1)->obtener(y1)->obtener(z1)->getFicha();
+    Ficha * ficha2 = casilleros->obtener(x2)->obtener(y2)->obtener(z2)->getFicha();
+    casilleros->obtener(x2)->obtener(y2)->obtener(z1)->setFicha(ficha1);
+    casilleros->obtener(x1)->obtener(y1)->obtener(z1)->setFicha(ficha2);
 }
