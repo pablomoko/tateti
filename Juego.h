@@ -1,9 +1,16 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <ctime>
+
 #include "Tablero.h"
 #include "Jugador.h"
 #include "Carta.h"
 #include "Cola.h"
+
+
+srand( time(NULL) );
+
 
 
 class Juego {
@@ -13,7 +20,7 @@ private:
 	Lista < Jugador * > * jugadores; // lista circular
 	Jugador * jugadorEnTurno; // sirve para luego saber quien fue el ultimo que jugo, quien gano
 	Tablero * tablero;
-	Cola < Carta * > * cartas;
+	Cola < Carta * > * mazo;
 
 	// clase interfaz ?  Para interactuar con usuario
 
@@ -42,6 +49,8 @@ public:
 	void ponerFicha();
 	// con try - except
 
+	void jugar();
+
 	/*
 	 * recibe 2 coordenadas en el tablero; el jugador es el actual
 	 */
@@ -49,7 +58,11 @@ public:
 	// con try - except
 
 
-	void activarCarta();
+	/* Pre: recibe el número perteneciente a una carta del mazo (del 1 al 6?)
+	 * Post:    si el jugador no posee esa carta, no se hace nada
+	 *          el juego actúa según lo que haga la carta
+	 */
+	void activarCarta( unsigned int );
 
 	// avanza una posicion en la lista de jugadores
 	// establece el nuevo jugadorEnTurno

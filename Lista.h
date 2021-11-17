@@ -250,27 +250,6 @@ template<class T> Nodo<T>* Lista<T>::obtenerNodo(unsigned int posicion){
     return actual;
 }
 
-/*
-template<class T> int Lista<T>::elementoPertenece(T elemento) {
 
-    bool pertenece = false;
-    int indice = 0;
-    Nodo<T> * aux = this->primero;
-    while ( aux && !pertenece ) {
-        if ( aux->getDato() == elemento) {
-            pertenece = true;
-        }
-        else {
-            aux = aux->setSiguiente();
-            ++indice;
-        }
-    }
 
-    if ( !pertenece ) {
-        indice = -1;
-    }
-
-    return indice;
-}
-*/
 #endif //TATETI_2_0_LISTA_H

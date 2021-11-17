@@ -12,31 +12,37 @@ Jugador::Jugador(std::string nombreJugador,Ficha * fichas,int cantidadFichas){
 
 
 void Jugador::tomarCarta( Carta * nuevaCarta ) {
+
     this->cartas->altaFinal(nuevaCarta);
 }
 
 
 Carta * Jugador::usarCarta( unsigned int numeroCarta ) {
 
-    int indice = 3;
-    //int indice = this->cartas->elementoPertenece(numeroCarta);
-    if ( indice == -1 ) {
-        throw ("El jugador no posee la carta que se quiere usar");
+    int cantidadCartas = this->cartas->contarElementos();
+    Carta * carta;
+
+    for (int i = 0; i < cantidadCartas; ++i) {
+        
+        carta = this->cartas->obtener(i);
+        if ( carta->getNumero() == numeroCarta ) {
+            this->cartas->remover(i);
+            return carta;
+        }
     }
-    else {
-        Carta * carta = this->cartas->obtener(indice);
-        this->cartas->remover(indice);
-        return  carta;
-    }
+
+    throw ("El jugador no posee la carta seleccionada");
 }
 
 
 size_t Jugador::getCantidadFichas() const{
+
     return this->cantidadFichas;
 }
 
 
 void Jugador::disminuirCantidadFichas(){
+
     (this->cantidadFichas)--;
 }
 
