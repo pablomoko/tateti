@@ -3,7 +3,7 @@
 #include "Tablero.h"
 #include "Jugador.h"
 #include "Carta.h"
-#include "Pila.h"
+#include "Cola.h"
 
 
 class Juego {
@@ -13,7 +13,7 @@ private:
 	Lista < Jugador * > * jugadores; // lista circular
 	Jugador * jugadorEnTurno; // sirve para luego saber quien fue el ultimo que jugo, quien gano
 	Tablero * tablero;
-	Pila < Carta * > * cartas;
+	Cola < Carta * > * cartas;
 
 	// clase interfaz ?  Para interactuar con usuario
 
