@@ -37,3 +37,38 @@ Juego::Juego(unsigned int ancho, unsigned int alto, unsigned int profundo, unsig
         }
     }
 }
+
+void Juego::cambiarTurno() {
+  // inicia el cursor en nulo
+  jugadores->iniciarCursor();
+  // itero la lista en busca del jugador en turno
+  for(int i = 0; i < cantidadJugadores; i++) {
+    // apunto al primer jugador
+    jugadores->avanzarCursor();
+    if(this->jugadorEnTurno == jugadores->obtenerCursor()->getDato()) {
+      // si es el jugador en turno, avanzo uno mas
+      jugadores->avanzarCursor();
+      // establezco el nuevo jugador en turno
+      this->jugadorEnTurno = jugadores->obtenerCursor()->getDato();
+    }
+  }
+  // con esta solucion se itera la lista cada vez que se cambia el turno.
+  // no es gran problema porque la cantidad de jugadores va a ser 2,3,4,5... a lo sumo 10
+}
+
+void Juego::repartirCartas() {
+  // inicia el cursor en nulo
+  jugadores->iniciarCursor();
+  // apunto al primer nodo que apunta a jugador
+  jugadores->avanzarCursor();
+  // itero la lista de jugadores
+  for(int i = 0; i < cantidadJugadores; i++) {
+    // saco carta del mazo
+    Carta * nuevaCarta = cartas->pop();
+    // entrego carta al jugador i
+    Jugador * jugador = jugadores->obtenerCursor()->getDato();
+    jugador->tomarCarta(nuevaCarta);
+    // avanzo al siguiente nodo que apunta al sig jugador
+    jugadores->avanzarCursor();
+  }
+}
