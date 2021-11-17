@@ -10,7 +10,8 @@ class Juego {
 
 private:
 
-	Lista < Jugador * > * jugadores;
+	Lista < Jugador * > * jugadores; // lista circular
+	Jugador * jugadorEnTurno; // sirve para luego saber quien fue el ultimo que jugo, quien gano
 	Tablero * tablero;
 	Pila < Carta * > * cartas;
 
@@ -49,6 +50,20 @@ public:
 
 
 	void activarCarta();
+
+	// avanza una posicion en la lista de jugadores
+	// establece el nuevo jugadorEnTurno
+ 	void cambiarTurno();
+
+	// itera la lista de jugadores, para cada uno
+	// 		retira una carta del mazo
+	//    agrega una carta al jugador (llama a tomarCarta)
+	// post: disminuyen cartas del mazo, cada jugador toma una carta
+	void repartirCartas();
+
+
+	// recibe las coordenadas de la ficha que se movio/coloco para chequear el tateti ahi
+	bool chequearTateti(/* coordenadas de la ficha movida */);
 
 private:
     std::string pedirNombre( int );
