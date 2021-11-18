@@ -3,18 +3,32 @@
 
 #include <string>
 
+typedef enum{
+    SALTEAR, BLOQUEAR, ANULAR, REGRESAR, REPETIR, ROBAR
+}funcion_t;
+    
+string *funcionalidades[] = {
+    [SALTEAR] = "Saltea al jugador siguiente",
+    [BLOQUEAR] = "Bloquea al jugador siguiente",
+    [ANULAR] = "Anula un casillero del tablero",
+    [REGRESAR] = "Vuelve atras una jugada",
+    [REPETIR] = "Repetis tu turno",
+    [ROBAR] = "Robas una carta a tu compañero",
+};
+    
+
 class Carta {
 
 private:
     unsigned int numero;
-    std::string descripcion;
+    funcion_t funcionalidad;
 
 
 public:
     
     Carta( unsigned int numeroDeCarta, std::string descripcion );
     unsigned int getNumero();
-    std::string getDescripcion();
+    std::string getDescripcion(funcion_t);
 
 };
 
@@ -31,9 +45,9 @@ unsigned int Carta::getNumero() {
 }
 
 
-std::string Carta::getDescripcion() {
+std::string Carta::getDescripcion(funcinalidad_t funcionalidad) {
 
-    return this->descripcion;
+    return funcionalidades[funcionalidad];
 }
 
 
