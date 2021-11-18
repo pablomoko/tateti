@@ -4,7 +4,12 @@
 Ficha::Ficha(char simbolo){
     this->validar(simbolo);
     this->simbolo = simbolo;
-    this->estado = desbloqueada;
+    this->estado = desbloqueado;
+}
+
+
+Ficha::~Ficha() {
+
 }
 
 
@@ -34,17 +39,17 @@ bool Ficha::sonIguales(Ficha * ficha1, Ficha * ficha2){
 
 bool Ficha::estaBloqueada() {
 
-    return (this->estado == bloqueada)
+    return (this->estado == bloqueado);
 }
 
 
 void Ficha::bloquear() {
 
-    this->estado = bloqueada;
+    this->estado = bloqueado;
 }
 
 
 void Ficha::desbloquear() {
 
-    this->estado = desbloqueada;
+    this->estado = desbloqueado;
 }

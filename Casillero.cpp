@@ -50,7 +50,7 @@ void Casillero::setFicha(Ficha * nuevaFicha) {
 
 bool Casillero::estaBloqueado() {
 
-    return (this->estado == bloqueado)
+    return (this->estado == bloqueado);
 }
 
 

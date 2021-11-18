@@ -9,10 +9,13 @@ private:
     unsigned int numero;
     std::string descripcion;
 
+
 public:
+    
     Carta( unsigned int numeroDeCarta, std::string descripcion );
     unsigned int getNumero();
     std::string getDescripcion();
+
 };
 
 
@@ -32,5 +35,6 @@ std::string Carta::getDescripcion() {
 
     return this->descripcion;
 }
+
 
 #endif //__CARTA_H__

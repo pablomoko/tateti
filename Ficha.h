@@ -2,17 +2,16 @@
 #define _FICHA_H_INCLUDED_
 
 
-enum estadoFicha {
-    desbloqueada;
-    bloqueada;
-}
+enum Estado {
+    desbloqueado, bloqueado
+};
 
 
 class Ficha{
 
 private:
     char simbolo;
-    estadoFicha estado;
+    Estado estado;
 
 
 public:
@@ -57,7 +56,7 @@ public:
     /*
      *Post: devuelve true si atributo estado == bloqueado
      */
-    void estaBloqueada();
+    bool estaBloqueada();
 
 
 private:

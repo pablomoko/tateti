@@ -7,10 +7,7 @@
 #include "Lista.h"
 
 
-enum estadoJugador {
-    desbloqueado;
-    bloqueado;
-}
+
 
 
 class Jugador {
@@ -22,7 +19,7 @@ private:
     Ficha * fichas;
     int cantidadFichas;
     Lista<Carta *> * cartas;
-    estadoJugador estado;
+    Estado estado;
 
 
 public:  
