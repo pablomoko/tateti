@@ -38,16 +38,16 @@ Juego::Juego(unsigned int ancho, unsigned int alto, unsigned int profundo, unsig
 
 void Juego::cambiarTurno() {
   // inicia el cursor en nulo
-  jugadores->iniciarCursor();
+  this->jugadores->iniciarCursor();
   // itero la lista en busca del jugador en turno
-  for(int i = 0; i < cantidadJugadores; i++) {
+  for(int i = 0; i < this->cantidadJugadores; i++) {
     // apunto al primer jugador
-    jugadores->avanzarCursor();
-    if(this->jugadorEnTurno == jugadores->obtenerCursor()->getDato()) {
+    this->jugadores->avanzarCursor();
+    if(this->jugadorEnTurno == this->jugadores->obtenerCursor()) {
       // si es el jugador en turno, avanzo uno mas
-      jugadores->avanzarCursor();
+      this->jugadores->avanzarCursor();
       // establezco el nuevo jugador en turno
-      this->jugadorEnTurno = jugadores->obtenerCursor()->getDato();
+      this->jugadorEnTurno = this->jugadores->obtenerCursor();
     }
   }
   // con esta solucion se itera la lista cada vez que se cambia el turno.
@@ -65,7 +65,7 @@ void Juego::repartirCartas() {
     // saco carta del mazo
     Carta * nuevaCarta = this->mazo->pop();
     // entrego carta al jugador i
-    Jugador * jugador = this->jugadores->obtenerCursor()->getDato();
+    Jugador * jugador = this->jugadores->obtenerCursor();
     jugador->tomarCarta(nuevaCarta);
     // avanzo al siguiente nodo que apunta al sig jugador
     this->jugadores->avanzarCursor();
