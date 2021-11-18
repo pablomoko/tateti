@@ -40,6 +40,8 @@ public:
         void bloquear();
 
         void desbloquear();
+    
+        std::string getNombre(){return this->nombreJugador;};
 };
 
 #endif
