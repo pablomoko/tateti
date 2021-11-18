@@ -84,7 +84,7 @@ void Juego::repartirCartas() {
     // saco carta del mazo
     Carta * nuevaCarta = this->mazo->pop();
     // entrego carta al jugador i
-    Jugador * jugador = this->jugadores->obtenerCursor()->getDato();
+    Jugador * jugador = this->jugadores->obtenerCursor();
     jugador->tomarCarta(nuevaCarta);
     // avanzo al siguiente nodo que apunta al sig jugador
     this->jugadores->avanzarCursor();
@@ -112,13 +112,25 @@ void Juago::activarCarta( unsigned int numeroDeCarta ) {
             break;
 
         case 2:
-            // Bloquear una ficha del siguiente jugador
-            this->bloquearFicha(  )
+            // Pedir coordenadas
+            // Bloquear la ficha del tablero
+            try {
+                this->bloquearFicha( 1,1,1 )
+            }
+            catch (...) {
+                // Informar Posicion no válida
+            }
             break;
 
         case 3:
-            // A traves de la interfaz se pregunta qué casillero se quiere bloquear
-            // Se llama a bloquear casillero
+            // Pedir coordenadas
+            // Bloquear ese casillero
+            try {
+                this->bloquearCasillero( 1,1,1 )
+            }
+            catch (...) {
+                // Informar Posicion no válida
+            }
             break;
 
     }
@@ -143,8 +155,71 @@ void Juego::bloquearSiguienteJugador() {
 
 void Juego::bloquearFicha( int ancho, int alto, int profundo ) {
 
-    if ( this->tablero->contarElementos() )
+    if ( ! (this->validarPosicion( ancho, alto, profundo )) ) {
+        throw("Posicion no válida para el tablero actual");
+    }
+
+    try {
+        this->tablero->obtener(ancho)->obtener(alto)->obtener(profundo)->getCasillero()->getFicha()->bloquear();
+    }
+    catch (...) {
+        throw("No hay ficha en esa posicion")
+    }
 }
+
+
+void Juego::bloquearCasillero( int ancho, int alto, int profundo ) {
+
+    if ( ! (this->validarPosicion( ancho, alto, profundo )) ) {
+        throw("Posicion no válida para el tablero actual");
+    }
+
+    this->tablero->obtener(ancho)->obtener(alto)->obtener(profundo)->getCasillero()->bloquear();
+}
+
+
+bool Juego::validarPosicionEnElTablero( int ancho, int alto, int profundo ) {
+
+    if ( ancho<0 || ancho>=*(this->tablero->getDimensiones()) ||
+         alto<0  || alto>=*(this->tablero->getDimensiones()+1)) ||
+         profundo<0 || profundo>=*(this->tablero->getDimensiones()+2) {
+
+            return false;
+         }
+
+    return true;
+}
+
+
+bool Juego::validarDimensiones( int x,  int y,  int z ) {
+
+    if ( x<0 || y<0 || z<0 ) {
+        return false;
+    }
+
+    return true;
+}
+
+
+bool Juego::validarCantidadJugadores( int x ) {
+
+    if ( x<0 ) {
+        return false;
+    }
+
+    return true;
+}
+
+
+bool Juego::validarCantidadCartas( int x ) {
+
+    if ( x<0 ) {
+        return false;
+    }
+
+    return true;
+}
+
 
 
 void Juego::jugar() {}

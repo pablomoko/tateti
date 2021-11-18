@@ -4,10 +4,19 @@
 
 const char VACIO = 'Z';
 
+enum estadoCasillero {
+    desbloqueado;
+    bloqueado;
+}
+
+
+
 class Casillero{
 private:
     Ficha * ficha;
     Casillero **** casillerosAdyacentes;
+    estadoCasillero estado;
+
 
 public:
     /*

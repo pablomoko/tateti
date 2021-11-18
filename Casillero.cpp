@@ -13,6 +13,8 @@ Casillero::Casillero(){
             this->casillerosAdyacentes[i][j] = new Casillero * [3];
         }
     }
+
+    this->estado = desbloqueado;
 }
 
 
@@ -35,13 +37,30 @@ void Casillero::asignarCasilleroAdyacente(int x, int y, int z, Casillero * casil
     this->casillerosAdyacentes[x][y][z] = casilleroAdyacente;
 }
 
+
 Ficha * Casillero::getFicha(){
     return this->ficha;
 }
+
 
 void Casillero::setFicha(Ficha * nuevaFicha) {
     this->ficha = nuevaFicha;
 }
 
 
+bool Casillero::estaBloqueado() {
 
+    return (this->estado == bloqueado)
+}
+
+
+void Casillero::bloquear() {
+
+    this->estado = bloqueado;
+}
+
+
+void Casillero::desbloquear() {
+
+    this->estado = desbloqueado;
+}

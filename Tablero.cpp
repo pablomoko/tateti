@@ -1,6 +1,11 @@
 #include "Tablero.h"
 
 Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
+
+    this->dimensiones[0] = x;
+    this->dimensiones[1] = y;
+    this->dimensiones[2] = z;
+
     //Se crea el tablero
     this->casilleros = new Lista<Lista<Lista<Casillero *> *> *>();
 
@@ -46,17 +51,28 @@ Tablero::~Tablero() {
 
 }
 
+
+int * Tablero::getDimensiones() {
+
+    return this->dimensiones;
+}
+
+
 bool Tablero::existeCasillero(unsigned int x, unsigned int y, unsigned int z) {
     
 }
 
+
 Casillero * Tablero::getCasillero(unsigned int x, unsigned int y, unsigned int z) {
+    
     return this->casilleros->obtener(z)->obtener(x)->obtener(y);
 }
+
 
 void Tablero::setCasillero(unsigned int x, unsigned int y, unsigned int z, Ficha * ficha) {
     this->casilleros->obtener(z)->obtener(x)->obtener(y)->setFicha(ficha);
 }
+
 
 void Tablero::moverFicha(unsigned int x1, unsigned int y1, unsigned int z1, unsigned int x2, unsigned int y2, unsigned int z2) {
     //Valida si las coordenadas ingresadas son válidas

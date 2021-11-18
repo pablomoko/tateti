@@ -84,13 +84,20 @@ public:
 	// recibe las coordenadas de la ficha que se movio/coloco para chequear el tateti ahi
 	bool chequearTateti(/* coordenadas de la ficha movida */);
 
+
 private:
+
     std::string pedirNombre( int );
     bool validarCantidadJugadores(int);
     bool validarCantidadCartas(int);
     bool validarDimensiones(int, int, int);
 
+    bool validarPosicionEnElTablero( int, int, int );
+
     void bloquearSiguienteJugador();
 
     void bloquearFicha( int, int, int );
+
+    void bloquearCasillero( int, int, int );
+
 };

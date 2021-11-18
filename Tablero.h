@@ -8,6 +8,7 @@
 class Tablero{
 private:
     Lista<Lista<Lista<Casillero *> *> *> * casilleros;
+    int dimensiones[3];
 
 public:
     /*
@@ -21,6 +22,10 @@ public:
      * Post: libera la memoria solicitada para la creacion del tablero
      */
     ~Tablero();
+
+
+    int * getDimensiones();
+
 
     /*
      * Pre: recibe las coordenadas x,y,z del Casillero que se desea verificar

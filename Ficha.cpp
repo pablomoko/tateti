@@ -4,6 +4,7 @@
 Ficha::Ficha(char simbolo){
     this->validar(simbolo);
     this->simbolo = simbolo;
+    this->estado = desbloqueada;
 }
 
 
