@@ -43,8 +43,8 @@ Casillero * Casillero::getAdyacente(unsigned int i, unsigned int j, unsigned int
 
 unsigned int Casillero::getLongitudFichasIguales(unsigned int i, unsigned int j, unsigned int k){
     //Pensar otro algoritmo sin tantos returns
-    if (!tieneAdyacente(i, j, k) ||  //Caso base
-        !estaOcupado(i, j, k)){
+    if (!this->tieneAdyacente(i, j, k) ||  //Caso base
+        !this->estaOcupado(i, j, k)){
         return 0;
     }
 
