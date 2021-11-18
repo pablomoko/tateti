@@ -36,18 +36,37 @@ Juego::Juego(unsigned int ancho, unsigned int alto, unsigned int profundo, unsig
 }
 
 
+
+Juego::~Juego() {
+    delete this->tablero;
+    delete this->jugadores;
+    delete this->mazo;
+}
+
+
 void Juego::cambiarTurno() {
   // inicia el cursor en nulo
-  jugadores->iniciarCursor();
+  this->jugadores->iniciarCursor();
   // itero la lista en busca del jugador en turno
-  for(int i = 0; i < cantidadJugadores; i++) {
+  for(int i = 0; i < this->jugadores->contarElementos(); i++) {
     // apunto al primer jugador
-    jugadores->avanzarCursor();
-    if(this->jugadorEnTurno == jugadores->obtenerCursor()->getDato()) {
-      // si es el jugador en turno, avanzo uno mas
-      jugadores->avanzarCursor();
+    this->jugadores->avanzarCursor();
+    if( this->jugadorEnTurno == jugadores->obtenerCursor() ) {
+      // si es el jugador en turno, avanzo uno mas (si llega al final empiezo de nuevo)
+      
+      if ( !(jugadores->avanzarCursor() ) ) {
+        this->jugadores->iniciarCursor();
+        this->jugadores->avanzarCursor();
+      }
+
+      if ( jugadores->obtenerCursor()->estaBloqueado() ) {
+        //si el sig jugador esta bloqueado, avanzo uno mas, y lo desbloqueo para la proxima
+        jugadores->obtenerCursor()->desbloquear();
+        jugadores->avanzarCursor();
+      }
+
       // establezco el nuevo jugador en turno
-      this->jugadorEnTurno = jugadores->obtenerCursor()->getDato();
+      this->jugadorEnTurno = jugadores->obtenerCursor();
     }
   }
   // con esta solucion se itera la lista cada vez que se cambia el turno.
@@ -88,11 +107,13 @@ void Juago::activarCarta( unsigned int numeroDeCarta ) {
     switch numeroDeCarta {
 
         case 1:
-            // El jugador tiene otro turno (no se llama a "cambiarTurno")
+            // Hacer perder un turno al siguiente jugador
+            this->bloquearFicha();
             break;
 
         case 2:
-            // El siguiente jugador pierde su turno (se llama 2 veces a "cambiarTurno")
+            // Bloquear una ficha del siguiente jugador
+            this->bloquearFicha(  )
             break;
 
         case 3:
@@ -104,4 +125,27 @@ void Juago::activarCarta( unsigned int numeroDeCarta ) {
 }
 
 
+void Juego::bloquearSiguienteJugador() {
+
+    this->jugadores->iniciarCursor();
+    bool listo = false;
+
+    while( (this->jugadores->avanzarCursor()) && (!listo) ) {
+        
+        if ( this->jugadorEnTurno == this->jugadores->obtenerCursor() ) {
+            this->jugadores->avanzarCursor();
+            this->jugadores->obtenerCursor()->bloquear();
+            listo = true;
+        }
+    }
+}
+
+
+void Juego::bloquearFicha( int ancho, int alto, int profundo ) {
+
+    if ( this->tablero->contarElementos() )
+}
+
+
 void Juego::jugar() {}
+

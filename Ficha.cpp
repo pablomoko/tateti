@@ -6,13 +6,11 @@ Ficha::Ficha(char simbolo){
     this->simbolo = simbolo;
 }
 
-Ficha::~Ficha(){
-
-}
 
 char Ficha::getSimbolo() {
     return this->simbolo;
 }
+
 
 void Ficha::validar(char simbolo){
     if ((simbolo == '\0') || 
@@ -21,6 +19,7 @@ void Ficha::validar(char simbolo){
         throw  error + "' " ;
     }    
 }
+
 
 bool Ficha::sonIguales(Ficha * ficha1, Ficha * ficha2){
     try {
@@ -32,4 +31,19 @@ bool Ficha::sonIguales(Ficha * ficha1, Ficha * ficha2){
 }
 
 
+bool Ficha::estaBloqueada() {
 
+    return (this->estado == bloqueada)
+}
+
+
+void Ficha::bloquear() {
+
+    this->estado = bloqueada;
+}
+
+
+void Ficha::desbloquear() {
+
+    this->estado = desbloqueada;
+}

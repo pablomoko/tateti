@@ -6,6 +6,7 @@ Jugador::Jugador(std::string nombreJugador,Ficha * fichas,int cantidadFichas){
     this->nombreJugador= nombreJugador;
     this->fichas = fichas;
     this->cantidadFichas = cantidadFichas;
+    this->estado = desbloqueado;
 
     this->cartas = new Lista<Carta *>;
 }
@@ -46,6 +47,23 @@ void Jugador::disminuirCantidadFichas(){
     (this->cantidadFichas)--;
 }
 
+
+bool Jugador::estaBloqueado() {
+
+    return ( this->estado == bloqueado );
+}
+
+
+void Jugador::bloquear() {
+
+    this->estado = bloqueado;
+}
+
+
+void Jugador::desbloquear() {
+
+    this->estado = desbloqueado;
+}
 
 
 

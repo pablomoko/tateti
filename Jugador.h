@@ -6,14 +6,24 @@
 #include "Carta.h"
 #include "Lista.h"
 
-class Jugador
-{
+
+enum estadoJugador {
+    desbloqueado;
+    bloqueado;
+}
+
+
+class Jugador {
 friend class Ficha;
+
 private:
+
     std::string nombreJugador;
     Ficha * fichas;
     int cantidadFichas;
     Lista<Carta *> * cartas;
+    estadoJugador estado;
+
 
 public:  
         Jugador(std::string nombreJugador,Ficha * fichas,int cantidadFichas);
@@ -27,6 +37,12 @@ public:
         size_t getCantidadFichas() const;
 
         void disminuirCantidadFichas();
+
+        bool estaBloqueado();
+
+        void bloquear();
+
+        void desbloquear();
 };
 
 #endif

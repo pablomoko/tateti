@@ -36,12 +36,14 @@ public:
 	 * y cantidadCartas en mano que se puede tener
 	 */
 	Juego(unsigned int ancho, unsigned int alto, unsigned int profundo, unsigned int cantidadFichas, unsigned int cantidadJugadores, unsigned int cantidadCartas);
-	// crear tablero
-	// crear jugadores
-	// crear cartas y repartir
 
+
+	/* Pre: -
+	 * Post: se libera memoria del heap usada para tablero, lista de jugadores, mazo de 
+     *  		cartas
+	 */
 	~Juego();
-	// destruir tablero, lista de jugadores, y pila de cartas
+
 
 	/*
 	 * recibe coordenadas en el tablero; el jugador es el actual
@@ -64,14 +66,18 @@ public:
 	 */
 	void activarCarta( unsigned int );
 
-	// avanza una posicion en la lista de jugadores
-	// establece el nuevo jugadorEnTurno
+
+	/* avanza una posicion en la lista de jugadores
+	 * establece el nuevo jugadorEnTurno
+	 */
  	void cambiarTurno();
 
-	// itera la lista de jugadores, para cada uno
-	// 		retira una carta del mazo
-	//    agrega una carta al jugador (llama a tomarCarta)
-	// post: disminuyen cartas del mazo, cada jugador toma una carta
+
+	/* itera la lista de jugadores, para cada uno
+	 * 		retira una carta del mazo
+	 *    agrega una carta al jugador (llama a tomarCarta)
+	 * post: disminuyen cartas del mazo, cada jugador toma una carta
+	 */
 	void repartirCartas();
 
 
@@ -84,4 +90,7 @@ private:
     bool validarCantidadCartas(int);
     bool validarDimensiones(int, int, int);
 
+    void bloquearSiguienteJugador();
+
+    void bloquearFicha( int, int, int );
 };
