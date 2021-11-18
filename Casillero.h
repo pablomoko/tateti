@@ -52,6 +52,12 @@ public:
 
     /*
      * Pre:
+     * Post:
+     */
+    Casillero * getAdyacente(unsigned int i, unsigned int  j, unsigned int  k);
+
+    /*
+     * Pre:
      * Post: devuelve un entero positivo que indica la cantidad de fichas iguales
      * respecto de la posicion recibida
      */
