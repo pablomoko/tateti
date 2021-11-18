@@ -37,6 +37,21 @@ void Casillero::asignarCasilleroAdyacente(int x, int y, int z, Casillero * casil
     this->casillerosAdyacentes[x][y][z] = casilleroAdyacente;
 }
 
+unsigned int Casillero::getLongitudFichasIguales(unsigned int i, unsigned int j, unsigned int k){
+    //Pensar otro algoritmo sin tantos returns
+    if (!tieneAdyacente(i, j, k) ||  //Caso base
+        !estaOcupado(i, j, k)){
+        return 0;
+    }
+
+    Casillero * casilleroAdyacente = this->getAdyacente(i, j, k);
+
+    if (this->tienenMismaFicha(casilleroAdyacente)){
+        return (1 + casilleroAdyacente->getLongitud(i, j, k));
+    }
+    //Las fichas son distintas y la longitud de fichas iguales es 0
+    return 0;
+}
 
 Ficha * Casillero::getFicha(){
     return this->ficha;
