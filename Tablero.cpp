@@ -62,6 +62,39 @@ bool Tablero::existeCasillero(unsigned int x, unsigned int y, unsigned int z) {
     
 }
 
+bool Tablero::hayTateti(Casillero * casilleroOrigen){
+
+    casilleroOrigen->getCasillerosAdyacentes(); //que hace esto
+    int longitudesAdyacentes[3][3][3];  //Cambiar por un nombre mas explicito
+    //En esta iteracion se guardan la cantidad de casilleros con fichas iguales en cada direccion
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                /*
+                 * Se guarda la longitud de un vector con origen en casilleroOrigen
+                 * en la posicion del array correspondiente a cada iteracion
+                 */
+                longitudesAdyacentes[i][j][k] = casilleroOrigen->getLongitudFichasIguales(i, j, k);
+            }
+        }
+    }
+
+    /*
+     * Una vez tenemos la cantidad de fichas iguales en cada direccion respecto de casilleroOrigen,
+     * se checkea si en alguna direccion hay 3 y en caso de que si se devuelve true
+     */
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                if (longitudesAdyacentes[i][j][k]){
+                    return true
+                }
+            }
+        }
+    }
+
+    return false
+}
 
 Casillero * Tablero::getCasillero(unsigned int x, unsigned int y, unsigned int z) {
     
