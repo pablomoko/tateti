@@ -1,21 +1,14 @@
-#include "Ficha.h"
-#include "Casillero.h"
-#include "Jugador.h"
-
+#include "Juego.h"
 
 int main(){
 
-    Ficha * ficha = NULL;
+    Juego * tateti = new Juego();
 
     try {
-        ficha = new Ficha(' ');
-    } catch(...) {    
-    }
 
-    if (ficha != NULL){
-        delete ficha;
+    } catch {
+        return 1; //Ocurrio un error al intentar jugar
     }
-    
 
     return 0;
 }
