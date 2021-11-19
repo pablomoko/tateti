@@ -92,7 +92,7 @@ void Juego::repartirCartas() {
 }
 
 
-void Juago::activarCarta( unsigned int numeroDeCarta ) {
+void Juego::activarCarta( unsigned int numeroDeCarta ) {
 
     try {
         Carta * carta = this->jugadorEnTurno->usarCarta( numeroDeCarta );

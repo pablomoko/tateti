@@ -61,8 +61,8 @@ public:
 
 
 	/* Pre: recibe el número perteneciente a una carta del mazo (del 1 al 6?)
-	 * Post:    si el jugador no posee esa carta, no se hace nada
-	 *          el juego actúa según lo que haga la carta
+	 * Post: si el jugador no posee esa carta, no se hace nada
+	 * el juego actúa según lo que haga la carta
 	 */
 	void activarCarta( unsigned int );
 

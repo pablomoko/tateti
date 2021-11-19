@@ -259,8 +259,8 @@ template<class T> Nodo<T>* Lista<T>::obtenerNodo(unsigned int posicion){
 }
 
 template<class T> T lista<T>::bajaAlFinal(){
-    if(!this->estaVacia()){
-        trhow "Lista sin elementos";
+    if(this->estaVacia()){
+        throw "Lista sin elementos";
     }
     T elemento = this->obtener(this->tamanio);
     delete this->obtener(tam);
@@ -268,7 +268,5 @@ template<class T> T lista<T>::bajaAlFinal(){
     this->altaFinal(this->obtener(tam));
     return elemento;
 }
-            
-
 
 #endif //TATETI_2_0_LISTA_H
