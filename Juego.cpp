@@ -9,11 +9,12 @@ std::string pedirNombre( int jugadorNumero ) {
     return nombre;
 }
 
-
 Juego::Juego(unsigned int ancho, unsigned int alto, unsigned int profundo, unsigned int cantidadFichas, unsigned int cantidadJugadores, unsigned int cantidadCartas) {
 
-    if (    !this->validarCantidadJugadores(cantJugadores) ||
-            !this->validarCantidadCartas(cantCartas) ||
+    Interfaz * interfaz = new Interfaz();
+
+    if (    !this->validarCantidadJugadores(cantidadJugadores) ||
+            !this->validarCantidadCartas(cantidadCartas) ||
             !this->validarDimensiones(ancho, alto, profundo) ) {
         throw ( "Argumentos no validos" );
     }
@@ -28,21 +29,18 @@ Juego::Juego(unsigned int ancho, unsigned int alto, unsigned int profundo, unsig
     }
 
     jugadores = new Lista < Jugador * >;
-    for (int i = 0; i < cantJugadores; ++i) {
+    for (int i = 0; i < cantidadJugadores; ++i) {
         std::string nombre = pedirNombre( i+1 );
         Ficha * ficha = new Ficha( 'A'+i );
-        Jugador * nuevoJugador = new Jugador( nombre, ficha, cantFichas );
+        Jugador * nuevoJugador = new Jugador( nombre, ficha, cantidadFichas );
     }
 }
-
-
 
 Juego::~Juego() {
     delete this->tablero;
     delete this->jugadores;
     delete this->mazo;
 }
-
 
 void Juego::cambiarTurno() {
   // inicia el cursor en nulo

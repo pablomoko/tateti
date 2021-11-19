@@ -7,22 +7,19 @@
 #include "Jugador.h"
 #include "Carta.h"
 #include "Cola.h"
-
+#include "Interfaz.h"
 
 srand( time(NULL) );
-
-
 
 class Juego {
 
 private:
 
-	Lista < Jugador * > * jugadores; // lista circular
+	Lista < Jugador * > * jugadores; // lista circular de jugadores
 	Jugador * jugadorEnTurno; // sirve para luego saber quien fue el ultimo que jugo, quien gano
 	Tablero * tablero;
 	Cola < Carta * > * mazo;
-
-	// clase interfaz ?  Para interactuar con usuario
+    Interfaz * interfaz;
 
 
 public:
