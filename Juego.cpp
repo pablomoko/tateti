@@ -74,6 +74,19 @@ void Juego::cambiarTurno() {
 }
 
 
+Jugador Juego::*obtenerJugador(){
+    this->jugadores->iniciarCursor();
+    for(int i = 0; i < this->cantidadJugadores; i++){
+        if(this->jugadorEnTurno->getNombre() == this->jugadores->obtenerCursor()->getNombre()){
+            this->jugadores->avanzarCursor();
+            return this->jugadores->obtenerCursor();
+        }
+        this->avanzarCursor();
+    }
+    return NULL;
+}
+
+
 void Juego::repartirCartas() {
   // inicia el cursor en nulo
   this->jugadores->iniciarCursor();
@@ -132,7 +145,18 @@ void Juago::activarCarta( unsigned int numeroDeCarta ) {
                 // Informar Posicion no válida
             }
             break;
-
+            
+        case 4:
+            //Cuando tengamos la funcion jugar, se haria uso de dicha funcion.  "this->jugar()";
+            break;
+        case 5:
+            try{
+                  Jugador *jugadorElegido = this->obtenerJugador(string nombre);
+                  Carta *carta = jugadorElegido->getCarta();
+                  this->jugadorEnTurno->tomarCarta(carta);
+            }
+            catch(...){
+                //O no existe jugador con ese nombre o no tiene cartas en su mano
     }
 }
 
