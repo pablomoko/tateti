@@ -96,6 +96,14 @@ public:
      * Post: devuelve -1 si el elemento no esta en la lista, si no devuelve el indice de su primer aparicion
      */
     int elementoPertenece( T elemento );
+    
+    
+    /*
+    * Post: Devuelve el ultimo elemento de la lista si esta no es nula
+    */
+    
+    T bajaAlFinal();
+    
 
 private:
     /*
@@ -250,6 +258,17 @@ template<class T> Nodo<T>* Lista<T>::obtenerNodo(unsigned int posicion){
     return actual;
 }
 
+template<class T> T lista<T>::bajaAlFinal(){
+    if(!this->estaVacia()){
+        trhow "Lista sin elementos";
+    }
+    T elemento = this->obtener(this->tamanio);
+    delete this->obtener(tam);
+    this->tamanio--;
+    this->altaFinal(this->obtener(tam));
+    return elemento;
+}
+            
 
 
 #endif //TATETI_2_0_LISTA_H
