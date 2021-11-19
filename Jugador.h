@@ -42,6 +42,8 @@ public:
         void desbloquear();
     
         std::string getNombre(){return this->nombreJugador;};
+        
+        Carta *getCarta();
 };
 
 #endif
