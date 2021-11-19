@@ -5,8 +5,8 @@ int main(){
     Juego * tateti = new Juego();
 
     try {
-
-    } catch {
+    //Usar funciones del tateti
+    } catch(...) {
         return 1; //Ocurrio un error al intentar jugar
     }
 

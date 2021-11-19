@@ -1,6 +1,6 @@
 #include "Juego.h"
 
-//PASAR A LA INTERFAZ
+/*PASAR A LA INTERFAZ
 std::string pedirNombre( int jugadorNumero ) {
     std::string nombre[50];
     std::cout<<"Jugador "<<jugadorNumero<<" - Ingrese su nombre (max 10 caracteres) :";
@@ -8,7 +8,7 @@ std::string pedirNombre( int jugadorNumero ) {
 
     return nombre;
 }
-
+*/
 Juego::Juego(unsigned int ancho, unsigned int alto, unsigned int profundo, unsigned int cantidadFichas, unsigned int cantidadJugadores, unsigned int cantidadCartas) {
 
     Interfaz * interfaz = new Interfaz();
