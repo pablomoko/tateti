@@ -65,5 +65,9 @@ void Jugador::desbloquear() {
     this->estado = desbloqueado;
 }
 
+Carta * Jugador::getCarta(){
+    return this->cartas->bajaAlFinal();
+}
+
 
 
