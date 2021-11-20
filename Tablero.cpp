@@ -9,13 +9,13 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
     //Se crea el tablero
     this->casilleros = new Lista<Lista<Lista<Casillero *> *> *>();
 
-    for (int k = 0; k < z; k++) {   //Se crea la lista perteneciente a las filas del tablero
+    for (unsigned int k = 0; k < z; k++) {   //Se crea la lista perteneciente a las filas del tablero
         Lista<Lista<Casillero *> *> * fila = new Lista<Lista<Casillero *> *>();
 
-        for (int i = 0; i < x; i++) {   //Se crea la lista perteneciente a las columnas del plano x,y
+        for (unsigned int j = 0; j < y; j++) {   //Se crea la lista perteneciente a las columnas del plano x,y
             Lista<Casillero *> * columna = new Lista<Casillero *>();
 
-            for (int j = 0; j < y; j++) {   //Se crean los casilleros apuntados por cada columna del plano
+            for (unsigned int i = 0; i < x; i++) {   //Se crean los casilleros apuntados por cada columna del plano
                 Casillero * casillero = new Casillero();
                 columna->altaFinal(casillero);
             }
@@ -27,15 +27,15 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
     }
 
     //Con el tablero ya creado, se asignan los vecinos de los casilleros
-    for (int k = 0; k < z; k++) {
-        for (int i = 0; i < x; i++) {
-            for (int j = 0; j < y; j++) {   //Itera los casilleros del tablero uno por uno
-                Casillero * casillero = this->getCasillero(x, y, z);
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            for (int k = 0; k < z; k++) {   //Itera los casilleros del tablero uno por uno
+                Casillero * casillero = this->getCasillero(i, j, k);
                 //pensar mejor disenio y evitar codigo flecha
                 for (int l = -1; l < 2; l++) {
                     for (int m = -1; m < 2; m++) {
                         for (int n = -1; n < 2; n++) {  //Itera matriz con origen en casillero
-                            if (existeCasillero(i+l, j+m, k+n)) {
+                            if (this->existeCasillero(i+l, j+m, k+n)) {
                                 Casillero *casilleroAdyacente = this->getCasillero(i+l, j+m, k+n);
                                 casillero->asignarCasilleroAdyacente(l, m, n, casilleroAdyacente);
                             }
@@ -48,18 +48,29 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
 }
 
 Tablero::~Tablero() {
-
+    //liberar lista de lista de lista de casilleros
+    // todos los indices con +1 por la funcion obtener() !!!
+    for(int k = 0; k < this->dimensiones[0]; k++) {
+        for(int j = 0; j < this->dimensiones[0]; j++) {
+            for(int i = 0; i < this->dimensiones[0]; i++) {
+                delete this->getCasillero(i, j, k);
+            }
+            delete this->casilleros->obtener(k+1)->obtener(j+1);
+        }
+        delete this->casilleros->obtener(k+1);
+    }
+    delete this->casilleros;
+    //this->casilleros = NULL;  hace falta   ???
 }
 
-
 int * Tablero::getDimensiones() {
-
     return this->dimensiones;
 }
 
-
 bool Tablero::existeCasillero(unsigned int x, unsigned int y, unsigned int z) {
-    
+    return (x >= 0 && x < this->getDimensiones()[0] &&
+            y >= 0 && y < this->getDimensiones()[1] &&
+            z >=0 && z < this->getDimensiones()[2]);
 }
 
 bool Tablero::hayTateti(Casillero * casilleroOrigen){
@@ -98,15 +109,18 @@ bool Tablero::hayTateti(Casillero * casilleroOrigen){
 }
 
 Casillero * Tablero::getCasillero(unsigned int x, unsigned int y, unsigned int z) {
-    
-    return this->casilleros->obtener(z)->obtener(x)->obtener(y);
+    // habria que agregar alguna validacion ?????
+    // sumo uno porque obtener va del [1, contarElementos()]
+    // indice desde 0  o  indice desde 1 ??????
+    return this->casilleros->obtener(z+1)->obtener(y+1)->obtener(x+1);
 }
-
 
 void Tablero::setCasillero(unsigned int x, unsigned int y, unsigned int z, Ficha * ficha) {
-    this->casilleros->obtener(z)->obtener(x)->obtener(y)->setFicha(ficha);
+    // Validar ???
+    // Hacer un throw catch ???
+    // de nuevo corrijo indices de funcion obtener
+    this->casilleros->obtener(z+1)->obtener(y+1)->obtener(x+1)->setFicha(ficha);
 }
-
 
 void Tablero::moverFicha(unsigned int x1, unsigned int y1, unsigned int z1, unsigned int x2, unsigned int y2, unsigned int z2) {
     //Valida si las coordenadas ingresadas son válidas
