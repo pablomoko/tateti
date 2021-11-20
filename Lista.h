@@ -96,14 +96,14 @@ public:
      * Post: devuelve -1 si el elemento no esta en la lista, si no devuelve el indice de su primer aparicion
      */
     int elementoPertenece( T elemento );
-    
-    
+
+
     /*
     * Post: Devuelve el ultimo elemento de la lista si esta no es nula
     */
-    
+
     T bajaAlFinal();
-    
+
 
 private:
     /*
@@ -188,7 +188,10 @@ template<class T> void Lista<T>::agregar(Lista<T>& otraLista){
 }
 
 template<class T> T Lista<T>::obtener(unsigned int posicion){
+    // se declara una variable que si no se le asigna un valor devuelve basura
+    // mejorar la implementacion
     T elemento;
+    // no es zero-indexado, y se vuelve incompatible para usarla
     if ((posicion > 0) && (posicion <= this->tamanio)){ //si la posicion recibida es valida
         elemento = this->obtenerNodo(posicion)->getDato();  //obtenerNodo(posicion) retorna un puntero al nodo del cual obtenemos el dato
     }
