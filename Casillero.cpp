@@ -1,46 +1,51 @@
 #include "Casillero.h"
-using namespace std;
 
 Casillero::Casillero(){
-
-    this->ficha = new Ficha(VACIO); //definir VACIO
+    // se crean en 'z', cambiarlo
+    this->ficha = new Ficha('z');
 
     this->casillerosAdyacentes = new Casillero *** [3];
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; i++) {
         this->casillerosAdyacentes[i] = new Casillero ** [3];
-
-        for (int j = 0; j < 3; ++j) {
+        for (int j = 0; j < 3; j++) {
             this->casillerosAdyacentes[i][j] = new Casillero * [3];
         }
     }
-
-    this->estado = desbloqueado;
+    this->estado = DESBLOQUEADO;
 }
-
 
 Casillero::Casillero(Ficha * ficha){
     this->ficha = ficha;
 }
 
-
 Casillero::~Casillero() {
-    
+    delete this->ficha;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            delete[] this->casillerosAdyacentes[i][j];
+        }
+        delete[] this->casillerosAdyacentes[i];
+    }
+    delete[] this->casillerosAdyacentes;
+    //this->casillerosAdyacentes = NULL;   hace falta ????
 }
 
-
 void Casillero::asignarCasilleroAdyacente(int x, int y, int z, Casillero * casilleroAdyacente) {
-    if ((x < -1 || x > 2) || (y < -1 || y > 2) || (z < -1 || z > 2)){
+    if ((x < -1 || x > 1) || (y < -1 || y > 1) || (z < -1 || z > 1)){
         throw "Coordenadas invalidas. Se toma el mismo casillero como origen por lo tanto"
-              "las coordenadas deben estan comprendidas entre -1 y 2";
+              "las coordenadas deben estan comprendidas entre -1 y 1";
     }
 
-    this->casillerosAdyacentes[x][y][z] = casilleroAdyacente;
+    // matriz con indices negativos ?????
+    // agrego +1
+    this->casillerosAdyacentes[x+1][y+1][z+1] = casilleroAdyacente;
 }
 
 Casillero * Casillero::getAdyacente(unsigned int i, unsigned int j, unsigned int k) {
     return this->casillerosAdyacentes[i][j][k];
 }
 
+// probar compilar esta funcion
 unsigned int Casillero::getLongitudFichasIguales(unsigned int i, unsigned int j, unsigned int k){
     //Pensar otro algoritmo sin tantos returns
     if (!this->tieneAdyacente(i, j, k) ||  //Caso base
@@ -61,25 +66,18 @@ Ficha * Casillero::getFicha(){
     return this->ficha;
 }
 
-
 void Casillero::setFicha(Ficha * nuevaFicha) {
     this->ficha = nuevaFicha;
 }
 
-
 bool Casillero::estaBloqueado() {
-
-    return (this->estado == bloqueado);
+    return (this->estado == BLOQUEADO);
 }
-
 
 void Casillero::bloquear() {
-
-    this->estado = bloqueado;
+    this->estado = BLOQUEADO;
 }
 
-
 void Casillero::desbloquear() {
-
-    this->estado = desbloqueado;
+    this->estado = DESBLOQUEADO;
 }
