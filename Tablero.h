@@ -23,9 +23,10 @@ public:
      */
     ~Tablero();
 
-
+    /*
+     * Post: devuelve un puntero a las dimensiones del Tablero
+     */
     int * getDimensiones();
-
 
     /*
      * Pre: recibe las coordenadas x,y,z del Casillero que se desea verificar
