@@ -45,7 +45,7 @@ public:
      * Post: devuelve true si el Casillero tiene un Casilllero adyacente existente
      * ubicado en las coordenadas recibidas y false en caso de que no
      */
-    bool tieneAdyacente(int x, int y, int z);
+    bool tieneAdyacente(unsigned int x, unsigned int y, unsigned int z);
 
     /*
      * Post: devuelve la Ficha del Casillero

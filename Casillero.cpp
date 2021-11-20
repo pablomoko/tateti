@@ -41,6 +41,11 @@ void Casillero::asignarCasilleroAdyacente(int x, int y, int z, Casillero * casil
     this->casillerosAdyacentes[x+1][y+1][z+1] = casilleroAdyacente;
 }
 
+bool Casillero::tieneAdyacente(unsigned int x, unsigned int y, unsigned int z) {
+    //Puede que este mal
+    return (this->casillerosAdyacentes[x][y][z] != NULL);
+}
+
 Casillero * Casillero::getAdyacente(unsigned int i, unsigned int j, unsigned int k) {
     return this->casillerosAdyacentes[i][j][k];
 }
