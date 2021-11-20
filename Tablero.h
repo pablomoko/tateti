@@ -33,8 +33,9 @@ public:
      * Post: devuelve true si existe un Casillero en el Tablero ubicado en las
      * coordenadas recibidas, devuelve false si no existe y lanza una excepcion
      * si las coordenadas son inválidas
+     * quito el unsigned int porque chequea numeros negativos
      */
-    bool existeCasillero(unsigned int x, unsigned int y, unsigned int z);
+    bool existeCasillero(int x, int y, int z);
 
     /*
      * Pre: recibe el casillero donde se desea checkear y hay tateti o no
