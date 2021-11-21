@@ -15,7 +15,9 @@ Casillero::Casillero(){
 }
 
 Casillero::Casillero(Ficha * ficha){
-    this->ficha = ficha;
+  Ficha * aux = this->ficha;
+  this->ficha = nuevaFicha;
+  delete aux;
 }
 
 Casillero::~Casillero() {
