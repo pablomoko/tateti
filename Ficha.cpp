@@ -19,11 +19,11 @@ char Ficha::getSimbolo() {
 
 
 void Ficha::validar(char simbolo){
-    if ((simbolo == '\0') || 
+    if ((simbolo == '\0') ||
         (simbolo == ' ')) {
         std::string error = "Simbolo ingresado invalido. '" +  simbolo ;
         throw  error + "' " ;
-    }    
+    }
 }
 
 
@@ -39,17 +39,17 @@ bool Ficha::sonIguales(Ficha * ficha1, Ficha * ficha2){
 
 bool Ficha::estaBloqueada() {
 
-    return (this->estado == bloqueado);
+    return (this->estado == BLOQUEADO);
 }
 
 
 void Ficha::bloquear() {
 
-    this->estado = bloqueado;
+    this->estado = BLOQUEADO;
 }
 
 
 void Ficha::desbloquear() {
 
-    this->estado = desbloqueado;
+    this->estado = DESBLOQUEADO;
 }

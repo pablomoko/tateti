@@ -2,8 +2,6 @@
 #define _CASILLERO_H_INCLUDED_
 #include "Ficha.h"
 
-const char VACIO = 'Z';
-
 enum EstadoCasillero {
     BLOQUEADO,
     DESBLOQUEADO

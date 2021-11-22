@@ -17,9 +17,10 @@ private:
 
 	Lista < Jugador * > * jugadores; // lista circular de jugadores
 	Jugador * jugadorEnTurno; // sirve para luego saber quien fue el ultimo que jugo, quien gano
+	unsigned int cantidadMaximaCartas;
 	Tablero * tablero;
 	Cola < Carta * > * mazo;
-    Interfaz * interfaz;
+  Interfaz * interfaz;
 
 
 public:
@@ -32,11 +33,11 @@ public:
 	 * dimensiones, cantidadFichas que indica las necesarias para ganar, cantidadJugadores
 	 * y cantidadCartas en mano que se puede tener
 	 */
-	Juego(unsigned int ancho, unsigned int alto, unsigned int profundo, unsigned int cantidadFichas, unsigned int cantidadJugadores, unsigned int cantidadCartas);
+	Juego();
 
 
 	/* Pre: -
-	 * Post: se libera memoria del heap usada para tablero, lista de jugadores, mazo de 
+	 * Post: se libera memoria del heap usada para tablero, lista de jugadores, mazo de
      *  		cartas
 	 */
 	~Juego();
@@ -75,12 +76,13 @@ public:
 	 *    agrega una carta al jugador (llama a tomarCarta)
 	 * post: disminuyen cartas del mazo, cada jugador toma una carta
 	 */
-	void repartirCartas();
+	//void repartirCartas();
 
 
 	// recibe las coordenadas de la ficha que se movio/coloco para chequear el tateti ahi
 	bool chequearTateti(/* coordenadas de la ficha movida */);
 
+	void entregarCarta();
 
 private:
 

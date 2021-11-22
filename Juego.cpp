@@ -9,30 +9,31 @@ std::string pedirNombre( int jugadorNumero ) {
     return nombre;
 }
 */
-Juego::Juego(unsigned int ancho, unsigned int alto, unsigned int profundo, unsigned int cantidadFichas, unsigned int cantidadJugadores, unsigned int cantidadCartas) {
+Juego::Juego() {
 
-    Interfaz * interfaz = new Interfaz();
+    this->interfaz = new Interfaz();
 
-    if (    !this->validarCantidadJugadores(cantidadJugadores) ||
-            !this->validarCantidadCartas(cantidadCartas) ||
-            !this->validarDimensiones(ancho, alto, profundo) ) {
-        throw ( "Argumentos no validos" );
+    unsigned int cantidadJugadores = pedirCantidadJugadores();
+    unsigned int cantidadFichas = pedirCantidadFichas();
+
+    this->jugadores = new Lista < Jugador * >;
+    for (unsigned int i = 0; i < cantidadJugadores; i++) {
+        std::string nombre = pedirNombre(i + 1);
+        Ficha * ficha = new Ficha('A' + i);
+        Jugador * nuevoJugador = new Jugador(nombre, ficha, cantidadFichas);
     }
+    this->jugadorEnTurno = this->jugadores->obtener(1);
 
-    this->tablero = new Tablero( ancho, alto, profundo );
+    unsigned int dimensiones[3] = pedirDimensionesTablero();
+    this->tablero = new Tablero(dimensiones[0], dimensiones[1], dimensiones[2]);
 
+    this->cantidadMaximaCartas = pedirCantidadCartasPorJugador();
     this->mazo = new Cola<Carta *>;
-    for ( int i=0; i < cantJugadores*cantCartas*100; ++i ) {
+    for (int i = 0; i < cantidadJugadores * this->cantidadMaximaCartas * 100; i++) {
+        // mejorar implementacion
         unsigned int numeroDeCartaAleatorio = rand() % 6;
         Carta * nuevaCarta = cartasDisponibles->obtener(numeroDeCartaAleatorio);
         this->mazo->push(nuevaCarta);
-    }
-
-    jugadores = new Lista < Jugador * >;
-    for (int i = 0; i < cantidadJugadores; ++i) {
-        std::string nombre = pedirNombre( i+1 );
-        Ficha * ficha = new Ficha( 'A'+i );
-        Jugador * nuevoJugador = new Jugador( nombre, ficha, cantidadFichas );
     }
 }
 
@@ -40,6 +41,7 @@ Juego::~Juego() {
     delete this->tablero;
     delete this->jugadores;
     delete this->mazo;
+    delete->this->interfaz;
 }
 
 void Juego::cambiarTurno() {
@@ -51,7 +53,7 @@ void Juego::cambiarTurno() {
     this->jugadores->avanzarCursor();
     if( this->jugadorEnTurno == jugadores->obtenerCursor() ) {
       // si es el jugador en turno, avanzo uno mas (si llega al final empiezo de nuevo)
-      
+
       if ( !(jugadores->avanzarCursor() ) ) {
         this->jugadores->iniciarCursor();
         this->jugadores->avanzarCursor();
@@ -72,20 +74,27 @@ void Juego::cambiarTurno() {
 }
 
 
-void Juego::repartirCartas() {
-  // inicia el cursor en nulo
-  this->jugadores->iniciarCursor();
-  // apunto al primer nodo que apunta a jugador
-  this->jugadores->avanzarCursor();
-  // itero la lista de jugadores
-  for( int i = 0; i < this->cantidadJugadores; i++ ) {
-    // saco carta del mazo
+// void Juego::repartirCartas() {
+//   // inicia el cursor en nulo
+//   this->jugadores->iniciarCursor();
+//   // apunto al primer nodo que apunta a jugador
+//   this->jugadores->avanzarCursor();
+//   // itero la lista de jugadores
+//   for( int i = 0; i < this->cantidadJugadores; i++ ) {
+//     // saco carta del mazo
+//     Carta * nuevaCarta = this->mazo->pop();
+//     // entrego carta al jugador i
+//     Jugador * jugador = this->jugadores->obtenerCursor();
+//     jugador->tomarCarta(nuevaCarta);
+//     // avanzo al siguiente nodo que apunta al sig jugador
+//     this->jugadores->avanzarCursor();
+//   }
+// }
+
+void Juego::entregarCarta() {
+  if(this->jugadorEnTurno->getCantidadDeCartas() < this->cantidadMaximaCartas) {
     Carta * nuevaCarta = this->mazo->pop();
-    // entrego carta al jugador i
-    Jugador * jugador = this->jugadores->obtenerCursor();
-    jugador->tomarCarta(nuevaCarta);
-    // avanzo al siguiente nodo que apunta al sig jugador
-    this->jugadores->avanzarCursor();
+    this->jugadorEnTurno->tomarCarta(nuevaCarta);
   }
 }
 
@@ -141,7 +150,7 @@ void Juego::bloquearSiguienteJugador() {
     bool listo = false;
 
     while( (this->jugadores->avanzarCursor()) && (!listo) ) {
-        
+
         if ( this->jugadorEnTurno == this->jugadores->obtenerCursor() ) {
             this->jugadores->avanzarCursor();
             this->jugadores->obtenerCursor()->bloquear();
@@ -219,6 +228,18 @@ bool Juego::validarCantidadCartas( int x ) {
 }
 
 
+void Juego::jugar() {
 
-void Juego::jugar() {}
+  // while() {
+  //   try {
+  //     casilleroDestino = pedirCoordenadas
+  //     if(sePuedeMover) {
+  //       this->jugadorEnTurno->moverFicha(casilleroOrigen, casilleroDestino);
+  //     }
+  //     break;
+  //   } catch() {
+  //
+  //   }
+  // }
 
+}

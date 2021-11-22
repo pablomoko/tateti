@@ -1,17 +1,13 @@
 #ifndef _FICHA_H_INCLUDED_
 #define _FICHA_H_INCLUDED_
 
-
-enum Estado {
-    desbloqueado, bloqueado
-};
-
+#include "constantes.h"
 
 class Ficha{
 
 private:
     char simbolo;
-    Estado estado;
+    EstadoFicha estado;
 
 
 public:
@@ -64,8 +60,8 @@ private:
     /*
      * Post:valida que el simbolo ingresado no sea '\0  o ' ' o lanza un excepcion en caso contrario.
      **/
-    void validar(char simbolo); 
-    
+    void validar(char simbolo);
+
 };
 
 #endif

@@ -13,7 +13,6 @@ Jugador::Jugador(std::string nombreJugador,Ficha * fichas,int cantidadFichas){
 
 
 void Jugador::tomarCarta( Carta * nuevaCarta ) {
-
     this->cartas->altaFinal(nuevaCarta);
 }
 
@@ -24,7 +23,7 @@ Carta * Jugador::usarCarta( unsigned int numeroCarta ) {
     Carta * carta;
 
     for (int i = 0; i < cantidadCartas; ++i) {
-        
+
         carta = this->cartas->obtener(i);
         if ( carta->getNumero() == numeroCarta ) {
             this->cartas->remover(i);
@@ -36,7 +35,7 @@ Carta * Jugador::usarCarta( unsigned int numeroCarta ) {
 }
 
 
-size_t Jugador::getCantidadFichas() const{
+unsigned int Jugador::getCantidadFichas() const{
 
     return this->cantidadFichas;
 }
@@ -69,5 +68,34 @@ Carta * Jugador::getCarta(){
     return this->cartas->bajaAlFinal();
 }
 
+unsigned int Jugador::getCantidadDeCartas() {
+    return this->cartas->contarElementos();
+}
 
+void Jugador::moverFicha(Casillero * casilleroOrigen, Casillero * casilleroDestino) {
 
+    // validacion
+    // if(! sePuedeMover(casilleroOrigen, casilleroDestino)) {
+    //   throw ""
+    // }
+
+    Ficha * ficha = casilleroOrigen->getFicha();
+    casilleroDestino->setFicha(ficha);
+    casilleroOrigen->quitarFicha();
+
+/*
+    //Valida si las coordenadas ingresadas son válidas
+    if(x1 > casilleros->contarElementos() ||
+       x2 > casilleros->contarElementos() ||
+       y1 > casilleros->obtener(1)->contarElementos() ||  //La posicion escogida es arbitraria, ya que el tablero es cuadrado
+       y2 > casilleros->obtener(1)->contarElementos()){
+        throw "Una de las coordenadas ingresadas esta fuera de los limites del tablero";
+    }
+
+    //Intercambia fichas, se podría implementar usando anterior y siguiente?
+    Ficha * ficha1 = casilleros->obtener(x1)->obtener(y1)->obtener(z1)->getFicha();
+    Ficha * ficha2 = casilleros->obtener(x2)->obtener(y2)->obtener(z2)->getFicha();
+    casilleros->obtener(x2)->obtener(y2)->obtener(z1)->setFicha(ficha1);
+    casilleros->obtener(x1)->obtener(y1)->obtener(z1)->setFicha(ficha2);
+*/
+}

@@ -11,7 +11,7 @@ private:
 
 
 public:
-    
+
     Carta( unsigned int numeroDeCarta, std::string descripcion );
     unsigned int getNumero();
     std::string getDescripcion();

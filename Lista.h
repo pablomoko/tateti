@@ -188,12 +188,11 @@ template<class T> void Lista<T>::agregar(Lista<T>& otraLista){
 }
 
 template<class T> T Lista<T>::obtener(unsigned int posicion){
-    // se declara una variable que si no se le asigna un valor devuelve basura
-    // mejorar la implementacion
     T elemento;
-    // no es zero-indexado, y se vuelve incompatible para usarla
     if ((posicion > 0) && (posicion <= this->tamanio)){ //si la posicion recibida es valida
         elemento = this->obtenerNodo(posicion)->getDato();  //obtenerNodo(posicion) retorna un puntero al nodo del cual obtenemos el dato
+    } else {
+      throw "Indice fuera de rango";
     }
     return elemento;
 }

@@ -38,6 +38,8 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
                             if (this->existeCasillero(i+l, j+m, k+n)) {
                                 Casillero *casilleroAdyacente = this->getCasillero(i+l, j+m, k+n);
                                 casillero->asignarCasilleroAdyacente(l, m, n, casilleroAdyacente);
+                            } else {
+                                casillero->asignarCasilleroAdyacente(l, m, n, NULL);
                             }
                         }
                     }
@@ -119,20 +121,4 @@ void Tablero::setCasillero(unsigned int x, unsigned int y, unsigned int z, Ficha
     // Hacer un throw catch ???
     // de nuevo corrijo indices de funcion obtener
     this->casilleros->obtener(z+1)->obtener(y+1)->obtener(x+1)->setFicha(ficha);
-}
-
-void Tablero::moverFicha(unsigned int x1, unsigned int y1, unsigned int z1, unsigned int x2, unsigned int y2, unsigned int z2) {
-    //Valida si las coordenadas ingresadas son válidas
-    if(x1 > casilleros->contarElementos() ||
-       x2 > casilleros->contarElementos() ||
-       y1 > casilleros->obtener(1)->contarElementos() ||  //La posicion escogida es arbitraria, ya que el tablero es cuadrado
-       y2 > casilleros->obtener(1)->contarElementos()){
-        throw "Una de las coordenadas ingresadas esta fuera de los limites del tablero";
-    }
-
-    //Intercambia fichas, se podría implementar usando anterior y siguiente?
-    Ficha * ficha1 = casilleros->obtener(x1)->obtener(y1)->obtener(z1)->getFicha();
-    Ficha * ficha2 = casilleros->obtener(x2)->obtener(y2)->obtener(z2)->getFicha();
-    casilleros->obtener(x2)->obtener(y2)->obtener(z1)->setFicha(ficha1);
-    casilleros->obtener(x1)->obtener(y1)->obtener(z1)->setFicha(ficha2);
 }

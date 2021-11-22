@@ -1,8 +1,7 @@
 #include "Casillero.h"
 
 Casillero::Casillero(){
-    // se crean en 'z', cambiarlo
-    this->ficha = new Ficha('z');
+    this->ficha = new Ficha(VACIO);
 
     this->casillerosAdyacentes = new Casillero *** [3];
     for (int i = 0; i < 3; i++) {
@@ -74,7 +73,12 @@ Ficha * Casillero::getFicha(){
 }
 
 void Casillero::setFicha(Ficha * nuevaFicha) {
+    //if(this->ficha->estaBloqueado)
     this->ficha = nuevaFicha;
+}
+
+void Casillero::quitarFicha() {
+  this->ficha = NULL;
 }
 
 bool Casillero::estaBloqueado() {
