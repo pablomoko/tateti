@@ -12,8 +12,24 @@ private:
 
 public:
 
+    /* 
+     * Pre: numero de carta entre 1 y 6, string con descripcion
+     * Post: inicializa los atributos con los argumentos
+     */
     Carta( unsigned int numeroDeCarta, std::string descripcion );
+
+
+    /* 
+     * Pre: -
+     * Post: devuelve un entero entre 1 y 6
+     */
     unsigned int getNumero();
+
+
+    /* 
+     * Pre: -
+     * Post: devuelve string
+     */
     std::string getDescripcion();
 
 };

@@ -56,22 +56,34 @@ public:
     void setFicha(Ficha * nuevaFicha);
 
     /*
-     * Pre:
-     * Post:
+     * Pre: recibe coordenadas i,j,k entre 0 y 2
+     * Post: devuelve el casillero adyacente que esta en la matriz de adyacentes
      */
     Casillero * getAdyacente(unsigned int i, unsigned int  j, unsigned int  k);
 
     /*
-     * Pre:
+     * Pre: recibe coordenadas i,j,k entre 0 y 2
      * Post: devuelve un entero positivo que indica la cantidad de fichas iguales
      * respecto de la posicion recibida
      */
     unsigned int getLongitudFichasIguales(unsigned int i, unsigned int j, unsigned int k);
 
+    /* 
+     * Pre: -
+     * Post: devuelve True si estado = bloqueado
+     */
     bool estaBloqueado();
 
+    /* 
+     * Pre: -
+     * Post: cambia estado a bloqueado
+     */
     void bloquear();
 
+    /* 
+     * Pre: -
+     * Post: cambia estado a desbloqueado
+     */
     void desbloquear();
 };
 

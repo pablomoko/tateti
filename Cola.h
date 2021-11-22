@@ -12,14 +12,40 @@ private:
     unsigned int tamanio;
 
 public:
+
+    /* 
+     * Pre: -
+     * Post: inicializa atributos en NULL y cero
+     */
     Cola();
 
+
+    /* 
+     * Pre: -
+     * Post: hace delete de cada nodo de la cola
+     */
     ~Cola();
 
+
+    /* 
+     * Pre: Recibe un elemento de tipo T
+     * Post: crea Nodo en el heap y agrega al final (cambia inicio, final y tamanio)
+     */
     void push( T );
 
+
+    /* 
+     * Pre: La cola no esta vacia
+     * Post: saca el primer elemento de la cola y lo devuelve
+     *          (lanza error si la cola esta vacia)
+     */
     T pop();
 
+    
+    /* 
+     * Pre: -
+     * Post: devuelve True si tamanio=0
+     */
     bool estaVacia();
 
 };
@@ -72,6 +98,13 @@ T Cola<T>::pop() {
     this->inicio = this->inicio->getSiguiente();
     delete nodoaBorrar;
     return  datoaBorrar;
+}
+
+
+template<class T>
+bool Cola<T>::estaVacia() {
+
+    return ( this->tamanio == 0 )
 }
 
 #endif //TATETI_2_0_COLA_H
