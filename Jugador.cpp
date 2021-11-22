@@ -2,9 +2,9 @@
 using namespace std;
 
 
-Jugador::Jugador(std::string nombreJugador,Ficha * fichas,int cantidadFichas){
+Jugador::Jugador(std::string nombreJugador,Ficha * ficha,int cantidadFichas){
     this->nombreJugador= nombreJugador;
-    this->fichas = fichas;
+    this->ficha = ficha;
     this->cantidadFichas = cantidadFichas;
     this->estado = desbloqueado;
 
@@ -12,7 +12,19 @@ Jugador::Jugador(std::string nombreJugador,Ficha * fichas,int cantidadFichas){
 }
 
 
+Jugador::~Jugador() {
+
+    this->cartas->iniciarCursor();
+    while( this->cartas->avanzarCursor() ) {
+        delete this->cartas->obtenerCursor();
+    }
+
+    delete this->cartas;
+}
+
+
 void Jugador::tomarCarta( Carta * nuevaCarta ) {
+
     this->cartas->altaFinal(nuevaCarta);
 }
 
@@ -49,28 +61,33 @@ void Jugador::disminuirCantidadFichas(){
 
 bool Jugador::estaBloqueado() {
 
-    return ( this->estado == bloqueado );
+    return ( this->estado == BLOQUEADO );
 }
 
 
 void Jugador::bloquear() {
 
-    this->estado = bloqueado;
+    this->estado = BLOQUEADO;
 }
 
 
 void Jugador::desbloquear() {
 
-    this->estado = desbloqueado;
+    this->estado = DESBLOQUEADO;
 }
 
+
 Carta * Jugador::getCarta(){
+
     return this->cartas->bajaAlFinal();
 }
 
+
 unsigned int Jugador::getCantidadDeCartas() {
+
     return this->cartas->contarElementos();
 }
+
 
 void Jugador::moverFicha(Casillero * casilleroOrigen, Casillero * casilleroDestino) {
 
