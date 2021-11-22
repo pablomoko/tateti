@@ -39,8 +39,18 @@ Juego::Juego() {
 
 Juego::~Juego() {
     delete this->tablero;
+
+    this->jugadores->iniciarCursor();
+    while( this->jugadores->avanzarCursor ) {
+        delete this->jugadores->getCursor();
+    }
     delete this->jugadores;
+    
+    while( ! this->mazo->estaVacia() ) {
+        delete this->mazo->pop();
+    }
     delete this->mazo;
+
     delete->this->interfaz;
 }
 
