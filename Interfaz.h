@@ -31,8 +31,9 @@ public:
     void mostrarTablero(Tablero * tableroActual);
 
     /*
-     * Pre:
-     * Post:
+     * Pre: recibe el numero de jugador al que corresponde el nombre
+     * Post: pide por pantalla el nombre al jugador indicando su numero
+     * ejemplo: Jugador 1: Tomas, Jugador 2: Miguel, ett
      */
     void pedirNombre(int jugadorNumero);
 };
