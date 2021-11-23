@@ -120,6 +120,7 @@ void Jugador::moverFicha(Casillero * casilleroOrigen, Casillero * casilleroDesti
 */
 }
 
-void Jugador::getFicha() {
+Ficha * Jugador::getFicha() {
+    //return this->fichas->bajaAlFinal()
     return this->ficha;
 }
