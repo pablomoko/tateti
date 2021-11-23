@@ -119,3 +119,7 @@ void Jugador::moverFicha(Casillero * casilleroOrigen, Casillero * casilleroDesti
     casilleros->obtener(x1)->obtener(y1)->obtener(z1)->setFicha(ficha2);
 */
 }
+
+void Jugador::getFicha() {
+    return this->ficha;
+}
