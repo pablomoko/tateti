@@ -200,50 +200,6 @@ void Juego::bloquearCasillero( int ancho, int alto, int profundo ) {
     this->tablero->obtener(ancho)->obtener(alto)->obtener(profundo)->getCasillero()->bloquear();
 }
 
-
-bool Juego::validarPosicionEnElTablero( int ancho, int alto, int profundo ) {
-
-    if ( ancho<0 || ancho>=*(this->tablero->getDimensiones()) ||
-         alto<0  || alto>=*(this->tablero->getDimensiones()+1)) ||
-         profundo<0 || profundo>=*(this->tablero->getDimensiones()+2) {
-
-            return false;
-         }
-
-    return true;
-}
-
-
-bool Juego::validarDimensiones( int x,  int y,  int z ) {
-
-    if ( x<0 || y<0 || z<0 ) {
-        return false;
-    }
-
-    return true;
-}
-
-
-bool Juego::validarCantidadJugadores( int x ) {
-
-    if ( x<0 ) {
-        return false;
-    }
-
-    return true;
-}
-
-
-bool Juego::validarCantidadCartas( int x ) {
-
-    if ( x<0 ) {
-        return false;
-    }
-
-    return true;
-}
-
-
 void Juego::jugar() {
 
   // while() {

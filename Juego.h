@@ -98,12 +98,6 @@ private:
      */
     unsigned int pedirCantidadJugadores();
 
-    bool validarCantidadJugadores(int);
-    bool validarCantidadCartas(int);
-    bool validarDimensiones(int, int, int);
-
-    bool validarPosicionEnElTablero( int, int, int );
-
     void bloquearSiguienteJugador();
 
     void bloquearFicha( int, int, int );
