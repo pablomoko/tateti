@@ -69,7 +69,7 @@ int * Tablero::getDimensiones() {
     return this->dimensiones;
 }
 
-bool Tablero::existeCasillero(unsigned int x, unsigned int y, unsigned int z) {
+bool Tablero::existeCasillero(int x, int y, int z) {
     return (x >= 0 && x < this->getDimensiones()[0] &&
             y >= 0 && y < this->getDimensiones()[1] &&
             z >=0 && z < this->getDimensiones()[2]);
