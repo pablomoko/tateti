@@ -303,3 +303,42 @@ void Juego::devolverFichaAJugadorAnterior() {
     Jugador * jugadorAnterior = this->jugadores->obtener(indice);
     jugadorAnterior->incrementarFichas();
 }
+
+void Juego::ponerFicha(unsigned int x, unsigned int y, unsigned int z) {
+    // validar las coordenadas ???
+    Casillero * casilleroDestino = this->tablero->getCasillero(x, y, z);
+
+    // if(casilleroDestino->estaDisponible()) --> estaDisponible chequea que este desbloqueado y vacio ??
+    if(casilleroDestino->estaVacio() && casilleroDestino->estaDesbloqueado()) {
+        Ficha * fichaJugador = this->jugadorEnTurno->getFicha();
+        Ficha * nuevaFicha = new Ficha(fichaJugador);
+        casilleroDestino->setFicha(nuevaFicha);
+        // si las fichas del jugador fuera una lista directamente le paso la ficha en lugar de crearla
+        //  Ficha * fichaJugador = this->jugadorEnTurno->getFicha();
+        //  casilleroDestino->setFicha(fichaJugador);
+    } else {
+      // si el casillero no esta disponible tira error y de afuera tienen que volver a llamar a la funcion con otras coordenadas
+      throw "El casillero esta ocupado o bloqueado";
+    }
+}
+
+void Juego::moverFicha(unsigned int x1, unsigned int y1, unsigned int z1, unsigned int x2, unsigned int y2, unsigned int z2) {
+    // validar coordenadas ??
+    Casillero * casilleroOrigen = this->tablero->getCasillero(x1, y1, z1);
+    Casillero * casilleroDestino = this->tablero->getCasillero(x2, y2, z2);
+    Ficha * fichaJugador = this->jugadorEnTurno->getFicha();
+
+    if(casilleroDestino->estaDisponible() && casilleroOrigen->Ocupado()) {
+        Ficha * fichaOrigen = casilleroOrigen->getFicha();
+        // primero chequea que la ficha sea la del jugador
+        // luego la quita y asigna
+        if(fichaOrigen == fichaJugador /* fichaOrigen->esIgual(fichaJugador) */) {
+            casilleroOrigen->quitarFicha(); // devuelve esa ficha
+            casilleroDestino->setFicha(fichaOrigen);
+        } else {
+          throw "El jugador no puede mover esta ficha";
+        }
+    } else {
+      throw "El casillero no esta disponible";
+    }
+}
