@@ -119,7 +119,7 @@ void Juego::activarCarta( unsigned int numeroDeCarta ) {
         // Si el jugador no tiene esa carta, tira error
     }
     catch (...) {
-        throw (" ");
+        return;
     }
 
     this->cartas->push(carta); // agrego la carta usada al final del mazo
