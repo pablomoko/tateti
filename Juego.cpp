@@ -21,6 +21,7 @@ Juego::Juego() {
         std::string nombre = pedirNombre(i + 1);
         Ficha * ficha = new Ficha('A' + i);
         Jugador * nuevoJugador = new Jugador(nombre, ficha, cantidadFichas);
+        this->jugadores->altaFinal(nuevoJugador);
     }
     this->jugadorEnTurno = this->jugadores->obtener(1);
 
@@ -49,7 +50,7 @@ Juego::~Juego() {
         delete this->jugadores->getCursor();
     }
     delete this->jugadores;
-    
+
     while( ! this->mazo->estaVacia() ) {
         delete this->mazo->pop();
     }
@@ -278,7 +279,7 @@ void Juego::volverJugadaAtras() {
     if ( this->jugadaAnterior[0][0] == -1 ) {
         devolverFichaAJugadorAnterior();
         delete ficha;
-    
+
     } else {
         int x1 = this->jugadaAnterior[0][0];
         int y1 = this->jugadaAnterior[0][1];
@@ -302,4 +303,3 @@ void Juego::devolverFichaAJugadorAnterior() {
     Jugador * jugadorAnterior = this->jugadores->obtener(indice);
     jugadorAnterior->incrementarFichas();
 }
-
