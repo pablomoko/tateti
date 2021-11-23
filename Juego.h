@@ -3,16 +3,12 @@
 
 #include <iostream>
 #include <string>
-#include <cstdlib>
-#include <ctime>
 
 #include "Tablero.h"
 #include "Jugador.h"
 #include "Carta.h"
 #include "Cola.h"
 #include "Interfaz.h"
-
-srand( time(NULL) );
 
 class Juego {
 
@@ -38,13 +34,10 @@ public:
 	 */
 	Juego();
 
-
-	/* Pre: -
-	 * Post: se libera memoria del heap usada para tablero, lista de jugadores, mazo de
-     *  		cartas
+	/*
+	 * Post: se libera memoria del heap usada para tablero, lista de jugadores, mazo de cartas
 	 */
 	~Juego();
-
 
 	/*
 	 * recibe coordenadas en el tablero; el jugador es el actual
@@ -52,17 +45,21 @@ public:
 	void ponerFicha(unsigned int x, unsigned int y, unsigned int z);
 	// con try - except
 
-	void jugar();
+	/*
+	 * juega jaja
+	 */
+    void jugar();
 
 	/*
 	 * recibe 2 coordenadas en el tablero; el jugador es el actual
 	 */
 	void moverFicha(unsigned int x1, unsigned int y1, unsigned int z1,
-									unsigned int x2, unsigned int y2, unsigned int z2);
+                    unsigned int x2, unsigned int y2, unsigned int z2);
 	// con try - except
 
 
-	/* Pre: recibe el número perteneciente a una carta del mazo (del 1 al 6?)
+	/*
+	 * Pre: recibe el número perteneciente a una carta del mazo (del 1 al 6?)
 	 * Post: si el jugador no posee esa carta, no se hace nada
 	 * el juego actúa según lo que haga la carta
 	 */
@@ -81,10 +78,6 @@ public:
 	 * post: disminuyen cartas del mazo, cada jugador toma una carta
 	 */
 	//void repartirCartas();
-
-
-	// recibe las coordenadas de la ficha que se movio/coloco para chequear el tateti ahi
-	bool chequearTateti(/* coordenadas de la ficha movida */);
 
 	void entregarCarta();
 
