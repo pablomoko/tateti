@@ -2,4 +2,4 @@ enum EstadoFicha {
     DESBLOQUEADO, BLOQUEADO
 };
 
-#define VACIO ' '
+#define VACIO '.' // tira error si hay espacio ' '
