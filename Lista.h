@@ -133,7 +133,7 @@ template<class T> Lista<T>::~Lista(){
     // mientras exista el primer nodo, se reasigna el puntero primero y se elimina el que era antes primer nodo
     while (this->primero != NULL){
         Nodo<T>* aBorrar = this->primero;
-        this->primero = this->primero->obtenerSiguiente();
+        this->primero = this->primero->getSiguiente();
         delete aBorrar;
     }
 }
@@ -267,7 +267,7 @@ template<class T> T lista<T>::bajaAlFinal(){
     if(this->estaVacia()){
         throw "Lista sin elementos";
     }
-    
+
     T elemento = this->obtener(this->tamanio);
     this->remover(this->tamanio);
 
