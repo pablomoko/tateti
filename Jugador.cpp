@@ -53,6 +53,11 @@ unsigned int Jugador::getCantidadFichas() const{
 }
 
 
+void Jugador::incrementarCantidadFichas() {
+    this->cantidadFichas++;
+}
+
+
 void Jugador::disminuirCantidadFichas(){
 
     (this->cantidadFichas)--;

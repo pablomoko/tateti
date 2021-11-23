@@ -35,6 +35,10 @@ Juego::Juego() {
         Carta * nuevaCarta = cartasDisponibles->obtener(numeroDeCartaAleatorio);
         this->mazo->push(nuevaCarta);
     }
+
+
+    this->jugadaAnterior[0][0] = -1;
+    this->jugadaAnterior[1][0] = -1;
 }
 
 Juego::~Juego() {
@@ -150,6 +154,9 @@ void Juego::activarCarta( unsigned int numeroDeCarta ) {
             }
             break;
 
+        case 4:
+            volverJugadaAtras();
+            break;
     }
 }
 
@@ -253,3 +260,46 @@ void Juego::jugar() {
   // }
 
 }
+
+
+void Juego::volverJugadaAtras() {
+
+    if ( this->jugadaAnterior[1][0] == -1 ) {
+        // NO hubo jugadas, recien inicia el juego
+        return;
+    }
+
+    int x2 = this->jugadaAnterior[1][0];
+    int y2 = this->jugadaAnterior[1][1];
+    int z2 = this->jugadaAnterior[1][2];
+
+    Ficha * ficha = this->tablero->getCasillero(x2, y2. z2)->quitarFicha();
+
+    if ( this->jugadaAnterior[0][0] == -1 ) {
+        devolverFichaAJugadorAnterior();
+        delete ficha;
+    
+    } else {
+        int x1 = this->jugadaAnterior[0][0];
+        int y1 = this->jugadaAnterior[0][1];
+        int z1 = this->jugadaAnterior[0][2];
+
+        this->tablero->getCasillero(x1, y1. z1)->setFicha(ficha);
+    }
+}
+
+
+void Juego::devolverFichaAJugadorAnterior() {
+
+    int indice = 0;
+    this->jugadores->iniciarCursor();
+    this->jugadores->avanzarCursor();
+    while ( this->jugadores->obtenerCursor() != this->jugadorEnTurno ) {
+        this->jugadores->avanzarCursor();
+        ++indice;
+    }
+
+    Jugador * jugadorAnterior = this->jugadores->obtener(indice);
+    jugadorAnterior->incrementarFichas();
+}
+

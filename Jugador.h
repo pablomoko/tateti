@@ -57,6 +57,13 @@ public:
 
 
         /*
+         * Pre: 
+         * Post: 
+         */
+        void incrementarCantidadFichas();
+
+
+        /*
          * Pre: -
          * Post: disminuye en 1 el valor CantidadFichas
          */

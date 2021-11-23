@@ -20,7 +20,9 @@ private:
 	unsigned int cantidadMaximaCartas;
 	Tablero * tablero;
 	Cola < Carta * > * mazo;
-  Interfaz * interfaz;
+  	Interfaz * interfaz;
+
+  	int jugadaAnterior[2][3];
 
 
 public:
@@ -98,5 +100,9 @@ private:
     void bloquearFicha( int, int, int );
 
     void bloquearCasillero( int, int, int );
+
+    void volverJugadaAtras();
+
+    void devolverFichaAJugadorAnterior();
 
 };
