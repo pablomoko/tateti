@@ -11,33 +11,40 @@ std::string pedirNombre( int jugadorNumero ) {
 */
 Juego::Juego() {
 
-    this->interfaz = new Interfaz();
+    this->interfaz = new Interfaz();    //Se crea objeto interfaz con el que se interactuara
 
+    /* Antes que nada se piden la cantidad de jugadores y fichas al usuario
+     * para luego poder generar la lista de jugadores */
     unsigned int cantidadJugadores = pedirCantidadJugadores();
     unsigned int cantidadFichas = pedirCantidadFichas();
 
+    //Se crea la lista de jugadores con sus respectivos nombres y fichas
     this->jugadores = new Lista < Jugador * >;
     for (unsigned int i = 0; i < cantidadJugadores; i++) {
         std::string nombre = pedirNombre(i + 1);
-        Ficha * ficha = new Ficha('A' + i);
+        Ficha * ficha = new Ficha('A' + i); //'A' + i para recorrer la tabla ASCII y asignar distintos caracteres
         Jugador * nuevoJugador = new Jugador(nombre, ficha, cantidadFichas);
         this->jugadores->altaFinal(nuevoJugador);
     }
-    this->jugadorEnTurno = this->jugadores->obtener(1);
+    this->jugadorEnTurno = this->jugadores->obtener(1); //Se establece el jugador 1 como el jugador en turno
 
+    //Se pide al usuario las dimensiones deseadas para cada plano del tablero y se crea uno con las mismas
     unsigned int dimensiones[3] = pedirDimensionesTablero();
     this->tablero = new Tablero(dimensiones[0], dimensiones[1], dimensiones[2]);
 
+    //Se pide al usuario la cantidad maxima de cartas que se puede tener en mano
     this->cantidadMaximaCartas = pedirCantidadCartasPorJugador();
-    this->mazo = new Cola<Carta *>;
+
+    //Se crea el mazo con una cola de cartas ordenadas (no disponemos del uso del módulo random)
+    this->mazo = new Cola < Carta * >;
     for (int i = 0; i < cantidadJugadores * this->cantidadMaximaCartas * 100; i++) {
-        // mejorar implementacion
+        // mejorar implementacion (no usar random)
         unsigned int numeroDeCartaAleatorio = rand() % 6;
         Carta * nuevaCarta = cartasDisponibles->obtener(numeroDeCartaAleatorio);
         this->mazo->push(nuevaCarta);
     }
 
-
+    //Se declaran las coordenadas de la ultima jugada con valores invalidos
     this->jugadaAnterior[0][0] = -1;
     this->jugadaAnterior[1][0] = -1;
 }

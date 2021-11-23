@@ -23,8 +23,8 @@ private:
     Jugador * jugadorEnTurno; // sirve para luego saber quien fue el ultimo que jugo, quien gano
     Tablero * tablero;
     Interfaz * interfaz;
-    unsigned int cantidadMaximaCartas;
-  	int jugadaAnterior[2][3];
+    unsigned int cantidadMaximaCartas;  // Cantidad maxima de cartas que puede tener un jugador en la mano
+  	int jugadaAnterior[2][3];   // Representa las coordenadas de donde se hizo la ultima modificacion en el tablero
 
 public:
 	/*
