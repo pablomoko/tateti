@@ -313,6 +313,9 @@ unsigned int Juego::pedirCantidadJugadores() {
 
     try {
         std::cin >> cantidadJugadores;
+        if (cantidadJugadores == 0){
+            throw "Error 0 jugadores";
+        }
     } catch (...) { //En caso de que ingrese un valor inválido se le indica al usuario que lo que ingreso es inválido
         this->interfaz->ingresoInvalido();
     }
