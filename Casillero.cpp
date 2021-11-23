@@ -13,7 +13,7 @@ Casillero::Casillero(){
     this->estado = DESBLOQUEADO;
 }
 
-Casillero::Casillero(Ficha * ficha){
+Casillero::Casillero(Ficha * nuevaFicha){
   Ficha * aux = this->ficha;
   this->ficha = nuevaFicha;
   delete aux;
