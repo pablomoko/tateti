@@ -1,3 +1,6 @@
+#ifndef _JUEGO_H
+#define _JUEGO_H
+
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -106,3 +109,5 @@ private:
     void devolverFichaAJugadorAnterior();
 
 };
+
+#endif // _JUEGO_H
