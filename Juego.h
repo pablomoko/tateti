@@ -19,14 +19,12 @@ class Juego {
 private:
 
 	Lista < Jugador * > * jugadores; // lista circular de jugadores
-	Jugador * jugadorEnTurno; // sirve para luego saber quien fue el ultimo que jugo, quien gano
-	unsigned int cantidadMaximaCartas;
-	Tablero * tablero;
-	Cola < Carta * > * mazo;
-  	Interfaz * interfaz;
-
+    Cola < Carta * > * mazo;
+    Jugador * jugadorEnTurno; // sirve para luego saber quien fue el ultimo que jugo, quien gano
+    Tablero * tablero;
+    Interfaz * interfaz;
+    unsigned int cantidadMaximaCartas;
   	int jugadaAnterior[2][3];
-
 
 public:
 	/*
