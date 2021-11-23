@@ -16,11 +16,11 @@ private:
 
 	Lista < Jugador * > * jugadores; // lista circular de jugadores
     Cola < Carta * > * mazo;
-    Jugador * jugadorEnTurno; // sirve para luego saber quien fue el ultimo que jugo, quien gano
+    Jugador * jugadorEnTurno; // sirve para luego saber quien fue el último que jugo, quien gano
     Tablero * tablero;
     Interfaz * interfaz;
     unsigned int cantidadMaximaCartas;  // Cantidad maxima de cartas que puede tener un jugador en la mano
-  	int jugadaAnterior[2][3];   // Representa las coordenadas de donde se hizo la ultima modificacion en el tablero
+  	int jugadaAnterior[2][3];   // Representa las coordenadas de donde se hizo la última modificacion en el tablero
 
 public:
 	/*
@@ -40,10 +40,12 @@ public:
 	~Juego();
 
 	/*
-	 * recibe coordenadas en el tablero; el jugador es el actual
+	 * Pre: recibe las coordenadas del tablero donde se desea colocar la ficha
+	 * Post: valida y coloca la ficha del jugador actual en el Casillero ubicado
+	 * en las coordenadas del Tablero recibidas. Si el Casillero está bloqueado
+	 * u ocupado lanza una excepcion
 	 */
 	void ponerFicha(unsigned int x, unsigned int y, unsigned int z);
-	// con try - except
 
 	/*
 	 * juega jaja
