@@ -349,3 +349,17 @@ std::string Juego::pedirNombre(int jugadorNumero) {
 
     return nombre;
 }
+
+unsigned int Juego::pedirCantidadJugadores() {
+    unsigned int cantidadJugadores = 0;
+
+    this->interfaz->pedirCantidadJugadores();
+
+    try {
+        std::cin >> cantidadJugadores;
+    } catch (...) { //En caso de que ingrese un valor inválido se le indica al usuario que lo que ingreso es inválido
+        this->interfaz->ingresoInvalido();
+    }
+
+    return cantidadJugadores;
+}

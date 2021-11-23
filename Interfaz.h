@@ -36,6 +36,17 @@ public:
      * ejemplo: Jugador 1: Tomas, Jugador 2: Miguel, ett
      */
     void pedirNombre(int jugadorNumero);
+
+    /*
+     * Post: pide por pantalla la cantidad de jugadores que tendra el juego
+     */
+    void pedirCantidadJugadores();
+
+    /*
+     * Post: indica por pantalla que se ingreso un valor invalido y pide
+     * que se ingrese nuevamente
+     */
+    void ingresoInvalido();
 };
 
 #endif //TATETI_2_0_INTERFAZ_H

@@ -92,6 +92,12 @@ private:
      */
     std::string pedirNombre(int jugadorNumero);
 
+    /*
+     * Post: pide por pantalla la cantidad de jugadores que tendra el juego. Lanza excepcion
+     * si se ingresa valor inválido
+     */
+    unsigned int pedirCantidadJugadores();
+
     bool validarCantidadJugadores(int);
     bool validarCantidadCartas(int);
     bool validarDimensiones(int, int, int);
