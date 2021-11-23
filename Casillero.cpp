@@ -98,3 +98,14 @@ void Casillero::bloquear() {
 void Casillero::desbloquear() {
     this->estado = DESBLOQUEADO;
 }
+
+
+bool Casillero::tienenMismaFicha( Casillero * casilleroAdyacente ) {
+
+    try {
+        return ( this->ficha->esIgual( casilleroAdyacente->getFicha() ) );
+    }
+    catch (...) {
+        return False;
+    }
+}

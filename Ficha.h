@@ -31,10 +31,10 @@ public:
 
 
     /*
-     * Post: devuelve true si los simbolos de las Fichas recibidas son iguales
+     * Post: devuelve true si los simbolos de la Ficha recibida es igual al simbolo
      * y false si no lo son
      **/
-    bool sonIguales(Ficha * ficha1, Ficha * ficha2);
+    bool esIgual(Ficha * ficha2);
 
 
     /*
