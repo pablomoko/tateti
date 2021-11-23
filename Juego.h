@@ -85,7 +85,13 @@ public:
 
 private:
 
-    std::string pedirNombre( int );
+    /*
+     * Pre: recibe el numero de jugador al que corresponde el nombre, por ejemplo:
+     * Jugador 1: Tomas, Jugador 2: Miguel, etc
+     * Post: pide por pantalla el nombre al jugador y devuelve una cadena con dicho nombre
+     */
+    std::string pedirNombre(int jugadorNumero);
+
     bool validarCantidadJugadores(int);
     bool validarCantidadCartas(int);
     bool validarDimensiones(int, int, int);

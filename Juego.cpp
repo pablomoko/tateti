@@ -1,14 +1,5 @@
 #include "Juego.h"
 
-/*PASAR A LA INTERFAZ
-std::string pedirNombre( int jugadorNumero ) {
-    std::string nombre[50];
-    std::cout<<"Jugador "<<jugadorNumero<<" - Ingrese su nombre (max 10 caracteres) :";
-    std::cin>>nombre;
-
-    return nombre;
-}
-*/
 Juego::Juego() {
 
     this->interfaz = new Interfaz();    //Se crea objeto interfaz con el que se interactuara
@@ -21,7 +12,7 @@ Juego::Juego() {
     //Se crea la lista de jugadores con sus respectivos nombres y fichas
     this->jugadores = new Lista < Jugador * >;
     for (unsigned int i = 0; i < cantidadJugadores; i++) {
-        std::string nombre = pedirNombre(i + 1);
+        std::string nombre = pedirNombre(i + 1); // i + 1 es el número de jugador al que corresponde el nombre
         Ficha * ficha = new Ficha('A' + i); //'A' + i para recorrer la tabla ASCII y asignar distintos caracteres
         Jugador * nuevoJugador = new Jugador(nombre, ficha, cantidadFichas);
         this->jugadores->altaFinal(nuevoJugador);
@@ -335,7 +326,7 @@ void Juego::moverFicha(unsigned int x1, unsigned int y1, unsigned int z1, unsign
     Casillero * casilleroDestino = this->tablero->getCasillero(x2, y2, z2);
     Ficha * fichaJugador = this->jugadorEnTurno->getFicha();
 
-    if(casilleroDestino->estaDisponible() && casilleroOrigen->Ocupado()) {
+    if (casilleroDestino->estaDisponible() && casilleroOrigen->Ocupado()) {
         Ficha * fichaOrigen = casilleroOrigen->getFicha();
         // primero chequea que la ficha sea la del jugador
         // luego la quita y asigna
@@ -348,4 +339,13 @@ void Juego::moverFicha(unsigned int x1, unsigned int y1, unsigned int z1, unsign
     } else {
       throw "El casillero no esta disponible";
     }
+}
+
+std::string Juego::pedirNombre(int jugadorNumero) {
+    std::string nombre[50];
+
+    this->interfaz->pedirNombre(int jugadorNumero);
+    std::cin >> nombre;
+
+    return nombre;
 }

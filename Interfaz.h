@@ -30,7 +30,11 @@ public:
      */
     void mostrarTablero(Tablero * tableroActual);
 
-
+    /*
+     * Pre:
+     * Post:
+     */
+    void pedirNombre(int jugadorNumero);
 };
 
 #endif //TATETI_2_0_INTERFAZ_H
