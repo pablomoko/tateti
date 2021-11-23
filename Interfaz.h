@@ -38,9 +38,14 @@ public:
     void pedirNombre(int jugadorNumero);
 
     /*
-     * Post: pide por pantalla la cantidad de jugadores que tendra el juego
+     * Post: pide por pantalla la cantidad de Jugadores que tendra el Juego
      */
     void pedirCantidadJugadores();
+
+    /*
+     * Post: pide por pantalla la cantidad de Fichas que tendra cada Jugador
+     */
+    void pedirCantidadFichas();
 
     /*
      * Post: indica por pantalla que se ingreso un valor invalido y pide

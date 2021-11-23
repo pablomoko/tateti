@@ -322,3 +322,20 @@ unsigned int Juego::pedirCantidadJugadores() {
 
     return cantidadJugadores;
 }
+
+unsigned int Juego::pedirCantidadFichas() {
+    unsigned int cantidadFichas = 0;
+
+    this->interfaz->pedirCantidadFichas();
+
+    try {
+        std::cin >> cantidadFichas;
+        if (cantidadJugadores == 0){
+            throw "Error 0 fichas";
+        }
+    } catch (...) { //En caso de que ingrese un valor inválido se le indica al usuario que lo que ingreso es inválido
+        this->interfaz->ingresoInvalido();
+    }
+
+    return cantidadFichas;
+}

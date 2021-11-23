@@ -98,6 +98,12 @@ private:
      */
     unsigned int pedirCantidadJugadores();
 
+    /*
+     * Post: pide por pantalla la cantidad de fichas que tendra cada Jugador. Lanza excepcion
+     * si se ingresa valor inválido
+     */
+    unsigned int pedirCantidadFichas();
+
     void bloquearSiguienteJugador();
 
     void bloquearFicha( int, int, int );

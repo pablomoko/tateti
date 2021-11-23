@@ -24,6 +24,10 @@ void Interfaz::pedirCantidadJugadores() {
     std::cout << "Ingrese la cantidad de jugadores con la que desea jugar: ";
 }
 
+void Interfaz::pedirCantidadFichas() {
+    std::cout << "Ingrese la cantidad de fichas que tendra cada jugador: ";
+}
+
 void Interfaz::ingresoInvalido() {
     std::cout << "El valor ingresado es invalido, vuelva a intentar" << std::endl;
 }
