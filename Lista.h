@@ -212,6 +212,9 @@ template<class T> void Lista<T>::remover(unsigned int posicion){
             removido = this->primero;
             this->primero = removido->getSiguiente();
 
+        } else if (  ) {
+
+
         } else{
             Nodo<T> * anterior = this->obtenerNodo(posicion - 1);
             removido = anterior->getSiguiente();
@@ -264,10 +267,10 @@ template<class T> T lista<T>::bajaAlFinal(){
     if(this->estaVacia()){
         throw "Lista sin elementos";
     }
+    
     T elemento = this->obtener(this->tamanio);
-    delete this->obtener(tam);
-    this->tamanio--;
-    this->altaFinal(this->obtener(tam));
+    this->remover(this->tamanio);
+
     return elemento;
 }
 
