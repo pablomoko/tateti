@@ -330,7 +330,7 @@ unsigned int Juego::pedirCantidadFichas() {
 
     try {
         std::cin >> cantidadFichas;
-        if (cantidadJugadores == 0){
+        if (cantidadFichas == 0){
             throw "Error 0 fichas";
         }
     } catch (...) { //En caso de que ingrese un valor inválido se le indica al usuario que lo que ingreso es inválido
