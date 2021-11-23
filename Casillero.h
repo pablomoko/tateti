@@ -56,6 +56,12 @@ public:
     void setFicha(Ficha * nuevaFicha);
 
     /*
+     * Pre: this->ficha != NULL
+     * Post: this->ficha=NULL, se devuelve el puntero a ficha
+     */
+    Ficha * Casillero::quitarFicha()
+
+    /*
      * Pre: recibe coordenadas i,j,k entre 0 y 2
      * Post: devuelve el casillero adyacente que esta en la matriz de adyacentes
      */

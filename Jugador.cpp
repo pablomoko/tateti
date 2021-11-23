@@ -96,9 +96,7 @@ void Jugador::moverFicha(Casillero * casilleroOrigen, Casillero * casilleroDesti
     //   throw ""
     // }
 
-    Ficha * ficha = casilleroOrigen->getFicha();
-    casilleroDestino->setFicha(ficha);
-    casilleroOrigen->quitarFicha();
+    casilleroDestino->setFicha( casilleroOrigen->quitarFicha() );
 
 /*
     //Valida si las coordenadas ingresadas son válidas

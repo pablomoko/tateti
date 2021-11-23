@@ -77,8 +77,14 @@ void Casillero::setFicha(Ficha * nuevaFicha) {
     this->ficha = nuevaFicha;
 }
 
-void Casillero::quitarFicha() {
-  this->ficha = NULL;
+Ficha * Casillero::quitarFicha() {
+
+    if ( this->ficha == NULL ) {
+        throw("No hay ficha para quitar");
+    }
+    Ficha * ficha = this->ficha;
+    this->ficha = NULL;
+    return ficha;
 }
 
 bool Casillero::estaBloqueado() {
