@@ -13,7 +13,7 @@ friend class Ficha;
 private:
 
     std::string nombreJugador;
-    Ficha * ficha;
+    Ficha * ficha; // deberia ser una lista ??
     int cantidadFichas;
     Lista<Carta *> * cartas;
     Estado estado;
@@ -57,8 +57,8 @@ public:
 
 
         /*
-         * Pre: 
-         * Post: 
+         * Pre:
+         * Post:
          */
         void incrementarCantidadFichas();
 
@@ -100,7 +100,7 @@ public:
 
         /*
          * Pre: La lista de cartas no esta vacia (si esta vacia lanza error)
-         * Post: Saca el ultimo elemento de la lista y lo devuelve 
+         * Post: Saca el ultimo elemento de la lista y lo devuelve
          *      (si la lista de cartas esta vacia lanza error)
          */
         Carta * getCarta();
@@ -121,6 +121,13 @@ public:
          * si las coordenadas son inválidas lanza una excepcion
          */
         void moverFicha(unsigned int x1, unsigned int y1, unsigned int z1, unsigned int x2, unsigned int y2, unsigned int z2);
+
+        /*
+         * chequea si el jugador le quedan fichas para poner
+         * quita la ficha de la lista
+         * devuelve una ficha del jugador
+        */
+        void getFicha();
 };
 
 #endif
