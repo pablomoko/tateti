@@ -51,7 +51,7 @@ public:
 	/*
 	 * recibe coordenadas en el tablero; el jugador es el actual
 	 */
-	void ponerFicha();
+	void ponerFicha(unsigned int x, unsigned int y, unsigned int z);
 	// con try - except
 
 	void jugar();
@@ -59,7 +59,8 @@ public:
 	/*
 	 * recibe 2 coordenadas en el tablero; el jugador es el actual
 	 */
-	void moverFicha();
+	void moverFicha(unsigned int x1, unsigned int y1, unsigned int z1,
+									unsigned int x2, unsigned int y2, unsigned int z2);
 	// con try - except
 
 
