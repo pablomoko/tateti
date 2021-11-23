@@ -127,7 +127,7 @@ public:
          * quita la ficha de la lista
          * devuelve una ficha del jugador
         */
-        void getFicha();
+        Ficha * getFicha();
 };
 
 #endif
