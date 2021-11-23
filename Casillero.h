@@ -58,8 +58,9 @@ public:
     /*
      * Pre: this->ficha != NULL
      * Post: this->ficha=NULL, se devuelve el puntero a ficha
+     ** deberia solo remover la ficha del casillero, ya que getFicha ya la devuelve??
      */
-    Ficha * Casillero::quitarFicha()
+    Ficha * quitarFicha()
 
     /*
      * Pre: recibe coordenadas i,j,k entre 0 y 2
@@ -74,19 +75,19 @@ public:
      */
     unsigned int getLongitudFichasIguales(unsigned int i, unsigned int j, unsigned int k);
 
-    /* 
+    /*
      * Pre: -
      * Post: devuelve True si estado = bloqueado
      */
     bool estaBloqueado();
 
-    /* 
+    /*
      * Pre: -
      * Post: cambia estado a bloqueado
      */
     void bloquear();
 
-    /* 
+    /*
      * Pre: -
      * Post: cambia estado a desbloqueado
      */
