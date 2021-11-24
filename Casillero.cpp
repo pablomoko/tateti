@@ -10,7 +10,7 @@ Casillero::Casillero(){
             this->casillerosAdyacentes[i][j] = new Casillero * [3];
         }
     }
-    this->estado = DESBLOQUEADO;
+    this->estado = CASILLERO_DESBLOQUEADO;
 }
 
 Casillero::Casillero(Ficha * nuevaFicha){
@@ -88,15 +88,15 @@ Ficha * Casillero::quitarFicha() {
 }
 
 bool Casillero::estaBloqueado() {
-    return (this->estado == BLOQUEADO);
+    return (this->estado == CASILLERO_BLOQUEADO);
 }
 
 void Casillero::bloquear() {
-    this->estado = BLOQUEADO;
+    this->estado = CASILLERO_BLOQUEADO;
 }
 
 void Casillero::desbloquear() {
-    this->estado = DESBLOQUEADO;
+    this->estado = CASILLERO_DESBLOQUEADO;
 }
 
 
