@@ -28,10 +28,9 @@ Juego::Juego() {
 
     //Se crea el mazo con una cola de cartas ordenadas (no disponemos del uso del módulo random)
     this->mazo = new Cola < Carta * >;
-    for (int i = 0; i < cantidadJugadores * this->cantidadMaximaCartas * 100; i++) {
-        // mejorar implementacion (no usar random)
-        unsigned int numeroDeCartaAleatorio = rand() % 6;
-        Carta * nuevaCarta = cartasDisponibles->obtener(numeroDeCartaAleatorio);
+    for (int i = 0; i < cantidadJugadores * this->cantidadMaximaCartas * 2; i++) {
+        funcion_t funcnionalidad = i % 6;
+        Carta * nuevaCarta = new Carta(funcnionalidad);
         this->mazo->push(nuevaCarta);
     }
 
@@ -58,6 +57,7 @@ Juego::~Juego() {
 }
 
 void Juego::cambiarTurno() {
+    
   // inicia el cursor en nulo
   this->jugadores->iniciarCursor();
   // itero la lista en busca del jugador en turno
@@ -72,9 +72,9 @@ void Juego::cambiarTurno() {
         this->jugadores->avanzarCursor();
       }
 
-      if ( jugadores->obtenerCursor()->estaBloqueado() ) {
+      if ( jugadores->obtenerCursor()->getNumeroDeTurnos() = 0 ) {
         //si el sig jugador esta bloqueado, avanzo uno mas, y lo desbloqueo para la proxima
-        jugadores->obtenerCursor()->desbloquear();
+        jugadores->obtenerCursor()->unTurno();
         jugadores->avanzarCursor();
       }
 
@@ -112,10 +112,10 @@ void Juego::entregarCarta() {
 }
 
 
-void Juego::activarCarta( unsigned int numeroDeCarta ) {
+void Juego::activarCarta( funcion_t funcionalidad ) {
 
     try {
-        Carta * carta = this->jugadorEnTurno->usarCarta( numeroDeCarta );
+        Carta * carta = this->jugadorEnTurno->usarCarta( funcionalidad );
         // Si el jugador no tiene esa carta, tira error
     }
     catch (...) {
@@ -124,14 +124,14 @@ void Juego::activarCarta( unsigned int numeroDeCarta ) {
 
     this->cartas->push(carta); // agrego la carta usada al final del mazo
 
-    switch numeroDeCarta {
+    switch funcionalidad {
 
-        case 1:
+        case SALTEAR:
             // Hacer perder un turno al siguiente jugador
-            this->bloquearFicha();
+            this->saltearSiguienteJugador();
             break;
 
-        case 2:
+        case BLOCK_FICHA:
             // Pedir coordenadas
             // Bloquear la ficha del tablero
             try {
@@ -142,7 +142,7 @@ void Juego::activarCarta( unsigned int numeroDeCarta ) {
             }
             break;
 
-        case 3:
+        case BLOCK_CASILLERO:
             // Pedir coordenadas
             // Bloquear ese casillero
             try {
@@ -153,14 +153,29 @@ void Juego::activarCarta( unsigned int numeroDeCarta ) {
             }
             break;
 
-        case 4:
+        case REGRESAR:
             volverJugadaAtras();
+            break;
+
+        case REPETIR:
+            this->jugadorEnTurno->dobleTurno();
+            break;
+
+        case ROBAR_CARTA:
+            try{
+                  Jugador *jugadorElegido = this->obtenerJugadorSiguiente();
+                  Carta *carta = jugadorElegido->getCarta();
+                  this->jugadorEnTurno->tomarCarta(carta);
+            }
+            catch(...){
+            }
+
             break;
     }
 }
 
 
-void Juego::bloquearSiguienteJugador() {
+void Juego::saltearSiguienteJugador() {
 
     this->jugadores->iniciarCursor();
     bool listo = false;
@@ -169,7 +184,7 @@ void Juego::bloquearSiguienteJugador() {
 
         if ( this->jugadorEnTurno == this->jugadores->obtenerCursor() ) {
             this->jugadores->avanzarCursor();
-            this->jugadores->obtenerCursor()->bloquear();
+            this->jugadores->obtenerCursor()->saltear();
             listo = true;
         }
     }
@@ -198,22 +213,6 @@ void Juego::bloquearCasillero( int ancho, int alto, int profundo ) {
     }
 
     this->tablero->obtener(ancho)->obtener(alto)->obtener(profundo)->getCasillero()->bloquear();
-}
-
-void Juego::jugar() {
-
-  // while() {
-  //   try {
-  //     casilleroDestino = pedirCoordenadas
-  //     if(sePuedeMover) {
-  //       this->jugadorEnTurno->moverFicha(casilleroOrigen, casilleroDestino);
-  //     }
-  //     break;
-  //   } catch() {
-  //
-  //   }
-  // }
-
 }
 
 
@@ -257,6 +256,22 @@ void Juego::devolverFichaAJugadorAnterior() {
     Jugador * jugadorAnterior = this->jugadores->obtener(indice);
     jugadorAnterior->incrementarFichas();
 }
+
+
+Jugador Juego::obtenerJugadorSiguiente(){
+
+    this->jugadores->iniciarCursor();
+    this->jugadores->avanzarCursor();
+    for(int i = 0; i < this->cantidadJugadores; i++){
+        if(this->jugadorEnTurno->getNombre() == this->jugadores->obtenerCursor()->getNombre()){
+            this->jugadores->avanzarCursor();
+            return this->jugadores->obtenerCursor();
+        }
+        this->avanzarCursor();
+    }
+    return NULL;
+}
+
 
 void Juego::ponerFicha(unsigned int x, unsigned int y, unsigned int z) {
     // validar las coordenadas ???
@@ -338,4 +353,25 @@ unsigned int Juego::pedirCantidadFichas() {
     }
 
     return cantidadFichas;
+}
+
+
+// ===============================================
+// ===============================================
+
+
+void Juego::jugar() {
+
+  // while() {
+  //   try {
+  //     casilleroDestino = pedirCoordenadas
+  //     if(sePuedeMover) {
+  //       this->jugadorEnTurno->moverFicha(casilleroOrigen, casilleroDestino);
+  //     }
+  //     break;
+  //   } catch() {
+  //
+  //   }
+  // }
+
 }

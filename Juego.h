@@ -110,6 +110,11 @@ private:
 
     void bloquearCasillero( int, int, int );
 
+    /*
+     * 
+     * Post: se deshace la jugada del jugador anterior al actual (la jugada realizada
+     		por el jugadorEnTurno queda intacta)
+     */
     void volverJugadaAtras();
 
     void devolverFichaAJugadorAnterior();

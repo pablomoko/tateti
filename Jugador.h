@@ -16,7 +16,7 @@ private:
     Ficha * ficha; // deberia ser una lista ??
     int cantidadFichas;
     Lista<Carta *> * cartas;
-    Estado estado;
+    int turnos;
 
 
 public:
@@ -70,25 +70,49 @@ public:
         void disminuirCantidadFichas();
 
 
-        /*
-         * Pre: -
-         * Post: devuelve True si estado=bloqueado
-         */
-        bool estaBloqueado();
+        // /*
+        //  * Pre: -
+        //  * Post: devuelve True si estado=bloqueado
+        //  */
+        // bool estaBloqueado();
 
 
-        /*
-         * Pre: -
-         * Post: cambia el estado a bloqueado
-         */
-        void bloquear();
+        // /*
+        //  * Pre: -
+        //  * Post: cambia el estado a bloqueado
+        //  */
+        // void bloquear();
 
 
-        /*
-         * Pre: -
-         * Post: cambia el estado a desbloqueado
-         */
-        void desbloquear();
+        
+        //  * Pre: -
+        //  * Post: cambia el estado a desbloqueado
+         
+        // void desbloquear();
+
+
+        // /*
+        //  * Post: estado pasa a ser DOBLE_TURNO
+        //  */
+        // void repetirTurno();
+
+
+        // /*
+        //  * Post: devuelve True si estado=DOBLE_TURNO
+        // */
+        // bool repiteTurno();
+        //
+
+        // ------------------------------------
+        int Jugador::getNumeroDeTurnos();
+
+        void Jugador::saltear();
+
+        void Jugador::dobleTurno();
+
+        void Jugador::unTurno();
+        // ------------------------------------
+
 
 
         /*

@@ -6,8 +6,8 @@ Jugador::Jugador(std::string nombreJugador,Ficha * ficha,int cantidadFichas){
     this->nombreJugador= nombreJugador;
     this->ficha = ficha;
     this->cantidadFichas = cantidadFichas;
-    this->estado = desbloqueado;
-
+    //this->estado = desbloqueado;
+    this->turnos = 1;
     this->cartas = new Lista<Carta *>;
 }
 
@@ -29,7 +29,7 @@ void Jugador::tomarCarta( Carta * nuevaCarta ) {
 }
 
 
-Carta * Jugador::usarCarta( unsigned int numeroCarta ) {
+Carta * Jugador::usarCarta( funcion_t funcnionalidad ) {
 
     int cantidadCartas = this->cartas->contarElementos();
     Carta * carta;
@@ -37,7 +37,7 @@ Carta * Jugador::usarCarta( unsigned int numeroCarta ) {
     for (int i = 0; i < cantidadCartas; ++i) {
 
         carta = this->cartas->obtener(i);
-        if ( carta->getNumero() == numeroCarta ) {
+        if ( carta->getFuncionalidad() == funcnionalidad ) {
             this->cartas->remover(i);
             return carta;
         }
@@ -63,24 +63,64 @@ void Jugador::disminuirCantidadFichas(){
     (this->cantidadFichas)--;
 }
 
+/*
+    bool Jugador::estaBloqueado() {
 
-bool Jugador::estaBloqueado() {
+        return ( this->estado == JUGADOR_BLOQUEADO );
+    }
 
-    return ( this->estado == BLOQUEADO );
+
+    void Jugador::bloquear() {
+
+        this->estado = JUGADOR_BLOQUEADO;
+    }
+
+
+    void Jugador::desbloquear() {
+
+        this->estado = JUGANDO;
+    }
+
+
+    void Jugador::repetirTurno() {
+
+        this->estado = DOBLE_TURNO;
+    }
+
+
+    bool Jugador::repiteTurno() {
+
+        return this->estado == DOBLE_TURNO;
+    }
+
+
+    void Jugador::finDobleTurno() {
+
+    }
+
+*/
+
+// ------------------------------------
+int Jugador::getNumeroDeTurnos() {
+
+    return this->turnos;
 }
 
+void Jugador::saltear() {
 
-void Jugador::bloquear() {
-
-    this->estado = BLOQUEADO;
+    this->turnos = 0;
 }
 
+void Jugador::dobleTurno() {
 
-void Jugador::desbloquear() {
-
-    this->estado = DESBLOQUEADO;
+    this->turnos = 2;
 }
 
+void Jugador::unTurno() {
+
+    this->turnos = 1;
+}
+// ------------------------------------
 
 Carta * Jugador::getCarta(){
 

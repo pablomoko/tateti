@@ -2,12 +2,13 @@
 #define __CARTA_H__
 
 #include <string>
+#include "constantes.h"
+
 
 class Carta {
 
 private:
-    unsigned int numero;
-    std::string descripcion;
+    funcion_t funcion;
 
 
 public:
@@ -16,14 +17,14 @@ public:
      * Pre: numero de carta entre 1 y 6, string con descripcion
      * Post: inicializa los atributos con los argumentos
      */
-    Carta( unsigned int numeroDeCarta, std::string descripcion );
+    Carta( funcion_t funcion );
 
 
     /* 
      * Pre: -
      * Post: devuelve un entero entre 1 y 6
      */
-    unsigned int getNumero();
+    funcion_t getFuncionalidad();
 
 
     /* 
@@ -35,21 +36,21 @@ public:
 };
 
 
-Carta::Carta( unsigned int numeroDeCarta, std::string descripcion ){
-    this->numero = numeroDeCarta;
-    this->descripcion = descripcion;
+Carta::Carta( funcion_t funcion ){
+
+    this->funcion = funcion;
 }
 
 
-unsigned int Carta::getNumero() {
+funcion_t Carta::getFuncionalidad() {
 
-    return this->numero;
+    return this->funcion;
 }
 
 
 std::string Carta::getDescripcion() {
 
-    return this->descripcion;
+    return funcionalidades[this->funcion];
 }
 
 
