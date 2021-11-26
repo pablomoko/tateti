@@ -4,6 +4,8 @@
 #include "iostream"
 #include "Juego.h"
 
+using namespace std;
+
 class Interfaz{
 public:
     /*
@@ -31,9 +33,9 @@ public:
     void mostrarTablero(Tablero * tableroActual);
 
     /*
-     * Pre: recibe el numero de jugador al que corresponde el nombre
-     * Post: pide por pantalla el nombre al jugador indicando su numero
-     * ejemplo: Jugador 1: Tomas, Jugador 2: Miguel, ett
+     * Pre: recibe el número de jugador al que corresponde el nombre
+     * Post: pide por pantalla el nombre al jugador indicando su número
+     * ejemplo: Jugador 1: Tomás, Jugador 2: Miguel, ett
      */
     void pedirNombre(int jugadorNumero);
 
@@ -48,7 +50,7 @@ public:
     void pedirCantidadFichas();
 
     /*
-     * Post: indica por pantalla que se ingreso un valor invalido y pide
+     * Post: muestra un mensaje por pantalla diciendo que se ingresó un valor invalido y pide
      * que se ingrese nuevamente
      */
     void ingresoInvalido();

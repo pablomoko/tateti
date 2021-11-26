@@ -17,17 +17,17 @@ void Interfaz::mostrarTablero(Tablero * tableroActual) {
 }
 
 void Interfaz::pedirNombre(int jugadorNumero) {
-    std::cout << "Jugador " << jugadorNumero << " - Ingrese su nombre (max 10 caracteres): ";
+    cout << "Jugador " << jugadorNumero << " - Ingrese su nombre (max 10 caracteres): ";
 }
 
 void Interfaz::pedirCantidadJugadores() {
-    std::cout << "Ingrese la cantidad de jugadores con la que desea jugar: ";
+    cout << "Ingrese la cantidad de jugadores con la que desea jugar: ";
 }
 
 void Interfaz::pedirCantidadFichas() {
-    std::cout << "Ingrese la cantidad de fichas que tendra cada jugador: ";
+    cout << "Ingrese la cantidad de fichas que tendra cada jugador: ";
 }
 
 void Interfaz::ingresoInvalido() {
-    std::cout << "El valor ingresado es invalido, vuelva a intentar" << std::endl;
+    cout << "El valor ingresado es invalido, vuelva a intentar" << endl;
 }
