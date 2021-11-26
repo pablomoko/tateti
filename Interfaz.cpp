@@ -1,7 +1,11 @@
 #include "Interfaz.h"
 
 void Interfaz::mostrarPantallaInicial() {
-
+    cout << "      TATETI 2.0      " << endl;
+    cout << "Bienvenido a Tateti 2.0, una version alternativa"
+            "del Tateti convencional con un tablero en 3 dimensiones"
+            "y varios jugadores y cartas para jugar!" << endl;
+    cout << "\nProyecto desarrollado por alumnos de FIUBA" << endl;
 }
 
 void Interfaz::mostrarGanador() {

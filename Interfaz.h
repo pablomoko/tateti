@@ -9,8 +9,8 @@ using namespace std;
 class Interfaz{
 public:
     /*
-     * Pre:
-     * Post:
+     * Post: muestra por pantalla el menu principal del juego mostrando el titulo
+     * del mismo y dando bienvenida al usuario
      */
     void mostrarPantallaInicial();
 
