@@ -57,8 +57,6 @@ public:
 	 */
 	void moverFicha(unsigned int x1, unsigned int y1, unsigned int z1,
                     unsigned int x2, unsigned int y2, unsigned int z2);
-	// con try - except
-
 
 	/*
 	 * Pre: recibe el número perteneciente a una carta del mazo (del 1 al 6?)
@@ -68,7 +66,8 @@ public:
 	void activarCarta( unsigned int );
 
 
-	/* avanza una posicion en la lista de jugadores
+	/*
+	 * Post: avanza una posicion en la lista de jugadores
 	 * establece el nuevo jugadorEnTurno
 	 */
  	void cambiarTurno();
@@ -86,8 +85,8 @@ public:
 private:
 
     /*
-     * Pre: recibe el numero de jugador al que corresponde el nombre, por ejemplo:
-     * Jugador 1: Tomas, Jugador 2: Miguel, etc
+     * Pre: recibe el número de jugador al que corresponde el nombre, por ejemplo:
+     * Jugador 1: Tomás, Jugador 2: Miguel, etc.
      * Post: pide por pantalla el nombre al jugador y devuelve una cadena con dicho nombre
      */
     std::string pedirNombre(int jugadorNumero);
@@ -111,7 +110,6 @@ private:
     void bloquearCasillero( int, int, int );
 
     /*
-     * 
      * Post: se deshace la jugada del jugador anterior al actual (la jugada realizada
      		por el jugadorEnTurno queda intacta)
      */
