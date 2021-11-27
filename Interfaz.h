@@ -15,10 +15,10 @@ public:
     void mostrarPantallaInicial();
 
     /*
-     * Pre:
-     * Post:
+     * Pre: recibe el Jugador no nulo que ha ganado el juego
+     * Post: muestra un mensaje por pantalla indicando el nombre del ganador
      */
-    void mostrarGanador();
+    void mostrarGanador(Jugador * ganador);
 
     /*
      * Pre:

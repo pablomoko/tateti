@@ -8,8 +8,8 @@ void Interfaz::mostrarPantallaInicial() {
     cout << "\nProyecto desarrollado por alumnos de FIUBA" << endl;
 }
 
-void Interfaz::mostrarGanador() {
-
+void Interfaz::mostrarGanador(Jugador * ganador) {
+    cout << "Juego terminado!\nGanador: " << ganador->getNombre() << endl;
 }
 
 void Interfaz::mostrarControles() {
