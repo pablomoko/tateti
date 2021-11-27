@@ -35,6 +35,9 @@ public:
     /*
      * Pre: recibe el estado actual del tablero
      * Post: muestra por pantalla las Fichas de los casilleros del tablero recibido
+     * imprimiendo tantos planos como profundidad tenga el tablero recibido.
+     * Por ejemplo si el tablero tiene una profundidad de 2 niveles (z=2)
+     * se mostrara por pantalla 2 planos xy pertenecientes a cada nivel de profundidad
      */
     void mostrar(Tablero * tableroActual);
 

@@ -21,13 +21,20 @@ void Interfaz::mostrar(Ficha * ficha) {
 }
 
 void Interfaz::mostrar(Tablero * tableroActual) {
-    for (unsigned int k = 0; k < tableroActual->getDimensiones()[2]; k++) {
-        for (unsigned int j = 0; j < tableroActual->getDimensiones()[1]; j++) {
-            for (unsigned int i = 0; i < tableroActual->getDimensiones()[0]; i++) {
+    unsigned int x = tableroActual->getDimensiones()[0];
+    unsigned int y = tableroActual->getDimensiones()[1];
+    unsigned int z = tableroActual->getDimensiones()[2];
 
+    for (unsigned int k = 0; k < z; k++) {
+        cout << "\nFichas en nivel z = " << z << endl;
+
+        for (unsigned int j = 0; j < y; j++) {
+
+            for (unsigned int i = 0; i < x; i++) {
                 Casillero * casillero = tableroActual->getCasillero(i, j, k);
-                casillero->getFicha()
+                cout << casillero->getFicha();  // Se imprimen todas las fichas de la línea
             }
+            cout << "\n"; // Salto de línea para que la proxima vez que se impriman las fichas sean de la proxima columna
         }
     }
 }
