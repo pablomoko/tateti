@@ -79,6 +79,14 @@ public:
 
 	void entregarCarta();
 
+    /*
+     * Pre: recibe el casillero donde se desea checkear si hay tateti o no
+     * Post: devuelve en booleano si hay tateti o no en todas las direcciones del
+     * Casillero recibido. Hay tateti cuando hay 3 casilleros adyacentes
+     * con el mismo tipo de ficha
+     */
+    bool hayTateti(Casillero * casilleroOrigen);
+
 private:
 
     /*
@@ -113,14 +121,6 @@ private:
     void volverJugadaAtras();
 
     void devolverFichaAJugadorAnterior();
-
-    /*
-     * Pre: recibe el casillero donde se desea checkear si hay tateti o no
-     * Post: devuelve en booleano si hay tateti o no en todas las direcciones del
-     * Casillero recibido. Hay tateti cuando hay 3 casilleros adyacentes
-     * con el mismo tipo de ficha
-     */
-    bool hayTateti(Casillero * casilleroOrigen);
 
 };
 
