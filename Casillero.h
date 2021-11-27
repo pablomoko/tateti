@@ -60,7 +60,7 @@ public:
      * Post: this->ficha=NULL, se devuelve el puntero a ficha
      ** deberia solo remover la ficha del casillero, ya que getFicha ya la devuelve??
      */
-    Ficha * quitarFicha()
+    Ficha * quitarFicha();
 
     /*
      * Pre: recibe coordenadas i,j,k entre 0 y 2
