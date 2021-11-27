@@ -38,14 +38,6 @@ public:
     bool existeCasillero(int x, int y, int z);
 
     /*
-     * Pre: recibe el casillero donde se desea checkear y hay tateti o no
-     * Post: devuelve en booleano si hay tateti o no en la posicion del
-     * Casillero recibida. Hay tateti cuando hay 3 casilleros adyacentes
-     * con el mismo tipo de ficha
-     */
-    bool hayTateti(Casillero * casilleroOrigen);
-
-    /*
      * Pre: recibe las coordenadas x,y,z del casillero que se desea obtener
      * Post: devuelve el casillero que se encuentra en la coordenada recibida
      */
