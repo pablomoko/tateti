@@ -13,10 +13,10 @@
 class Juego {
 
 private:
-
 	Lista < Jugador * > * jugadores; // lista circular de jugadores
     Cola < Carta * > * mazo;
-    Jugador * jugadorEnTurno; // sirve para luego saber quien fue el último que jugo, quien gano
+    Jugador * jugadorEnTurno; // Jugador que se encuentra jugando en el turno actual
+    Jugador * ganador;
     Tablero * tablero;
     Interfaz * interfaz;
     unsigned int cantidadMaximaCartas;  // Cantidad maxima de cartas que puede tener un jugador en la mano
@@ -24,13 +24,10 @@ private:
 
 public:
 	/*
-	 * Pre:	recibe las 3 dimensiones que tendra el tablero,
-	 * la cantidad de fichas seguidas necesarias para ganar, cantidad de jugadores
-	 * distinta de 0, y la cantidad de cartas en mano que se puede tener
-	 *
-	 * Post: valida y crea un nuevo juego. El juego se crea con un tablero de ancho x alto x profundo
-	 * dimensiones, cantidadFichas que indica las necesarias para ganar, cantidadJugadores
-	 * y cantidadCartas en mano que se puede tener
+	 * Post: crea un nuevo juego inicializando una Interfaz, un Jugador ganador nulo y una estructura
+	 * para almacenar la jugadaAnterior. Luego pide por pantalla al usuario las dimensiones con las
+	 * que desea crear el tablero, la cantidad de Jugadores y la cantidad maxima de cartas en mano
+	 * con las que desea jugar
 	 */
 	Juego();
 

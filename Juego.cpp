@@ -2,7 +2,8 @@
 
 Juego::Juego() {
 
-    this->interfaz = new Interfaz();    //Se crea objeto interfaz con el que se interactuara
+    this->interfaz = new Interfaz();    // Se crea objeto interfaz con el que se interactuara
+    this->ganador = NULL;   // Como recien empieza el juego, se crea en nulo
 
     /* Antes que nada se piden la cantidad de jugadores y fichas al usuario
      * para luego poder generar la lista de jugadores */
