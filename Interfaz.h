@@ -21,10 +21,10 @@ public:
     void mostrarGanador(Jugador * ganador);
 
     /*
-     * Pre:
-     * Post:
+     * Post: muestra un mensaje en pantalla pidiendo al jugador que introduzca
+     * las 3 coordenadas del tablero donde desea ubicar su ficha
      */
-    void mostrarControles();
+    void pedirCoordenadas();
 
     /*
      * Pre: recibe el estado actual del tablero

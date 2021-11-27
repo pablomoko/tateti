@@ -12,8 +12,8 @@ void Interfaz::mostrarGanador(Jugador * ganador) {
     cout << "Juego terminado!\nGanador: " << ganador->getNombre() << endl;
 }
 
-void Interfaz::mostrarControles() {
-
+void Interfaz::pedirCoordenadas() {
+    cout << "Introduzca las 3 coordenadas donde desea colocar la ficha" << endl;
 }
 
 void Interfaz::mostrarTablero(Tablero * tableroActual) {
