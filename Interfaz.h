@@ -27,6 +27,12 @@ public:
     void pedirCoordenadas();
 
     /*
+     * Post: muestra en pantalla el simbolo de la ficha recibida sin dar
+     * salto de línea al final
+     */
+    void mostrar(Ficha * ficha);
+
+    /*
      * Pre: recibe el estado actual del tablero
      * Post: muestra por pantalla las Fichas de los casilleros del tablero recibido
      */

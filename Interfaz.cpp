@@ -16,6 +16,10 @@ void Interfaz::pedirCoordenadas() {
     cout << "Introduzca las 3 coordenadas donde desea colocar la ficha" << endl;
 }
 
+void Interfaz::mostrar(Ficha * ficha) {
+    cout << ficha->getSimbolo();
+}
+
 void Interfaz::mostrar(Tablero * tableroActual) {
     for (unsigned int k = 0; k < tableroActual->getDimensiones()[2]; k++) {
         for (unsigned int j = 0; j < tableroActual->getDimensiones()[1]; j++) {
