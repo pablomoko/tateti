@@ -28,9 +28,9 @@ public:
 
     /*
      * Pre: recibe el estado actual del tablero
-     * Post:
+     * Post: muestra por pantalla las Fichas de los casilleros del tablero recibido
      */
-    void mostrarTablero(Tablero * tableroActual);
+    void mostrar(Tablero * tableroActual);
 
     /*
      * Pre: recibe el número de jugador al que corresponde el nombre

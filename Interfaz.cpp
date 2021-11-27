@@ -16,8 +16,16 @@ void Interfaz::pedirCoordenadas() {
     cout << "Introduzca las 3 coordenadas donde desea colocar la ficha" << endl;
 }
 
-void Interfaz::mostrarTablero(Tablero * tableroActual) {
+void Interfaz::mostrar(Tablero * tableroActual) {
+    for (unsigned int k = 0; k < tableroActual->getDimensiones()[2]; k++) {
+        for (unsigned int j = 0; j < tableroActual->getDimensiones()[1]; j++) {
+            for (unsigned int i = 0; i < tableroActual->getDimensiones()[0]; i++) {
 
+                Casillero * casillero = tableroActual->getCasillero(i, j, k);
+                casillero->getFicha()
+            }
+        }
+    }
 }
 
 void Interfaz::pedirNombre(int jugadorNumero) {
