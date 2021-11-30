@@ -2,6 +2,7 @@
 
 Casillero::Casillero(){
     this->ficha = new Ficha(VACIO);
+    this->estado = CASILLERO_DESBLOQUEADO;
 
     this->casillerosAdyacentes = new Casillero *** [3];
     for (int i = 0; i < 3; i++) {
@@ -10,17 +11,28 @@ Casillero::Casillero(){
             this->casillerosAdyacentes[i][j] = new Casillero * [3];
         }
     }
-    this->estado = CASILLERO_DESBLOQUEADO;
 }
 
 Casillero::Casillero(Ficha * nuevaFicha){
-  Ficha * aux = this->ficha;
-  this->ficha = nuevaFicha;
-  delete aux;
+
+    this->ficha = nuevaFicha;
+    this->estado = CASILLERO_DESBLOQUEADO;
+
+    this->casillerosAdyacentes = new Casillero *** [3];
+    for (int i = 0; i < 3; i++) {
+        this->casillerosAdyacentes[i] = new Casillero ** [3];
+        for (int j = 0; j < 3; j++) {
+            this->casillerosAdyacentes[i][j] = new Casillero * [3];
+        }
+    }
 }
 
 Casillero::~Casillero() {
-    delete this->ficha;
+
+    if ( this->ficha ) {
+        delete this->ficha;
+    }
+
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             delete[] this->casillerosAdyacentes[i][j];
@@ -28,7 +40,6 @@ Casillero::~Casillero() {
         delete[] this->casillerosAdyacentes[i];
     }
     delete[] this->casillerosAdyacentes;
-    //this->casillerosAdyacentes = NULL;   hace falta ????
 }
 
 void Casillero::asignarCasilleroAdyacente(int x, int y, int z, Casillero * casilleroAdyacente) {
@@ -47,17 +58,37 @@ bool Casillero::tieneAdyacente(unsigned int x, unsigned int y, unsigned int z) {
     return (this->casillerosAdyacentes[x][y][z] != NULL);
 }
 
+bool Casillero::esAdyacente( Casillero * casillero ){
+
+    Casillero * ca;
+    for (int k = 0; k < 3; ++k) {
+        for (int j = 0; j < 3; ++j) {
+            for (int i = 0; i < 3; ++i) {
+                ca = this->getAdyacente(i, j, k);
+                if (ca == casillero) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 Casillero * Casillero::getAdyacente(unsigned int i, unsigned int j, unsigned int k) {
-    return this->casillerosAdyacentes[i][j][k];
+    Casillero * c = this->casillerosAdyacentes[i][j][k];
+    return c;
 }
 
 // probar compilar esta funcion
 unsigned int Casillero::getLongitudFichasIguales(unsigned int i, unsigned int j, unsigned int k){
     //Pensar otro algoritmo sin tantos returns
     if (!this->tieneAdyacente(i, j, k) ||  //Caso base
-        !this->estaOcupado(i, j, k)){
+        !this->ficha ||
+        this->ficha->getSimbolo() == VACIO ||
+        ( i==1 && j==1 && k==1 ) ){
         return 0;
     }
+
 
     Casillero * casilleroAdyacente = this->getAdyacente(i, j, k);
 
@@ -73,8 +104,12 @@ Ficha * Casillero::getFicha(){
 }
 
 void Casillero::setFicha(Ficha * nuevaFicha) {
-    //if(this->ficha->estaBloqueado)
-    this->ficha = nuevaFicha;
+    if( !this->estaVacio() || this->estaBloqueado() ) {
+        std::cout<<"\nCasillero ocupado o bloqueado\n";
+        throw("No se puede poner una ficha en el casillero ocupado o bloqueado");
+    }
+    if ( this->ficha ) delete this->ficha;
+    this->ficha = new Ficha(nuevaFicha);
 }
 
 Ficha * Casillero::quitarFicha() {
@@ -83,7 +118,7 @@ Ficha * Casillero::quitarFicha() {
         throw("No hay ficha para quitar");
     }
     Ficha * ficha = this->ficha;
-    this->ficha = NULL;
+    this->ficha = new Ficha(VACIO);
     return ficha;
 }
 
@@ -106,6 +141,17 @@ bool Casillero::tienenMismaFicha( Casillero * casilleroAdyacente ) {
         return ( this->ficha->esIgual( casilleroAdyacente->getFicha() ) );
     }
     catch (...) {
-        return False;
+        return false;
     }
+}
+
+
+
+bool Casillero::estaVacio() {
+
+    if ( this->ficha->getSimbolo() == VACIO ) {
+        return true;
+    }
+
+    return false;
 }

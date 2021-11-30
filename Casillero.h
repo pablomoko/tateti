@@ -1,11 +1,10 @@
-#ifndef _CASILLERO_H_INCLUDED_
-#define _CASILLERO_H_INCLUDED_
+#ifndef CASILLERO_H_
+#define CASILLERO_H_
+
+#include "Constantes.h"
 #include "Ficha.h"
 
-enum EstadoCasillero {
-    BLOQUEADO,
-    DESBLOQUEADO
-};
+
 
 class Casillero{
 private:
@@ -45,6 +44,10 @@ public:
      */
     bool tieneAdyacente(unsigned int x, unsigned int y, unsigned int z);
 
+
+    bool esAdyacente( Casillero * );
+
+
     /*
      * Post: devuelve la Ficha del Casillero
      */
@@ -75,6 +78,8 @@ public:
      */
     unsigned int getLongitudFichasIguales(unsigned int i, unsigned int j, unsigned int k);
 
+    bool tienenMismaFicha( Casillero * casilleroAdyacente );
+
     /*
      * Pre: -
      * Post: devuelve True si estado = bloqueado
@@ -92,6 +97,14 @@ public:
      * Post: cambia estado a desbloqueado
      */
     void desbloquear();
+
+
+    /*
+     *
+     */
+    bool estaVacio();
 };
 
-#endif
+
+
+#endif /* CASILLERO_H_ */
