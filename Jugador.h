@@ -1,7 +1,9 @@
-#ifndef _JUGADOR_H_INCLUDED_
-#define _JUGADOR_H_INCLUDED_
+#ifndef JUGADOR_H_
+#define JUGADOR_H_
 
-#include <iostream>
+
+
+#include <string>
 #include "Ficha.h"
 #include "Carta.h"
 #include "Lista.h"
@@ -46,7 +48,13 @@ public:
          * Pre: recibe un numero entero entre 1 y 6 (numeros de cartas)
          * Post: retorna un puntero a Carta (sacada de la lista de cartas)
          */
-        Carta * usarCarta( unsigned  int );
+        Carta * usarCarta( funcion_t );
+
+
+        /*
+         *
+         */
+        Lista<Carta*> * getCartas();
 
 
         /*
@@ -70,47 +78,15 @@ public:
         void disminuirCantidadFichas();
 
 
-        // /*
-        //  * Pre: -
-        //  * Post: devuelve True si estado=bloqueado
-        //  */
-        // bool estaBloqueado();
-
-
-        // /*
-        //  * Pre: -
-        //  * Post: cambia el estado a bloqueado
-        //  */
-        // void bloquear();
-
-
-        
-        //  * Pre: -
-        //  * Post: cambia el estado a desbloqueado
-         
-        // void desbloquear();
-
-
-        // /*
-        //  * Post: estado pasa a ser DOBLE_TURNO
-        //  */
-        // void repetirTurno();
-
-
-        // /*
-        //  * Post: devuelve True si estado=DOBLE_TURNO
-        // */
-        // bool repiteTurno();
-        //
 
         // ------------------------------------
-        int Jugador::getNumeroDeTurnos();
+        int getNumeroDeTurnos();
 
-        void Jugador::saltear();
+        void saltear();
 
-        void Jugador::dobleTurno();
+        void dobleTurno();
 
-        void Jugador::unTurno();
+        void unTurno();
         // ------------------------------------
 
 
@@ -127,7 +103,7 @@ public:
          * Post: Saca el ultimo elemento de la lista y lo devuelve
          *      (si la lista de cartas esta vacia lanza error)
          */
-        Carta * getCarta();
+        Carta * getUltimaCarta();
 
 
         /*
@@ -138,15 +114,6 @@ public:
 
 
         /*
-         * Pre: recibe dos coordenadas pertenecientes al tablero. Las primeras indican cual
-         * ficha mover y las segundas hacia donde. El movimiento debe ser adyacente
-         *
-         * Post: intercambia la ficha del casillero ubicado en la primer coordenada con el de la segunda
-         * si las coordenadas son inválidas lanza una excepcion
-         */
-        void moverFicha(unsigned int x1, unsigned int y1, unsigned int z1, unsigned int x2, unsigned int y2, unsigned int z2);
-
-        /*
          * chequea si el jugador le quedan fichas para poner
          * quita la ficha de la lista
          * devuelve una ficha del jugador
@@ -154,4 +121,6 @@ public:
         Ficha * getFicha();
 };
 
-#endif
+
+
+#endif /* JUGADOR_H_ */
