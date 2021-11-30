@@ -595,13 +595,13 @@ bool Juego::hayTateti(Casillero * casilleroOrigen){
             for (int k = 0; k < 3; k++) {
                 if ((longitudesAdyacentes[i][j][k] + 1 == 3)|| //Caso tateti siguiendo una direccion
                     (longitudesAdyacentes[i][j][k] + 1 + longitudesAdyacentes[2-i][2-j][2-k] == 3)){ //Caso tateti en un adyacente y su opuesto
-                    return true
+                    return true;
                 }
             }
         }
     }
 
-    return false
+    return false;
 }
 
 // ===============================================
@@ -648,7 +648,7 @@ void Juego::jugar() {
         */
 
         Casillero * casillero = this->tablero->getCasillero(jugadaActual[1][0], jugadaActual[1][1], jugadaActual[1][2]);
-        if ( this->tablero->hayTateti(casillero) ) {
+        if ( this->hayTateti(casillero) ) {
             break;
         }
 

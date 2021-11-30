@@ -5,13 +5,22 @@ all: tp2 clear
 
 #Make Main
 
-tp2: ficha.o casillero.o jugador.o main.o
-	$(CC) $(CFLAGS) -o tp2  casillero.o  jugador.o  ficha.o main.o
+tp2: carta.o ficha.o casillero.o tablero.o jugador.o juego.o interfaz.o main.o
+	$(CC) $(CFLAGS) -o tp2 interfaz.o juego.o casillero.o tablero.o jugador.o carta.o ficha.o main.o
 
 #Make Obj
 
 main.o: main.cpp 
 	$(CC) $(CFLAGS) -o main.o  -c main.cpp
+
+juego.o: Juego.cpp Juego.h
+	$(CC) $(CFLAGS) -o juego.o  -c Juego.cpp
+
+interfaz.o: Interfaz.cpp Interfaz.h
+	$(CC) $(CFLAGS) -o interfaz.o  -c Interfaz.cpp
+
+tablero.o: Tablero.cpp Tablero.h
+	$(CC) $(CFLAGS) -o tablero.o  -c Tablero.cpp
 
 casillero.o: Casillero.cpp Casillero.h
 	$(CC) $(CFLAGS) -o casillero.o  -c Casillero.cpp
@@ -21,6 +30,9 @@ jugador.o: Jugador.cpp  Jugador.h
 
 ficha.o: Ficha.cpp  Ficha.h
 	$(CC) $(CFLAGS) -o ficha.o  -c Ficha.cpp
+
+carta.o: Carta.cpp  Carta.h
+	$(CC) $(CFLAGS) -o carta.o  -c Carta.cpp
 
 #Make Clear
 

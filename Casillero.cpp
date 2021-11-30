@@ -105,7 +105,6 @@ Ficha * Casillero::getFicha(){
 
 void Casillero::setFicha(Ficha * nuevaFicha) {
     if( !this->estaVacio() || this->estaBloqueado() ) {
-        std::cout<<"\nCasillero ocupado o bloqueado\n";
         throw("No se puede poner una ficha en el casillero ocupado o bloqueado");
     }
     if ( this->ficha ) delete this->ficha;

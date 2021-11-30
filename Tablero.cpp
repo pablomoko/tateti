@@ -27,9 +27,9 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
     }
 
     //Con el tablero ya creado, se asignan los vecinos de los casilleros
-    for (int i = 0; i < x; i++) {
-        for (int j = 0; j < y; j++) {
-            for (int k = 0; k < z; k++) {   //Itera los casilleros del tablero uno por uno
+    for (unsigned int i = 0; i < x; i++) {
+        for (unsigned int j = 0; j < y; j++) {
+            for (unsigned int k = 0; k < z; k++) {   //Itera los casilleros del tablero uno por uno
                 Casillero * casillero = this->getCasillero(i, j, k);
                 //pensar mejor disenio y evitar codigo flecha
                 for (int l = -1; l < 2; l++) {

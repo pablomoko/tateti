@@ -3,7 +3,6 @@
 
 
 #include "iostream"
-#include "Juego.h"
 #include "Tablero.h"
 #include "Carta.h"
 #include "Lista.h"
