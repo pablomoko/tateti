@@ -1,5 +1,6 @@
-#ifndef TATETI_2_0_COLA_H
-#define TATETI_2_0_COLA_H
+#ifndef COLA_H_
+#define COLA_H_
+
 
 #include "Nodo.h"
 
@@ -13,36 +14,36 @@ private:
 
 public:
 
-    /* 
+    /*
      * Pre: -
      * Post: inicializa atributos en NULL y cero
      */
     Cola();
 
 
-    /* 
+    /*
      * Pre: -
      * Post: hace delete de cada nodo de la cola
      */
     ~Cola();
 
 
-    /* 
+    /*
      * Pre: Recibe un elemento de tipo T
      * Post: crea Nodo en el heap y agrega al final (cambia inicio, final y tamanio)
      */
     void push( T );
 
 
-    /* 
+    /*
      * Pre: La cola no esta vacia
      * Post: saca el primer elemento de la cola y lo devuelve
      *          (lanza error si la cola esta vacia)
      */
     T pop();
 
-    
-    /* 
+
+    /*
      * Pre: -
      * Post: devuelve True si tamanio=0
      */
@@ -75,10 +76,10 @@ void Cola<T>::push(T dato) {
 
     if ( !this->inicio ) {
         this->inicio = nuevoNodo;
-        this->final = this->inicio
+        this->final = this->inicio;
     }
     else {
-        this->final->getSiguiente = nuevoNodo;
+        this->final->setSiguiente(nuevoNodo);
         this->final = nuevoNodo;
     }
 
@@ -97,6 +98,8 @@ T Cola<T>::pop() {
     Nodo<T> * nodoaBorrar = this->inicio;
     this->inicio = this->inicio->getSiguiente();
     delete nodoaBorrar;
+    --(this->tamanio);
+
     return  datoaBorrar;
 }
 
@@ -104,7 +107,9 @@ T Cola<T>::pop() {
 template<class T>
 bool Cola<T>::estaVacia() {
 
-    return ( this->tamanio == 0 )
+    return ( this->tamanio == 0 );
 }
 
-#endif //TATETI_2_0_COLA_H
+
+
+#endif /* COLA_H_ */
