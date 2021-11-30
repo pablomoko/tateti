@@ -1,5 +1,6 @@
-#ifndef TATETI_2_0_LISTA_H
-#define TATETI_2_0_LISTA_H
+#ifndef LISTA_H_
+#define LISTA_H_
+
 
 #include "Nodo.h"
 
@@ -91,11 +92,6 @@ public:
      * Post: devuelve un entero con la cantidad de elementos en la lista
      */
     unsigned int contarElementos();
-
-    /*
-     * Post: devuelve -1 si el elemento no esta en la lista, si no devuelve el indice de su primer aparicion
-     */
-    int elementoPertenece( T elemento );
 
 
     /*
@@ -212,9 +208,6 @@ template<class T> void Lista<T>::remover(unsigned int posicion){
             removido = this->primero;
             this->primero = removido->getSiguiente();
 
-        } else if (  ) {
-
-
         } else{
             Nodo<T> * anterior = this->obtenerNodo(posicion - 1);
             removido = anterior->getSiguiente();
@@ -244,10 +237,12 @@ template<class T> bool Lista<T>::avanzarCursor(){
 }
 
 template<class T> T Lista<T>::obtenerCursor(){
-    T elemento;
-    if (this->cursor != NULL){
-        elemento = this->cursor->getDato();
+    if (this->cursor == NULL){
+        throw("");
     }
+    T elemento = this->cursor->getDato();
+
+
     return elemento;
 }
 
@@ -263,7 +258,7 @@ template<class T> Nodo<T>* Lista<T>::obtenerNodo(unsigned int posicion){
     return actual;
 }
 
-template<class T> T lista<T>::bajaAlFinal(){
+template<class T> T Lista<T>::bajaAlFinal(){
     if(this->estaVacia()){
         throw "Lista sin elementos";
     }
@@ -274,4 +269,6 @@ template<class T> T lista<T>::bajaAlFinal(){
     return elemento;
 }
 
-#endif //TATETI_2_0_LISTA_H
+
+
+#endif /* LISTA_H_ */
