@@ -8,6 +8,12 @@ Ficha::Ficha(char simbolo){
 }
 
 
+Ficha::Ficha(Ficha* ficha) {
+    this->simbolo = ficha->getSimbolo();
+    this->estado = FICHA_DESBLOQUEADA;
+}
+
+
 Ficha::~Ficha() {
 
 }
@@ -53,3 +59,5 @@ void Ficha::desbloquear() {
 
     this->estado = FICHA_DESBLOQUEADA;
 }
+
+
