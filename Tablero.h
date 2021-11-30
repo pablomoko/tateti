@@ -1,5 +1,6 @@
-#ifndef TATETI_2_0_TABLERO_H
-#define TATETI_2_0_TABLERO_H
+#ifndef TABLERO_H_
+#define TABLERO_H_
+
 
 #include "Lista.h"
 #include "Casillero.h"
@@ -45,4 +46,6 @@ public:
 
 };
 
-#endif //TATETI_2_0_TABLERO_H
+
+
+#endif /* TABLERO_H_ */
