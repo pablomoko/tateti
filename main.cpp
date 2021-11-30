@@ -1,14 +1,15 @@
 #include "Juego.h"
 
-int main(){
 
-    Juego * tateti = new Juego();
+int main () {
 
-    try {
-    //Usar funciones del tateti
-    } catch(...) {
-        return 1; //Ocurrio un error al intentar jugar
-    }
+
+    Juego * j = new Juego();
+
+    j->jugar();
+
+    delete j;
+
 
     return 0;
 }
