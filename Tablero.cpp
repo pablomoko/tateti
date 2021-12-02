@@ -16,7 +16,7 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
             Lista<Casillero *> * columna = new Lista<Casillero *>();
 
             for (unsigned int i = 0; i < x; i++) {   //Se crean los casilleros apuntados por cada columna del plano
-                Casillero * casillero = new Casillero();
+            	Casillero * casillero = new Casillero();
                 columna->altaFinal(casillero);
             }
             //Una vez creadas las columnas del plano, se agregan a la lista de columnas que luego representara una fila del trablero
@@ -31,7 +31,7 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
         for (unsigned int j = 0; j < y; j++) {
             for (unsigned int k = 0; k < z; k++) {   //Itera los casilleros del tablero uno por uno
                 Casillero * casillero = this->getCasillero(i, j, k);
-                //pensar mejor disenio y evitar codigo flecha
+
                 for (int l = -1; l < 2; l++) {
                     for (int m = -1; m < 2; m++) {
                         for (int n = -1; n < 2; n++) {  //Itera matriz con origen en casillero
@@ -62,7 +62,6 @@ Tablero::~Tablero() {
         delete this->casilleros->obtener(k+1);
     }
     delete this->casilleros;
-    //this->casilleros = NULL;  hace falta   ???
 }
 
 int * Tablero::getDimensiones() {

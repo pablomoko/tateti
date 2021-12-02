@@ -107,7 +107,7 @@ private:
     /*
      * Post: devuelve un vector de 3 enteros
      */
-    void pedirDimensionesTablero(unsigned int, unsigned int, unsigned int * dimensiones);
+    void pedirDimensionesTablero(int, int, unsigned int * dimensiones);
 
 
     /*

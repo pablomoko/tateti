@@ -4,11 +4,15 @@
 int main () {
 
 
-    Juego * j = new Juego();
+	try {
+		Juego * j = new Juego();
 
-    j->jugar();
+		j->jugar();
 
-    delete j;
+		delete j;
+	}
+	catch (...) {
+	}
 
 
     return 0;
