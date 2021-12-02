@@ -33,8 +33,9 @@ public:
     void mostrarGanador(std::string nombreGanador);
 
     /*
-     * Pre:
-     * Post:
+     * Pre: Recibe un tablero validp
+     * Post: muestra por pantalla el la disposicion del tablero especificando
+     *        el ancho alto y profundo para orientar al ususario
      */
     void mostrarControles(Tablero * );
 
@@ -65,34 +66,40 @@ public:
     void pedirCantidadFichas();
 
     /*
-     * Post:
+     * Post: pide por pantalla cada una de las dimensiones del tablero
      */
     void pedirDimensiones();
 
-    void tableroChico();
-
     /*
-     * Post:
-     */
+    * Post: pide por pantalla cual sera la cantidad maxima de cartas que tendra cada jugador
+    */
     void pedirCantidadCartas();
 
     /*
-     *
+    * Post: imprime un mensaje de error indicando al usuario que el tablero debe ser mas grande
+    */
+    void tableroChico();
+
+
+    /*
+     * Post: pide por pantalla la posicion de la ficha a bloquear
      */
     void pedirPosicionFichaABloquear();
 
 
     /*
-     *
+     * Post: imprime un mensaje de error indicando al usuario que la posicion ingresada es invalida
      */
     void informarNoHayFicha();
 
-
+    /*
+     * Post: pide por pantalla la posicion del casillero a bloquear
+    */
     void pedirPosicionCasilleroABloquear();
 
 
     /*
-     * Post: indica por pantalla que se ingreso un valor invalido 
+     * Post: indica por pantalla que se ingreso un valor invalido
      */
     void ingresoInvalido();
 
@@ -105,51 +112,62 @@ public:
 
 
     /*
-     *
+     * Post: imprime un mensaje de error indicando al usuario que el casillero pedido no esta disponible
      */
     void informarCasilleroNoDisponible();
 
 
     /*
-     *
+     * Post: pide por pantalla la posicion de origen de la ficha que se desea mover
      */
     void pedirCoordOrigenMoverFicha();
 
 
     /*
-     *
+     * Post: pide por pantalla la posicion de destino de la ficha que se desea mover
      */
     void pedirCoordDestinoMoverFicha();
 
 
     /*
-     *
+     * Post: imprime un mensaje preguntado al usuario si quiere utilizar alguna de sus cartas
      */
     void preguntarUsarCarta();
 
 
     /*
-     *
+     * Post: imprime un mensaje preguntado al usuario que numero de carta quier utilizar
      */
     void preguntarNroCarta();
 
 
-    void tocaPonerFicha(std::string, char);
+    /*
+    * Pre: recibe un string nombreJugador valido y un char simbolo valido
+    * Post: indica al jugador "nombreJugador" que debe poner una ficha cuyo simbolo en pantalla es "simbolo"
+    */
+    void tocaPonerFicha(std::string nombreJugador, char simbolo);
 
-
-    void tocaMoverFicha(std::string, char);
+    /*
+    * Pre: recibe un string nombreJugador valido y un char simbolo valido
+    * Post: indica al jugador "nombreJugador" que debe mober una ficha cuyo simbolo en pantalla es "simbolo"
+    */
+    void tocaMoverFicha(std::string nombreJugador, char simbolo);
 
 
     /*
-     *
+     * Pre: Recibe una lista de cartas valida y un string nombreJugador valido
+     * Post: muestra por pantalla las "cartas" disponibles del jugador "nombreJugador"
      */
-    void mostrarCartasJugador(std::string, Lista<Carta*> *);
+    void mostrarCartasJugador(std::string nombreJugador, Lista<Carta*> * cartas);
 
+    /*
+     * Post: imprime un mensaje de error indicando al usuario que no posee la carta elegida
+    */
     void jugadorNoTieneCartaElegida();
 
 
     /*
-     *
+     * Post: imprime por pantalla un mensaje indicando al usuario que el mismo no posee cartas en su mano
      */
     void jugadorSinCartas();
 };
