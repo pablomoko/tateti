@@ -1,7 +1,8 @@
-#ifndef _FICHA_H_INCLUDED_
-#define _FICHA_H_INCLUDED_
+#ifndef FICHA_H_
+#define FICHA_H_
 
-#include "constantes.h"
+
+#include "Constantes.h"
 
 class Ficha{
 
@@ -16,6 +17,13 @@ public:
      * Post: crea una ficha con el simbolo indicado y estado desbloqueado
      * */
     Ficha(char simbolo);
+
+
+    /*
+     * Post: crea una ficha como copia de la ficha dada, y estado desbloqueado
+     * */
+    Ficha( Ficha * );
+
 
 
     /*
@@ -64,4 +72,6 @@ private:
 
 };
 
-#endif
+
+
+#endif /* FICHA_H_ */

@@ -1,5 +1,7 @@
-#ifndef _JUEGO_H
-#define _JUEGO_H
+#ifndef JUEGO_H_
+#define JUEGO_H_
+
+
 
 #include <iostream>
 #include <string>
@@ -9,14 +11,18 @@
 #include "Carta.h"
 #include "Cola.h"
 #include "Interfaz.h"
+#include "Constantes.h"
+
+
 
 class Juego {
 
 private:
+
 	Lista < Jugador * > * jugadores; // lista circular de jugadores
     Cola < Carta * > * mazo;
-    Jugador * jugadorEnTurno; // Jugador que se encuentra jugando en el turno actual
     Jugador * ganador;
+    Jugador * jugadorEnTurno; // sirve para luego saber quien fue el último que jugo, quien gano
     Tablero * tablero;
     Interfaz * interfaz;
     unsigned int cantidadMaximaCartas;  // Cantidad maxima de cartas que puede tener un jugador en la mano
@@ -24,6 +30,9 @@ private:
 
 public:
 	/*
+	 * Pre:	recibe las 3 dimensiones que tendra el tablero,
+	 * la cantidad de fichas seguidas necesarias para ganar, cantidad de jugadores
+	 * distinta de 0, y la cantidad de cartas en mano que se puede tener
 	 * Post: crea un nuevo juego inicializando una Interfaz, un Jugador ganador nulo y una estructura
 	 * para almacenar la jugadaAnterior. Luego pide por pantalla al usuario las dimensiones con las
 	 * que desea crear el tablero, la cantidad de Jugadores y la cantidad maxima de cartas en mano
@@ -37,34 +46,29 @@ public:
 	~Juego();
 
 	/*
-	 * Pre: recibe las coordenadas del tablero donde se desea colocar la ficha
-	 * Post: valida y coloca la ficha del jugador actual en el Casillero ubicado
-	 * en las coordenadas del Tablero recibidas. Si el Casillero está bloqueado
-	 * u ocupado lanza una excepcion
-	 */
-	void ponerFicha(unsigned int x, unsigned int y, unsigned int z);
-
-	/*
 	 * juega jaja
 	 */
     void jugar();
 
-	/*
-	 * recibe 2 coordenadas en el tablero; el jugador es el actual
-	 */
-	void moverFicha(unsigned int x1, unsigned int y1, unsigned int z1,
-                    unsigned int x2, unsigned int y2, unsigned int z2);
+
+    void ponerFicha( int ** jugadaActual );
+
+
+    void moverFicha( int ** jugadaActual );
+
+
+    void usarCarta();
+
 
 	/*
 	 * Pre: recibe el número perteneciente a una carta del mazo (del 1 al 6?)
 	 * Post: si el jugador no posee esa carta, no se hace nada
 	 * el juego actúa según lo que haga la carta
 	 */
-	void activarCarta( unsigned int );
+	void activarCarta( funcion_t );
 
 
-	/*
-	 * Post: avanza una posicion en la lista de jugadores
+	/* Post: avanza una posicion en la lista de jugadores
 	 * establece el nuevo jugadorEnTurno
 	 */
  	void cambiarTurno();
@@ -79,19 +83,11 @@ public:
 
 	void entregarCarta();
 
-    /*
-     * Pre: recibe el casillero donde se desea checkear si hay tateti o no
-     * Post: devuelve en booleano si hay tateti o no en todas las direcciones del
-     * Casillero recibido. Hay tateti cuando hay 3 casilleros adyacentes
-     * con el mismo tipo de ficha
-     */
-    bool hayTateti(Casillero * casilleroOrigen);
-
 private:
 
     /*
-     * Pre: recibe el número de jugador al que corresponde el nombre, por ejemplo:
-     * Jugador 1: Tomás, Jugador 2: Miguel, etc.
+     * Pre: recibe el numero de jugador al que corresponde el nombre, por ejemplo:
+     * Jugador 1: Tomas, Jugador 2: Miguel, etc
      * Post: pide por pantalla el nombre al jugador y devuelve una cadena con dicho nombre
      */
     std::string pedirNombre(int jugadorNumero);
@@ -108,20 +104,67 @@ private:
      */
     unsigned int pedirCantidadFichas();
 
+    /*
+     * Post: devuelve un vector de 3 enteros
+     */
+    void pedirDimensionesTablero(unsigned int, unsigned int, unsigned int * dimensiones);
+
+
+    /*
+     * Post: devuelve un entero sin signo, cantidad maxima de cartas que podra tener
+     * en su mano al mismo tiempo el jugador
+     */
+    unsigned int pedirCantidadCartasPorJugador();
+
+
+    /*
+     *
+     */
+    funcion_t getFuncionalidad(unsigned int);
+
+
+    /*
+     *
+     */
+    Casillero * pedirCoordenadas();
+
+    Casillero * pedirCoordenadasB( int * coordenadas );
+
+
+    /*
+     *
+     */
+    void saltearSiguienteJugador();
+
+
     void bloquearSiguienteJugador();
 
-    void bloquearFicha( int, int, int );
+
+    void bloquearFicha( Casillero * );
+
 
     void bloquearCasillero( int, int, int );
 
+
     /*
+     *
      * Post: se deshace la jugada del jugador anterior al actual (la jugada realizada
      		por el jugadorEnTurno queda intacta)
      */
     void volverJugadaAtras();
 
+
     void devolverFichaAJugadorAnterior();
 
+    Jugador * obtenerJugadorSiguiente();
+
+     /*
+     * Pre: recibe el casillero donde se desea checkear si hay tateti o no
+     * Post: devuelve en booleano si hay tateti o no en todas las direcciones del
+     * Casillero recibido. Hay tateti cuando hay 3 casilleros adyacentes
+     * con el mismo tipo de ficha
+     */
+    bool hayTateti(Casillero * casilleroOrigen);
 };
 
-#endif // _JUEGO_H
+#endif /* JUEGO_H_ */

@@ -1,8 +1,21 @@
-#ifndef __CARTA_H__
-#define __CARTA_H__
+#ifndef CARTA_H_
+#define CARTA_H_
+
 
 #include <string>
-#include "constantes.h"
+#include "Constantes.h"
+
+
+// ----------------------------------------------------------------------------
+// PARA CARTAS
+typedef enum{
+    SALTEAR, BLOCK_FICHA, BLOCK_CASILLERO, REGRESAR, REPETIR, ROBAR_CARTA,
+}funcion_t;
+
+extern std::string funcionalidades[6];
+// ----------------------------------------------------------------------------
+
+
 
 
 class Carta {
@@ -13,21 +26,21 @@ private:
 
 public:
 
-    /* 
+    /*
      * Pre: numero de carta entre 1 y 6, string con descripcion
      * Post: inicializa los atributos con los argumentos
      */
     Carta( funcion_t funcion );
 
 
-    /* 
+    /*
      * Pre: -
      * Post: devuelve un entero entre 1 y 6
      */
     funcion_t getFuncionalidad();
 
 
-    /* 
+    /*
      * Pre: -
      * Post: devuelve string
      */
@@ -36,22 +49,6 @@ public:
 };
 
 
-Carta::Carta( funcion_t funcion ){
-
-    this->funcion = funcion;
-}
 
 
-funcion_t Carta::getFuncionalidad() {
-
-    return this->funcion;
-}
-
-
-std::string Carta::getDescripcion() {
-
-    return funcionalidades[this->funcion];
-}
-
-
-#endif //__CARTA_H__
+#endif /* CARTA_H_ */

@@ -1,5 +1,7 @@
-#ifndef TATETI_2_0_NODO_H
-#define TATETI_2_0_NODO_H
+#ifndef NODO_H_
+#define NODO_H_
+
+
 
 #ifndef NULL
 #define NULL 0
@@ -40,4 +42,6 @@ public:
     void setSiguiente(Nodo<T> * nuevoSiguiente) { this->siguiente = nuevoSiguiente; }
 };
 
-#endif //TATETI_2_0_NODO_H
+
+
+#endif /* NODO_H_ */

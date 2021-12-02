@@ -1,13 +1,18 @@
-#ifndef TATETI_2_0_INTERFAZ_H
-#define TATETI_2_0_INTERFAZ_H
+#ifndef INTERFAZ_H_
+#define INTERFAZ_H_
+
 
 #include "iostream"
-#include "Juego.h"
+#include "Tablero.h"
+#include "Carta.h"
+#include "Lista.h"
 
 using namespace std;
 
+
 class Interfaz{
 public:
+
     /*
      * Post: muestra por pantalla el menu principal del juego mostrando el titulo
      * del mismo y dando bienvenida al usuario
@@ -15,22 +20,23 @@ public:
     void mostrarPantallaInicial();
 
     /*
-     * Pre: recibe el Jugador no nulo que ha ganado el juego
-     * Post: muestra un mensaje por pantalla indicando el nombre del ganador
-     */
-    void mostrarGanador(Jugador * ganador);
-
-    /*
-     * Post: muestra un mensaje en pantalla pidiendo al jugador que introduzca
-     * las 3 coordenadas del tablero donde desea ubicar su ficha
-     */
-    void pedirCoordenadas();
-
-    /*
      * Post: muestra en pantalla el simbolo de la ficha recibida sin dar
      * salto de línea al final
      */
     void mostrar(Ficha * ficha);
+
+
+    /*
+     * Pre: recibe un string con el nombre del Jugador que ha ganado el juego
+     * Post: muestra un mensaje por pantalla indicando el nombre del ganador
+     */
+    void mostrarGanador(std::string nombreGanador);
+
+    /*
+     * Pre:
+     * Post:
+     */
+    void mostrarControles();
 
     /*
      * Pre: recibe el estado actual del tablero
@@ -39,7 +45,7 @@ public:
      * Por ejemplo si el tablero tiene una profundidad de 2 niveles (z=2)
      * se mostrara por pantalla 2 planos xy pertenecientes a cada nivel de profundidad
      */
-    void mostrar(Tablero * tableroActual);
+    void mostrarTablero(Tablero * );
 
     /*
      * Pre: recibe el número de jugador al que corresponde el nombre
@@ -59,10 +65,92 @@ public:
     void pedirCantidadFichas();
 
     /*
-     * Post: muestra un mensaje por pantalla diciendo que se ingresó un valor invalido y pide
-     * que se ingrese nuevamente
+     * Post:
+     */
+    void pedirDimensiones();
+
+    /*
+     * Post:
+     */
+    void pedirCantidadCartas();
+
+    /*
+     *
+     */
+    void pedirPosicionFichaABloquear();
+
+
+    /*
+     *
+     */
+    void informarNoHayFicha();
+
+
+    void pedirPosicionCasilleroABloquear();
+
+
+    /*
+     * Post: indica por pantalla que se ingreso un valor invalido 
      */
     void ingresoInvalido();
+
+
+    /*
+     * Post: muestra un mensaje en pantalla pidiendo al jugador que introduzca
+     * las 3 coordenadas del tablero donde desea ubicar su ficha
+     */
+    void pedirCoordPonerFicha();
+
+
+    /*
+     *
+     */
+    void informarCasilleroNoDisponible();
+
+
+    /*
+     *
+     */
+    void pedirCoordOrigenMoverFicha();
+
+
+    /*
+     *
+     */
+    void pedirCoordDestinoMoverFicha();
+
+
+    /*
+     *
+     */
+    void preguntarUsarCarta();
+
+
+    /*
+     *
+     */
+    void preguntarNroCarta();
+
+
+    void tocaPonerFicha(std::string);
+
+
+    void tocaMoverFicha(std::string);
+
+
+    /*
+     *
+     */
+    void mostrarCartasJugador(Lista<Carta*> *);
+
+
+    /*
+     *
+     */
+    void jugadorSinCartas();
 };
 
-#endif //TATETI_2_0_INTERFAZ_H
+
+
+
+#endif /* INTERFAZ_H_ */
