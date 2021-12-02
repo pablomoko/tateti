@@ -1,25 +1,87 @@
 #include "Interfaz.h"
 
+
 void Interfaz::mostrarPantallaInicial() {
-    cout << "      TATETI 2.0      " << endl;
-    cout << "Bienvenido a Tateti 2.0, una version alternativa"
-            "del Tateti convencional con un tablero en 3 dimensiones"
-            "y varios jugadores y cartas para jugar!" << endl;
+	cout << "\n\n=================================================================";
+	cout << "==============================\n\n";
+    cout << "\n\t\t\t\tTATETI 2.0      " << endl;
+    cout << "\n\tBienvenido a Tateti 2.0, una version alternativa"
+            " del Tateti convencional \n\tcon un tablero en 3 dimensiones"
+            " y varios jugadores y cartas para jugar!" << endl;
     cout << "\nProyecto desarrollado por alumnos de FIUBA" << endl;
+	cout << "\n\n=================================================================";
+	cout << "==============================\n\n";
 }
 
-void Interfaz::mostrar(Ficha * ficha) {
-    cout << ficha->getSimbolo();
-    
+
+void Interfaz::mostrarControles( Tablero * t ) {
+    int dim[3];
+    dim[0] = t->getDimensiones()[0];
+    dim[1] = t->getDimensiones()[1];
+    dim[2] = t->getDimensiones()[2];
+
+	cout << "\n\n·································································";
+	cout << "······························\n\n";
+
+    std::cout<<"#DISPOSICION DEL TABLERO:\n\n";
+    for ( int k=1; k < dim[2]+1; ++k ) {
+		for ( int f=0; f < k-1; ++f ) {
+			std::cout<<"\t";
+		}
+        std::cout<<"Profundo:"<<k<<"\n";
+		for ( int f=0; f < k; ++f ) {
+			std::cout<<"\t";
+		}
+		std::cout<<"     ancho:";
+		for ( int f=1; f < dim[0]+1; ++f ) {
+			std::cout<<" "<<f<<"   ";
+		}
+		std::cout<<"\n";
+        for ( int j=1; j < dim[1]+1; ++j ) {
+    		for ( int f=0; f < k; ++f ) {
+    			std::cout<<"\t";
+    		}
+            std::cout<<"alto:"<<j<<"    ";
+
+            for ( int i=1; i < dim[0]+1; ++i ) {
+            	try {
+            		char simbolo = t->getCasillero(i-1, j-1, k-1)->getFicha()->getSimbolo();
+                    std::cout<<"  "<<simbolo<<"  ";
+                }
+                catch (...) {
+                    std::cout<<"  "<<"-"<<"  ";
+                }
+            }
+            std::cout<<"\n";
+        }
+        std::cout<<"\n\n";
+    }
+    std::cout<<"\n#COORDENADAS\n";
+    std::cout<<"\nLas coordenadas que ingrese deben estar entre los rangos:  \n";
+    std::cout<<"\n\t Ancho:\t\t1 - "<<dim[0];
+    std::cout<<"\n\t Alto:\t\t1 - "<<dim[1];
+    std::cout<<"\n\t Profundo:\t1 - "<<dim[2];
+
+	cout << "\n\n·································································";
+	cout << "······························\n\n";
+
 }
+
+
+void Interfaz::mostrarFicha(Ficha * ficha) {
+    cout << ficha->getSimbolo();
+}
+
 
 void Interfaz::mostrarGanador(std::string nombreGanador) {
-    std::cout << "\nEl ganador del juego es: " << nombreGanador<<std::endl;
+	cout << "\n\n=================================================================";
+	cout << "==============================\n\n";
+    std::cout << "\n\tEl ganador del juego es: \n\n\t\t" << nombreGanador<<std::endl;
+	cout << "\n\n=================================================================";
+	cout << "==============================\n\n";
+
 }
 
-void Interfaz::mostrarControles() {
-
-}
 
 void Interfaz::mostrarTablero(Tablero * t) {
 
@@ -28,26 +90,40 @@ void Interfaz::mostrarTablero(Tablero * t) {
     dim[1] = t->getDimensiones()[1];
     dim[2] = t->getDimensiones()[2];
 
-    std::cout<<"\n\nTABLERO:\n\n";
+    std::cout<<"\n\n";
+    for ( int f=0; f < dim[2]+3; ++f ) {
+    	cout << "*****";
+    }
+    std::cout<<"\n\n";
+
+    std::cout<<"TABLERO:\n";
     for ( int k=0; k < dim[2]; ++k ) {
-        std::cout<<"Profundo:"<<k<<"\n";
+
         for ( int j=0; j < dim[1]; ++j ) {
-            std::cout<<"alto:"<<j<<"    ";
+    		for ( int f=0; f < k+2; ++f ) {
+    			for ( int m=0; m < dim[0]*2-1; ++m ) {
+    				std::cout<<" ";
+    			}
+    		}
 
             for ( int i=0; i < dim[0]; ++i ) {
-                char simbolo = t->getCasillero(i, j, k)->getFicha()->getSimbolo();
-                if ( simbolo != VACIO ) {
+            	try {
+            		char simbolo = t->getCasillero(i, j, k)->getFicha()->getSimbolo();
                     std::cout<<" "<<simbolo<<"";
                 }
-                else {
+                catch (...) {
                     std::cout<<" "<<"-";
                 }
             }
+
             std::cout<<"\n";
         }
-        std::cout<<"\n\n";
     }
-
+    std::cout<<"\n\n";
+    for ( int f=0; f < dim[2]+3; ++f ) {
+    	cout << "*****";
+    }
+    std::cout<<"\n\n";
 }
 
 
@@ -71,6 +147,11 @@ void Interfaz::pedirDimensiones() {
 }
 
 
+void Interfaz::tableroChico() {
+	std::cout << "\nEl tablero debe ser mas grande." << std::endl;
+}
+
+
 void Interfaz::pedirCantidadCartas() {
     std::cout << "\nIngrese la cantidad maxima de cartas que podra tener en la mano cada jugador al mismo tiempo (minimo 1): ";
 }
@@ -88,11 +169,6 @@ void Interfaz::informarNoHayFicha() {
 
 void Interfaz::pedirPosicionCasilleroABloquear() {
     std::cout << "\nIngrese la posicion en el tablero del casillero a bloquear: " << std::endl;
-}
-
-
-void Interfaz::ingresoInvalido() {
-    std::cout << "\nEl valor ingresado es invalido, vuelva a intentar" << std::endl;
 }
 
 
@@ -126,18 +202,18 @@ void Interfaz::preguntarNroCarta() {
 }
 
 
-void Interfaz::tocaPonerFicha(std::string nombreJugador) {
-    std::cout << "Jugador: "<< nombreJugador<<" te toca poner una ficha." << std::endl;
+void Interfaz::tocaPonerFicha(std::string nombreJugador, char simbolo) {
+    std::cout << "\nJugador: "<< nombreJugador<<" te toca poner una ficha (usas la "<<simbolo<<")." << std::endl;
 }
 
 
-void Interfaz::tocaMoverFicha(std::string nombreJugador) {
-    std::cout << "Jugador: "<< nombreJugador<<" te toca mover una ficha." << std::endl;
+void Interfaz::tocaMoverFicha(std::string nombreJugador, char simbolo) {
+    std::cout << "\nJugador: "<< nombreJugador<<" te toca mover una ficha (usas la "<<simbolo<<")." << std::endl;
 }
 
 
-void Interfaz::mostrarCartasJugador(Lista<Carta*> * cartas) {
-    std::cout << "\nTus cartas son: ";
+void Interfaz::mostrarCartasJugador(std::string nombreJugador, Lista<Carta*> * cartas) {
+    std::cout << "\n"<<nombreJugador<<" tus cartas son: ";
     cartas->iniciarCursor();
     while ( cartas->avanzarCursor() ) {
         Carta * carta = cartas->obtenerCursor();
@@ -146,7 +222,16 @@ void Interfaz::mostrarCartasJugador(Lista<Carta*> * cartas) {
 }
 
 
+void Interfaz::jugadorNoTieneCartaElegida() {
+	std::cout << "\nNo tienes la carta que elegiste usar." << std::endl;
+}
+
+
 void Interfaz::jugadorSinCartas() {
     std::cout << "\nNo tienes cartas para usar." << std::endl;
 }
 
+
+void Interfaz::ingresoInvalido() {
+    std::cout << "\nEl valor ingresado es invalido, vuelva a intentar" << std::endl;
+}

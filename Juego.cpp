@@ -113,17 +113,17 @@ void Juego::entregarCarta() {
 }
 
 
+// ===============================================
+// ============= FUNCIONES DE CARTAS =============
+
+
 void Juego::activarCarta( funcion_t funcionalidad ) {
 
-    try {
-        Carta * carta = this->jugadorEnTurno->usarCarta( funcionalidad );
-        // Si el jugador no tiene esa carta, tira error
 
-        this->mazo->push(carta); // agrego la carta usada al final del mazo
-    }
-    catch (...) {
-        return;
-    }
+	Carta * carta = this->jugadorEnTurno->usarCarta( funcionalidad );
+	// Si el jugador no tiene esa carta, tira error
+
+	this->mazo->push(carta); // agrego la carta usada al final del mazo
 
 
     switch (funcionalidad) {
@@ -262,64 +262,67 @@ Jugador * Juego::obtenerJugadorSiguiente(){
 }
 
 
-
 // ===============================================
-// ===============================================
+// ======== FUNCIONES DE ENTRADA DE DATOS ========
 
 
 unsigned int Juego::pedirCantidadJugadores() {
-    unsigned int cantidadJugadores = 0;
 
-    this->interfaz->pedirCantidadJugadores();
+	int cantidadJugadores = 0;
+	bool cantidadValida = false;
 
-    while (true) {
+    while ( !cantidadValida ) {
+
+    	this->interfaz->pedirCantidadJugadores();
         try {
             std::cin >> cantidadJugadores;
             if (cantidadJugadores < 2){
                 throw "Error Menos de 2 jugadores";
             }
-            break;
-        } catch (...) { //En caso de que ingrese un valor inválido se le indica al usuario que lo que ingreso es inválido
+            cantidadValida = true;
+        } catch (...) {
             this->interfaz->ingresoInvalido();
         }
     }
 
-    return cantidadJugadores;
+    return (unsigned int) cantidadJugadores;
 }
 
 
 unsigned int Juego::pedirCantidadFichas() {
 
-    unsigned int cantidadFichas = 0;
+    int cantidadFichas = 0;
+    bool cantidadValida = false;
 
-    while (true) {
+    while (!cantidadValida) {
         this->interfaz->pedirCantidadFichas();
         try {
             std::cin >> cantidadFichas;
             if (cantidadFichas < 3){
                 throw "Error menos de 3 fichas";
             }
-            break;
+            cantidadValida = true;
         } catch (...) { //En caso de que ingrese un valor inválido se le indica al usuario que lo que ingreso es inválido
             this->interfaz->ingresoInvalido();
         }
     }
 
-    return cantidadFichas;
+    return (unsigned int) cantidadFichas;
 }
 
 
 std::string Juego::pedirNombre(int jugadorNumero) {
     std::string nombre;
+    bool nombreValido = false;
 
-    while ( true ) {
+    while ( !nombreValido ) {
         this->interfaz->pedirNombre(jugadorNumero);
         try {
             std::cin >> nombre;
             if (nombre.length() > 10) {
                 throw("Nombre demasiado largo.");
             }
-            break;
+            nombreValido = true;
         } catch (...) {
             this->interfaz->ingresoInvalido();
         }
@@ -328,11 +331,12 @@ std::string Juego::pedirNombre(int jugadorNumero) {
 }
 
 
-void Juego::pedirDimensionesTablero(unsigned int cantidadJugadores, unsigned int cantidadFichas, unsigned int * dimensiones) {
+void Juego::pedirDimensionesTablero(int cantidadJugadores, int cantidadFichas, unsigned int * dimensiones) {
 
-    unsigned int ancho, alto, profundo;
+    int ancho, alto, profundo;
+    bool dimensionesValidas = false;
 
-    while ( true ) {
+    while ( !dimensionesValidas ) {
         this->interfaz->pedirDimensiones();
         try {
             std::cout<<"Ancho:  \t";
@@ -348,24 +352,23 @@ void Juego::pedirDimensionesTablero(unsigned int cantidadJugadores, unsigned int
                     ancho*alto*profundo<cantidadJugadores*cantidadFichas+cantidadJugadores ) {
                 throw("Coordenadas invalidas o talbero demasiado chico.");
             }
-            break;
+            dimensionesValidas = true;
 
         } catch (...) {
-            this->interfaz->ingresoInvalido();
+        	this->interfaz->tableroChico();
         }
     }
 
-    //unsigned int * coordenadas = new unsigned int [3];
     dimensiones[0] = ancho; dimensiones[1] = alto; dimensiones[2] = profundo;
-    //return dimensiones;
 }
 
 
 unsigned int Juego::pedirCantidadCartasPorJugador() {
 
-    unsigned int cantidadCartas;
+    int cantidadCartas;
+    bool cantidad_valida = false;
 
-    while ( true ) {
+    while ( !cantidad_valida ) {
 
         this->interfaz->pedirCantidadCartas();
         try {
@@ -373,61 +376,69 @@ unsigned int Juego::pedirCantidadCartasPorJugador() {
             if ( cantidadCartas < 1 ) {
                 throw("Cada jugador debe tener al menos una carta.");
             }
-            break;
+            cantidad_valida = true;
         } catch (...) {
             this->interfaz->ingresoInvalido();
         }
     }
 
-    return cantidadCartas;
+    return (unsigned int)cantidadCartas;
 }
 
 
 funcion_t Juego::getFuncionalidad(unsigned int indice) {
 
     switch (indice) {
-    case SALTEAR:
-        return SALTEAR;
+		case SALTEAR:
+			return SALTEAR;
 
-    case BLOCK_FICHA:
-        return BLOCK_FICHA;
+		case BLOCK_FICHA:
+			return BLOCK_FICHA;
 
-    case BLOCK_CASILLERO:
-        return BLOCK_CASILLERO;
+		case BLOCK_CASILLERO:
+			return BLOCK_CASILLERO;
 
-    case REGRESAR:
-        return REGRESAR;
+		case REGRESAR:
+			return REGRESAR;
 
-    case REPETIR:
-        return REPETIR;
+		case REPETIR:
+			return REPETIR;
 
-    case ROBAR_CARTA:
-        return ROBAR_CARTA;
+		case ROBAR_CARTA:
+			return ROBAR_CARTA;
     };
 
-    return SALTEAR;
+    throw("Numero de carta no valido");
 }
+
+
+// ===============================================
+// ========= FUNCIONES DE COORDENADAS ============
 
 
 Casillero * Juego::pedirCoordenadasB( int * coordenadas = NULL ) {
 
     Casillero * casillero;
     unsigned int x, y, z;
+    bool ingreso_valido = false;
 
-    while (true) {
+    while (!ingreso_valido) {
         try {
             std::cout<<"Ancho:  \t";
             std::cin>>x;
+            --x;
 
             std::cout<<"Alto:   \t";
             std::cin>>y;
+            --y;
 
             std::cout<<"Profundo:  \t";
             std::cin>>z;
+            --z;
 
             casillero = this->tablero->getCasillero(x, y, z);
 
-            break;
+            ingreso_valido = true;
         } catch (...) {
             this->interfaz->ingresoInvalido();
         }
@@ -447,21 +458,25 @@ Casillero * Juego::pedirCoordenadas() {
 
     Casillero * casillero;
     unsigned int x, y, z;
+    bool ingreso_valido = false;
 
-    while (true) {
+    while (!ingreso_valido) {
         try {
             std::cout<<"Ancho: \t";
             std::cin>>x;
+            --x;
 
             std::cout<<"Alto:  \t";
             std::cin>>y;
+            --y;
 
             std::cout<<"Profundo:  \t";
             std::cin>>z;
+            --z;
 
             casillero = this->tablero->getCasillero(x, y, z);
 
-            break;
+            ingreso_valido = true;
         } catch (...) {
             this->interfaz->ingresoInvalido();
         }
@@ -472,44 +487,48 @@ Casillero * Juego::pedirCoordenadas() {
 
 
 // ===============================================
-// ===============================================
+// =========== FUNCIONES PRINCIPALES =============
+
 
 void Juego::ponerFicha( int ** jugadaActual ) {
 
-    while (true) {
+	Casillero * casilleroDestino;
+	bool coordenadas_validas = false;
+
+    while (!coordenadas_validas) {
 
         this->interfaz->pedirCoordPonerFicha();
-        Casillero * casilleroDestino = this->pedirCoordenadasB( jugadaActual[1] ); // casillero existente
-        jugadaActual[0][0] = -1;jugadaActual[0][1] = -1;jugadaActual[0][2] = -1;
+        casilleroDestino = this->pedirCoordenadasB( jugadaActual[1] ); // casillero existente
+        jugadaActual[0][0] = -1 ;jugadaActual[0][1] = -1; jugadaActual[0][2] = -1;
 
         try {
 
             casilleroDestino->setFicha( this->jugadorEnTurno->getFicha() );
-                //Que tire error
 
-            break;
+            coordenadas_validas = true;
         } catch (...) {
             this->interfaz->informarCasilleroNoDisponible();
         }
     }
 
     this->jugadorEnTurno->disminuirCantidadFichas();
-    //std::cout<<"\nEl jugador: "<<this->jugadorEnTurno->getNombre()<<" tiene "<<this->jugadorEnTurno->getCantidadFichas()<<" fichas.\n";
 }
 
 
 
 void Juego::moverFicha( int ** jugadaActual ) {
 
-    while (true) {
+    Ficha * ficha;
+    Casillero * casilleroOrigen;
+    bool coordenadas_validas = false;
+
+    while (!coordenadas_validas) {
 
         this->interfaz->pedirCoordOrigenMoverFicha();
-        Casillero * casilleroOrigen = this->pedirCoordenadasB( jugadaActual[0] ); // casillero existente
-        Ficha * ficha;
+        casilleroOrigen = this->pedirCoordenadasB( jugadaActual[0] ); // casillero existente
         try {
 
             ficha = casilleroOrigen->getFicha();
-                //Que tire error si: casillero vacio, bloqueado o ficha bloqueada
 
             if ( ! ficha->esIgual( this->jugadorEnTurno->getFicha() ) ) {
                 throw("La ficha que intenta mover no le pertenece al jugador actual.");
@@ -524,7 +543,7 @@ void Juego::moverFicha( int ** jugadaActual ) {
         Casillero * casilleroDestino = this->pedirCoordenadasB( jugadaActual[1] ); // casillero existente
 
         try {
-            if ( ! casilleroOrigen->esAdyacente(casilleroDestino) ) {
+            if ( ! casilleroOrigen->esAdyacenteLineal(casilleroDestino) ) {
             //if ( ! casilleroOrigen->adyacenteRecto(casilleroDestino) ) {
                 // Se puede mover a adyacente que no sea oblicuo
                 throw("El casillero de destino no es un adyacente recto.");
@@ -538,7 +557,7 @@ void Juego::moverFicha( int ** jugadaActual ) {
 
         casilleroOrigen->quitarFicha();
 
-        break;
+        coordenadas_validas = true;
     }
 }
 
@@ -546,10 +565,13 @@ void Juego::moverFicha( int ** jugadaActual ) {
 
 void Juego::usarCarta() {
 
-    while (true) {
+    char respuesta;
+    int numeroCarta;
+    bool cartaValida = false;
+
+    while (!cartaValida) {
 
         this->interfaz->preguntarUsarCarta();
-        char respuesta;
         std::cin>>respuesta;
         if ( respuesta == 'N' ) {
             return;
@@ -558,17 +580,24 @@ void Juego::usarCarta() {
         }
 
         this->interfaz->preguntarNroCarta();
-        int numeroCarta;
         std::cin>>numeroCarta;
-        this->activarCarta( this->getFuncionalidad(numeroCarta-1) );
 
-        return;
+        try {
+        	this->activarCarta( this->getFuncionalidad(numeroCarta-1) ); //lanza error si elije una carta que no tiene
+        }
+        catch (...) {
+        	this->interfaz->jugadorNoTieneCartaElegida();
+        	continue;
+        }
+
+        cartaValida = true;
     }
 }
 
 
 // ===============================================
 // ===============================================
+
 
 bool Juego::hayTateti(Casillero * casilleroOrigen){
     int longitudesAdyacentes[3][3][3];  //Longitud de vector de adyacentes en cada direccion
@@ -595,7 +624,8 @@ bool Juego::hayTateti(Casillero * casilleroOrigen){
             for (int k = 0; k < 3; k++) {
                 if ((longitudesAdyacentes[i][j][k] + 1 == 3)|| //Caso tateti siguiendo una direccion
                     (longitudesAdyacentes[i][j][k] + 1 + longitudesAdyacentes[2-i][2-j][2-k] == 3)){ //Caso tateti en un adyacente y su opuesto
-                    return true;
+                    this->ganador = this->jugadorEnTurno;
+                	return true;
                 }
             }
         }
@@ -604,48 +634,37 @@ bool Juego::hayTateti(Casillero * casilleroOrigen){
     return false;
 }
 
+
 // ===============================================
 // ===============================================
 
 void Juego::jugar() {
 
+	this->interfaz->mostrarPantallaInicial();
 
-    //int jugadaActual[2][3];
+	this->interfaz->mostrarControles(this->tablero);
+
     int ** jugadaActual = new int* [2];
     jugadaActual[0] = new int [3];
     jugadaActual[1] = new int [3];
 
-    while (true) { // Mientras que no haya ganador
-
-        /*
-        std::cout<<"\n\n   =========   INICIO DEL TURNO   =========  ";
-        std::cout<<"\nJugada anterior:";
-        std::cout<<"\nOrigen: ("<<this->jugadaAnterior[0][0]<<" "<<this->jugadaAnterior[0][1]<<" "<<this->jugadaAnterior[0][2]<<")";
-        std::cout<<"\nDestino: ("<<this->jugadaAnterior[1][0]<<" "<<this->jugadaAnterior[1][1]<<" "<<this->jugadaAnterior[1][2]<<")";
-        std::cout<<"\n\n";
-        */
+    while ( !(this->ganador) ) {
 
         this->interfaz->mostrarTablero(this->tablero);
 
         this->entregarCarta();
 
-        //std::cout<<"\nEl jugador: "<<this->jugadorEnTurno->getNombre()<<" tiene "<<this->jugadorEnTurno->getCantidadFichas()<<" fichas.\n";
         if ( this->jugadorEnTurno->getCantidadFichas() > 0 ) {
-            this->interfaz->tocaPonerFicha( this->jugadorEnTurno->getNombre() );
+            this->interfaz->tocaPonerFicha( this->jugadorEnTurno->getNombre(), this->jugadorEnTurno->getFicha()->getSimbolo() );
             this->ponerFicha( jugadaActual );
         }
 
         else {
-            this->interfaz->tocaMoverFicha( this->jugadorEnTurno->getNombre() );
+            this->interfaz->tocaMoverFicha( this->jugadorEnTurno->getNombre(), this->jugadorEnTurno->getFicha()->getSimbolo() );
             this->moverFicha( jugadaActual );
         }
 
-        /*
-        std::cout<<"\n\nJugada actual:";
-        std::cout<<"\nOrigen: ("<<jugadaActual[0][0]<<" "<<jugadaActual[0][1]<<" "<<jugadaActual[0][2]<<")";
-        std::cout<<"\nDestino: ("<<jugadaActual[1][0]<<" "<<jugadaActual[1][1]<<" "<<jugadaActual[1][2]<<")";
-        std::cout<<"\n\n";
-        */
+        this->interfaz->mostrarTablero(this->tablero);
 
         Casillero * casillero = this->tablero->getCasillero(jugadaActual[1][0], jugadaActual[1][1], jugadaActual[1][2]);
         if ( this->hayTateti(casillero) ) {
@@ -653,7 +672,7 @@ void Juego::jugar() {
         }
 
         if ( this->jugadorEnTurno->getCantidadDeCartas() > 0 ) {
-            this->interfaz->mostrarCartasJugador(jugadorEnTurno->getCartas());
+            this->interfaz->mostrarCartasJugador(jugadorEnTurno->getNombre(), jugadorEnTurno->getCartas());
             this->usarCarta();
         } else {
             this->interfaz->jugadorSinCartas();
@@ -666,7 +685,6 @@ void Juego::jugar() {
         }
 
         if ( jugadorEnTurno->getNumeroDeTurnos() == 1 ) {
-            // si le jugador tiene doble turno, no entra aca
             this->cambiarTurno();
         } else {
             jugadorEnTurno->unTurno();

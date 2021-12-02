@@ -23,7 +23,7 @@ public:
      * Post: muestra en pantalla el simbolo de la ficha recibida sin dar
      * salto de línea al final
      */
-    void mostrar(Ficha * ficha);
+    void mostrarFicha(Ficha * ficha);
 
 
     /*
@@ -36,7 +36,7 @@ public:
      * Pre:
      * Post:
      */
-    void mostrarControles();
+    void mostrarControles(Tablero * );
 
     /*
      * Pre: recibe el estado actual del tablero
@@ -68,6 +68,8 @@ public:
      * Post:
      */
     void pedirDimensiones();
+
+    void tableroChico();
 
     /*
      * Post:
@@ -132,16 +134,18 @@ public:
     void preguntarNroCarta();
 
 
-    void tocaPonerFicha(std::string);
+    void tocaPonerFicha(std::string, char);
 
 
-    void tocaMoverFicha(std::string);
+    void tocaMoverFicha(std::string, char);
 
 
     /*
      *
      */
-    void mostrarCartasJugador(Lista<Carta*> *);
+    void mostrarCartasJugador(std::string, Lista<Carta*> *);
+
+    void jugadorNoTieneCartaElegida();
 
 
     /*

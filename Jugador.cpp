@@ -40,8 +40,8 @@ Carta * Jugador::usarCarta( funcion_t funcionalidad ) {
             return carta;
         }
     }
-    return carta;
-    //throw ("El jugador no posee la carta seleccionada");
+
+    throw ("El jugador no posee la carta seleccionada");
 }
 
 

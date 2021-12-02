@@ -45,7 +45,7 @@ public:
     bool tieneAdyacente(unsigned int x, unsigned int y, unsigned int z);
 
 
-    bool esAdyacente( Casillero * );
+    bool esAdyacenteLineal( Casillero * );
 
 
     /*
