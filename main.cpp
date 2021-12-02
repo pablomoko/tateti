@@ -5,11 +5,11 @@ int main () {
 
 
 	try {
-		Juego * j = new Juego();
+		Juego * tateti = new Juego();
 
-		j->jugar();
+		tateti->jugar();
 
-		delete j;
+		delete tateti;
 	}
 	catch (...) {
         return 1;
