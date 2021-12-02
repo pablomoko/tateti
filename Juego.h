@@ -136,31 +136,41 @@ private:
 
     /*
 		 * Pre: recibe un entero que brinda el usuario
-     * Post: devuelve el enumerativo correspondiente 
+     * Post: devuelve el enumerativo correspondiente
      */
     funcion_t getFuncionalidad(unsigned int);
 
 
     /*
-     *
+     * Post: pide por pantalla las coordenadas del casillero y chequea que sean validas
+		 * 				en caso de que no lo sean imprime por Interfaz un mensaje de ingreso invalido
      */
     Casillero * pedirCoordenadas();
 
+		/*
+		 * Pre: recibe un array de enteros que se cargara con con las coordenadas del usuario
+		 * Post: pide por pantalla las coordenadas del casillero y chequea que sean validas
+		 * 				en caso de que no lo sean imprime por Interfaz un mensaje de ingreso invalido
+     */
     Casillero * pedirCoordenadasB( int * coordenadas );
 
 
     /*
-     *
+     * Post: avanza 2 jugadores en la lista, salteando al primero
      */
     void saltearSiguienteJugador();
 
-
+		/*
+		*/
     void bloquearSiguienteJugador();
 
-
+		/*
+		*/
     void bloquearFicha( Casillero * );
 
 
+		/*
+		*/
     void bloquearCasillero( int, int, int );
 
 
@@ -171,9 +181,14 @@ private:
      */
     void volverJugadaAtras();
 
-
+		/*
+		 * Post: incrementa una ficha al jugadorEnTurno
+		*/
     void devolverFichaAJugadorAnterior();
 
+		/*
+		 * Post: devuelve el jugador siguiente al jugadorEnTurno segun la lista de jugadores
+		*/
     Jugador * obtenerJugadorSiguiente();
 
      /*
