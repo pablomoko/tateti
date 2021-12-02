@@ -12,6 +12,7 @@ int main () {
 		delete j;
 	}
 	catch (...) {
+        return 1;
 	}
 
 
