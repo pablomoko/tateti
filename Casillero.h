@@ -44,11 +44,15 @@ public:
      */
     bool tieneAdyacente(unsigned int x, unsigned int y, unsigned int z);
 
-
+    /*
+     * Post: devuelve verdadero si el casillero pasado por parametro es adyacente
+     *        en linea con el casillero actual
+     */
     bool esAdyacenteLineal( Casillero * );
 
 
     /*
+      * Pre: Recibe una casillero valido
      * Post: devuelve la Ficha del Casillero
      */
     Ficha * getFicha();
@@ -78,6 +82,10 @@ public:
      */
     unsigned int getLongitudFichasIguales(unsigned int i, unsigned int j, unsigned int k);
 
+    /*
+     * Pre: Recibe una casillero valido
+     * Post: devuelve verdadero si la ficha de ambos casilleros es igual
+    */
     bool tienenMismaFicha( Casillero * casilleroAdyacente );
 
     /*
@@ -100,7 +108,7 @@ public:
 
 
     /*
-     *
+     * Post: devuelve verdadero si el casillero no posee una ficha 
      */
     bool estaVacio();
 };
