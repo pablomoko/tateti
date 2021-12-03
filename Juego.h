@@ -46,7 +46,6 @@ public:
 	 */
 	~Juego();
 
-private:
 	
 	 /* Post: invoca a funciones de la interfaz con mensajes para el usuario
 		 * 				realiza un ciclo while que se ejecuta mientras no haya ganador del Juego
@@ -57,6 +56,7 @@ private:
 	*/
     void jugar();
 
+private:
 
     /*
 	 * Pre: recibe una matriz de enteros "jugadaActual" donde se cargara -1
