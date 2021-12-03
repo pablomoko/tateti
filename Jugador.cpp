@@ -1,7 +1,6 @@
 #include "Jugador.h"
 
 
-
 Jugador::Jugador(std::string nombreJugador,Ficha * ficha,int cantidadFichas){
     this->nombreJugador= nombreJugador;
     this->ficha = ficha;
@@ -28,17 +27,21 @@ void Jugador::tomarCarta( Carta * nuevaCarta ) {
 
 
 Carta * Jugador::usarCarta( funcion_t funcionalidad ) {
-    int cantidadCartas = this->cartas->contarElementos();
+
     Carta * carta;
 
-    for (int i = 1; i <= cantidadCartas; ++i) {
+    this->cartas->iniciarCursor();
+    int indice = 1;
 
-        carta = this->cartas->obtener(i);
+    while ( this->cartas->avanzarCursor() ) {
+
+        carta = this->cartas->obtenerCursor();
 
         if ( carta->getFuncionalidad() == funcionalidad ) {
-            this->cartas->remover(i);
+            this->cartas->remover(indice);
             return carta;
         }
+        ++indice;
     }
 
     throw ("El jugador no posee la carta seleccionada");
@@ -74,15 +77,18 @@ int Jugador::getNumeroDeTurnos() {
     return this->turnos;
 }
 
+
 void Jugador::saltear() {
 
     this->turnos = 0;
 }
 
+
 void Jugador::dobleTurno() {
 
     this->turnos = 2;
 }
+
 
 void Jugador::unTurno() {
 

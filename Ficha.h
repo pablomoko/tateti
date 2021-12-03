@@ -13,18 +13,16 @@ private:
 
 public:
 
-    /*
-     * Pre: Recibe una char que representara el simbolo de la ficha
+    /* Pre: Recibe una char que representara el simbolo de la ficha
      * Post: crea una ficha con el simbolo indicado y estado desbloqueado
      * */
     Ficha(char simbolo);
 
 
-    /*
-     * Pre: la fichaOriginal debe ser valida
+    /* Pre: la fichaOriginal debe ser valida
      * Post: crea una ficha como copia de la ficha dada, y estado desbloqueado
      * */
-    Ficha( Ficha * fichaOriginal );
+    Ficha( Ficha * fichaOriginal);
 
 
 
@@ -41,7 +39,6 @@ public:
 
 
     /*
-     * Pre: la ficha2 debe ser valida 
      * Post: devuelve true si los simbolos de la Ficha recibida es igual al simbolo
      * y false si no lo son
      **/

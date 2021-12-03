@@ -121,15 +121,13 @@ void Juego::activarCarta( funcion_t funcionalidad ) {
 
 
 	Carta * carta = this->jugadorEnTurno->usarCarta( funcionalidad );
-	// Si el jugador no tiene esa carta, tira error
 
-	this->mazo->push(carta); // agrego la carta usada al final del mazo
+	this->mazo->push(carta);
 
 
     switch (funcionalidad) {
 
         case SALTEAR:
-            // Hacer perder un turno al siguiente jugador
             this->saltearSiguienteJugador();
             break;
 
@@ -167,7 +165,7 @@ void Juego::activarCarta( funcion_t funcionalidad ) {
             break;
 
         case ROBAR_CARTA:
-            try{
+        	try{
                   Jugador *jugadorElegido = this->obtenerJugadorSiguiente();
                   Carta *carta = jugadorElegido->getUltimaCarta();
                   this->jugadorEnTurno->tomarCarta(carta);
@@ -215,14 +213,19 @@ void Juego::volverJugadaAtras() {
 
     if ( this->jugadaAnterior[0][0] == -1 ) {
         devolverFichaAJugadorAnterior();
-        delete ficha;
 
     } else {
         int x1 = this->jugadaAnterior[0][0];
         int y1 = this->jugadaAnterior[0][1];
         int z1 = this->jugadaAnterior[0][2];
 
-        this->tablero->getCasillero(x1, y1, z1)->setFicha(ficha);
+        try {
+        	this->tablero->getCasillero(x1, y1, z1)->setFicha(ficha);
+        }
+        catch (...) {
+        	delete ficha;
+        	devolverFichaAJugadorAnterior();
+        }
     }
 }
 
@@ -249,9 +252,12 @@ Jugador * Juego::obtenerJugadorSiguiente(){
     while( this->jugadores->avanzarCursor() ){
 
         if(this->jugadorEnTurno == this->jugadores->obtenerCursor() ){
-            
-            if ( this->jugadores->avanzarCursor() ) {
+
+        	if ( this->jugadores->avanzarCursor() ) {
                 return this->jugadores->obtenerCursor();
+            }
+            else {
+            	break;
             }
         }
     }
@@ -388,6 +394,7 @@ unsigned int Juego::pedirCantidadCartasPorJugador() {
 
 funcion_t Juego::getFuncionalidad(unsigned int indice) {
 
+
     switch (indice) {
 		case SALTEAR:
 			return SALTEAR;
@@ -409,6 +416,7 @@ funcion_t Juego::getFuncionalidad(unsigned int indice) {
     };
 
     throw("Numero de carta no valido");
+
 }
 
 
@@ -462,11 +470,11 @@ Casillero * Juego::pedirCoordenadas() {
 
     while (!ingreso_valido) {
         try {
-            std::cout<<"Ancho: \t";
+            std::cout<<"Ancho:   \t";
             std::cin>>x;
             --x;
 
-            std::cout<<"Alto:  \t";
+            std::cout<<"Alto:    \t";
             std::cin>>y;
             --y;
 
@@ -500,13 +508,14 @@ void Juego::ponerFicha( int ** jugadaActual ) {
         this->interfaz->pedirCoordPonerFicha();
         casilleroDestino = this->pedirCoordenadasB( jugadaActual[1] ); // casillero existente
         jugadaActual[0][0] = -1 ;jugadaActual[0][1] = -1; jugadaActual[0][2] = -1;
-
+        Ficha * nuevaFicha;
         try {
-
-            casilleroDestino->setFicha( this->jugadorEnTurno->getFicha() );
+        	nuevaFicha = new Ficha( this->jugadorEnTurno->getFicha() );
+            casilleroDestino->setFicha( nuevaFicha );
 
             coordenadas_validas = true;
         } catch (...) {
+        	delete nuevaFicha;
             this->interfaz->informarCasilleroNoDisponible();
         }
     }
@@ -530,9 +539,11 @@ void Juego::moverFicha( int ** jugadaActual ) {
 
             ficha = casilleroOrigen->getFicha();
 
-            if ( ! ficha->esIgual( this->jugadorEnTurno->getFicha() ) ) {
-                throw("La ficha que intenta mover no le pertenece al jugador actual.");
+            if ( ! ficha->esIgual( this->jugadorEnTurno->getFicha()) ||
+            		ficha->estaBloqueada()  ) {
+                throw("La ficha que intenta mover no le pertenece al jugador actual o esta bloqueada.");
             }
+
 
         } catch (...) {
             this->interfaz->informarCasilleroNoDisponible();
@@ -544,14 +555,14 @@ void Juego::moverFicha( int ** jugadaActual ) {
 
         try {
             if ( ! casilleroOrigen->esAdyacenteLineal(casilleroDestino) ) {
-            //if ( ! casilleroOrigen->adyacenteRecto(casilleroDestino) ) {
-                // Se puede mover a adyacente que no sea oblicuo
                 throw("El casillero de destino no es un adyacente recto.");
             }
             casilleroDestino->setFicha( ficha );
 
         } catch (...) {
+        	delete ficha;
             this->interfaz->informarCasilleroNoDisponible();
+
             continue;
         }
 
@@ -600,25 +611,19 @@ void Juego::usarCarta() {
 
 
 bool Juego::hayTateti(Casillero * casilleroOrigen){
-    int longitudesAdyacentes[3][3][3];  //Longitud de vector de adyacentes en cada direccion
 
-    //En esta iteracion se guardan la cantidad de casilleros con fichas iguales en cada direccion
+	int longitudesAdyacentes[3][3][3];
+
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 3; k++) {
-                /*
-                 * Se guarda la longitud de un vector con origen en casilleroOrigen
-                 * en la posicion del array correspondiente a cada iteracion
-                 */
+               
                 longitudesAdyacentes[i][j][k] = casilleroOrigen->getLongitudFichasIguales(i, j, k);
             }
         }
     }
 
-    /*
-     * Una vez tenemos la cantidad de fichas iguales en cada direccion respecto de casilleroOrigen,
-     * se checkea si en alguna direccion hay 3 y en caso de que si se devuelve true
-     */
+
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 3; k++) {
@@ -650,7 +655,7 @@ void Juego::jugar() {
 
     while ( !(this->ganador) ) {
 
-        this->interfaz->mostrarTablero(this->tablero);
+    	this->interfaz->mostrarTablero(this->tablero);
 
         this->entregarCarta();
 
@@ -689,6 +694,7 @@ void Juego::jugar() {
         } else {
             jugadorEnTurno->unTurno();
         }
+
     }
 
     this->interfaz->mostrarTablero(this->tablero);
@@ -699,3 +705,5 @@ void Juego::jugar() {
     delete [] jugadaActual;
 
 }
+
+

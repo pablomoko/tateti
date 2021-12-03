@@ -52,7 +52,7 @@ public:
 
 
         /*
-         * Post: devuelve la lista de cartas del jugador
+         * Post: devuelve la lista de cartas del jugadors
          */
         Lista<Carta*> * getCartas();
 
@@ -65,7 +65,6 @@ public:
 
 
         /*
-         * Pre: -
          * Post: agrega 1 ficha al jugador
          */
         void incrementarCantidadFichas();
@@ -80,26 +79,31 @@ public:
 
 
         // ------------------------------------
+
         /*
-         * Post: devuelve un entero represenativo del turno del jugador
-         * 0: sin turno, 1: un solo turno, 2: doble turno 
-        */
+          * Post: devuelve un entero represenativo del turno del jugador
+          * 0: sin turno, 1: un solo turno, 2: doble turno
+         */
         int getNumeroDeTurnos();
+
 
         /*
          * Post: establece el turno del jugador en 0
-        */
+         */
         void saltear();
 
-        /*
-        * Post: establece el turno del jugador en 2
-        */
-        void dobleTurno();
 
         /*
-        * Post: establece el turno del jugador en 1
-        */
+         * Post: establece el turno del jugador en 2
+         */
+        void dobleTurno();
+
+
+        /*
+         * Post: establece el turno del jugador en 1
+         */
         void unTurno();
+
         // ------------------------------------
 
 

@@ -91,8 +91,10 @@ void Interfaz::mostrarTablero(Tablero * t) {
     dim[2] = t->getDimensiones()[2];
 
     std::cout<<"\n\n";
-    for ( int f=0; f < dim[2]+3; ++f ) {
-    	cout << "*****";
+    for ( int f=0; f < dim[2]+2; ++f ) {
+		for (int g=0; g < dim[0]; ++g) {
+			cout << "**";
+		}
     }
     std::cout<<"\n\n";
 
@@ -120,8 +122,10 @@ void Interfaz::mostrarTablero(Tablero * t) {
         }
     }
     std::cout<<"\n\n";
-    for ( int f=0; f < dim[2]+3; ++f ) {
-    	cout << "*****";
+    for ( int f=0; f < dim[2]+2; ++f ) {
+		for (int g=0; g < dim[0]; ++g) {
+			cout << "**";
+		}
     }
     std::cout<<"\n\n";
 }

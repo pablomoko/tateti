@@ -40,44 +40,48 @@ public:
 	 */
 	Juego();
 
+
 	/*
 	 * Post: se libera memoria del heap usada para tablero, lista de jugadores, mazo de cartas
 	 */
 	~Juego();
 
-	/*
-	 * Post: invoca a funciones de la interfaz con mensajes para el usuario
-	 * 				realiza un ciclo while que se ejecuta mientras no haya ganador del Juego
-	 * 				dentro del while  se muestra el tablero, se entrega una carta al jugador en turno,
-	 *				opcionalmente se utiliza una carta, se pone/mueve una ficha,
-	 *				y por ultimo se cambia el turno al siguiente jugador
-	 *				Cuando se sale del while se muestra una vez mas el tablero, y el ganador del Juego
-	 */
+
+	 /* Post: invoca a funciones de la interfaz con mensajes para el usuario
+		 * 				realiza un ciclo while que se ejecuta mientras no haya ganador del Juego
+		 * 				dentro del while  se muestra el tablero, se entrega una carta al jugador en turno,
+		 *				opcionalmente se utiliza una carta, se pone/mueve una ficha,
+		 *				y por ultimo se cambia el turno al siguiente jugador
+		 *				Cuando se sale del while se muestra una vez mas el tablero, y el ganador del Juego
+	*/
     void jugar();
 
-		/*
-		 * Pre: recibe una matriz de enteros "jugadaActual" donde se cargara -1
-	 	 *				ya que el historial de jugadas sera valido unas vez dispuestas todas las fichas
-		 * Post: dentro de un ciclo while Pide coordenadas al usuario a traves de Interfaz, y en caso que el casillero
-		 					indicando se encuentre disponible le cargara la ficha del jugador, y saldra del ciclo
-		 *        caso contrario avisara al usuario mediante la Interfaz
-		 *
-		*/
+
+    /*
+	 * Pre: recibe una matriz de enteros "jugadaActual" donde se cargara -1
+	 *				ya que el historial de jugadas sera valido unas vez dispuestas todas las fichas
+	 * Post: dentro de un ciclo while Pide coordenadas al usuario a traves de Interfaz, y en caso que el casillero
+						indicando se encuentre disponible le cargara la ficha del jugador, y saldra del ciclo
+	 *        caso contrario avisara al usuario mediante la Interfaz
+	 *
+    */
     void ponerFicha( int ** jugadaActual );
 
-		/*
-		 * Pre: recibe una matriz de enteros "jugadaActual" donde se cargara el movimiento realizado
-		 * Post: dentro de un ciclo while Pide coordenadas de origen y destion al usuario a traves de Interfaz,
-		 * 				y en caso que los casilleros indicandos  se encuentren disponibles realizara el movimiento
-		 *				de la ficha del jugador y saldra del ciclo
-		 * 				caso contrario avisara al usuario mediante la Interfaz
-		*/
+
+	/*
+	 * Pre: recibe una matriz de enteros "jugadaActual" donde se cargara el movimiento realizado
+	 * Post: dentro de un ciclo while Pide coordenadas de origen y destion al usuario a traves de Interfaz,
+	 * 				y en caso que los casilleros indicandos  se encuentren disponibles realizara el movimiento
+	 *				de la ficha del jugador y saldra del ciclo
+	 * 				caso contrario avisara al usuario mediante la Interfaz
+	*/
     void moverFicha( int ** jugadaActual );
 
-		/*
-		 * Post: pregunta al usuario si quiere utilizar una carta y cual quiere utilizar
-		 *				en caso afirmativo usara la carta
-		*/
+
+	/*
+	 * Post: pregunta al usuario si quiere utilizar una carta y cual quiere utilizar
+	 *				en caso afirmativo usara la carta
+	*/
     void usarCarta();
 
 
@@ -135,7 +139,7 @@ private:
 
 
     /*
-		 * Pre: recibe un entero que brinda el usuario
+     * Pre: recibe un entero que brinda el usuario
      * Post: devuelve el enumerativo correspondiente
      */
     funcion_t getFuncionalidad(unsigned int);
@@ -143,15 +147,16 @@ private:
 
     /*
      * Post: pide por pantalla las coordenadas del casillero y chequea que sean validas
-		 * 				en caso de que no lo sean imprime por Interfaz un mensaje de ingreso invalido
+     * 		en caso de que no lo sean imprime por Interfaz un mensaje de ingreso invalido
      */
     Casillero * pedirCoordenadas();
 
-		/*
-		 * Pre: recibe un array de enteros que se cargara con con las coordenadas del usuario
-		 * Post: pide por pantalla las coordenadas del casillero y chequea que sean validas
-		 * 				en caso de que no lo sean imprime por Interfaz un mensaje de ingreso invalido
-     */
+
+    /*
+	 * Pre: recibe un array de enteros que se cargara con con las coordenadas del usuario
+	 * Post: pide por pantalla las coordenadas del casillero y chequea que sean validas
+	 * 				en caso de que no lo sean imprime por Interfaz un mensaje de ingreso invalido
+	 */
     Casillero * pedirCoordenadasB( int * coordenadas );
 
 
@@ -160,36 +165,25 @@ private:
      */
     void saltearSiguienteJugador();
 
-		/*
-		*/
-    void bloquearSiguienteJugador();
-
-		/*
-		*/
-    void bloquearFicha( Casillero * );
-
-
-		/*
-		*/
-    void bloquearCasillero( int, int, int );
-
 
     /*
-     *
      * Post: se deshace la jugada del jugador anterior al actual (la jugada realizada
      		por el jugadorEnTurno queda intacta)
      */
     void volverJugadaAtras();
 
-		/*
-		 * Post: incrementa una ficha al jugadorEnTurno
-		*/
+
+    /*
+    * Post: incrementa una ficha al jugadorEnTurno
+   */
     void devolverFichaAJugadorAnterior();
 
-		/*
-		 * Post: devuelve el jugador siguiente al jugadorEnTurno segun la lista de jugadores
-		*/
+
+	/*
+	* Post: devuelve el jugador siguiente al jugadorEnTurno segun la lista de jugadores
+	*/
     Jugador * obtenerJugadorSiguiente();
+
 
      /*
      * Pre: recibe el casillero donde se desea checkear si hay tateti o no
@@ -198,6 +192,10 @@ private:
      * con el mismo tipo de ficha
      */
     bool hayTateti(Casillero * casilleroOrigen);
+
 };
+
+
+
 
 #endif /* JUEGO_H_ */

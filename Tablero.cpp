@@ -1,5 +1,6 @@
 #include "Tablero.h"
 
+
 Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
 
     this->dimensiones[0] = x;
@@ -18,6 +19,7 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
             	Casillero * casillero = new Casillero();
                 columna->altaFinal(casillero);
             }
+
             fila->altaFinal(columna);
         }
         this->casilleros->altaFinal(fila);
@@ -45,10 +47,10 @@ Tablero::Tablero(unsigned int x, unsigned int y, unsigned int z) {
     }
 }
 
+
 Tablero::~Tablero() {
-    //liberar lista de lista de lista de casilleros
-    // todos los indices con +1 por la funcion obtener() !!!
-    for(int k = 0; k < this->dimensiones[2]; k++) {
+
+	for(int k = 0; k < this->dimensiones[2]; k++) {
         for(int j = 0; j < this->dimensiones[1]; j++) {
             for(int i = 0; i < this->dimensiones[0]; i++) {
                 delete this->getCasillero(i, j, k);
@@ -60,9 +62,11 @@ Tablero::~Tablero() {
     delete this->casilleros;
 }
 
+
 int * Tablero::getDimensiones() {
     return this->dimensiones;
 }
+
 
 bool Tablero::existeCasillero(int x, int y, int z) {
     return (x >= 0 && x < this->getDimensiones()[0] &&
@@ -72,5 +76,9 @@ bool Tablero::existeCasillero(int x, int y, int z) {
 
 
 Casillero * Tablero::getCasillero(unsigned int x, unsigned int y, unsigned int z) {
+
     return this->casilleros->obtener(z+1)->obtener(y+1)->obtener(x+1);
 }
+
+
+

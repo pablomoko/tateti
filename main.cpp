@@ -12,7 +12,7 @@ int main () {
 		delete tateti;
 	}
 	catch (...) {
-        return 1;
+		return 1;
 	}
 
 

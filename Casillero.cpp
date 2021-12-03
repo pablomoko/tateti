@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Casillero.h"
 
 
@@ -95,7 +94,6 @@ unsigned int Casillero::getLongitudFichasIguales(unsigned int i, unsigned int j,
 
 	if (!this->tieneAdyacente(i, j, k) ||
         !this->ficha ||
-        this->ficha->getSimbolo() == VACIO ||
         ( i==1 && j==1 && k==1 ) ){
         return 0;
     }
@@ -103,9 +101,13 @@ unsigned int Casillero::getLongitudFichasIguales(unsigned int i, unsigned int j,
 
     Casillero * casilleroAdyacente = this->getAdyacente(i, j, k);
 
-    if (this->tienenMismaFicha(casilleroAdyacente)){
-        return (1 + casilleroAdyacente->getLongitudFichasIguales(i, j, k));
-    }
+	try {
+		if (this->tienenMismaFicha(casilleroAdyacente)){
+			return (1 + casilleroAdyacente->getLongitudFichasIguales(i, j, k));
+		}
+	}
+	catch (...) {
+	}
 
     return 0;
 }
