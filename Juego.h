@@ -46,7 +46,8 @@ public:
 	 */
 	~Juego();
 
-
+private:
+	
 	 /* Post: invoca a funciones de la interfaz con mensajes para el usuario
 		 * 				realiza un ciclo while que se ejecuta mientras no haya ganador del Juego
 		 * 				dentro del while  se muestra el tablero, se entrega una carta al jugador en turno,
@@ -104,7 +105,7 @@ public:
 	 */
 	void entregarCarta();
 
-private:
+
 
     /*
      * Pre: recibe el numero de jugador al que corresponde el nombre, por ejemplo:
