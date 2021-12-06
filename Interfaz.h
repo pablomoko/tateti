@@ -143,7 +143,7 @@ public:
     * Pre: recibe un string nombreJugador valido y un char simbolo valido
     * Post: indica al jugador "nombreJugador" que debe poner una ficha cuyo simbolo en pantalla es "simbolo"
     */
-    void tocaPonerFicha(std::string, char);
+    void tocaPonerFicha(std::string, char, int);
 
     /*
     * Pre: recibe un string nombreJugador valido y un char simbolo valido

@@ -126,7 +126,7 @@ void Casillero::setFicha(Ficha * nuevaFicha) {
         throw("No se puede poner una ficha en el casillero ocupado o bloqueado");
     }
 
-    this->ficha = nuevaFicha;
+    this->ficha = new Ficha(nuevaFicha);
 }
 
 

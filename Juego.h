@@ -21,8 +21,9 @@ private:
 
 	Lista < Jugador * > * jugadores;
     Cola < Carta * > * mazo;
-    Jugador * ganador;
     Jugador * jugadorEnTurno;
+    Jugador * jugadorAnterior;
+    Jugador * ganador;
     Tablero * tablero;
     Interfaz * interfaz;
     unsigned int cantidadMaximaCartas;
@@ -46,7 +47,7 @@ public:
 	 */
 	~Juego();
 
-	
+
 	 /* Post: invoca a funciones de la interfaz con mensajes para el usuario
 		 * 				realiza un ciclo while que se ejecuta mientras no haya ganador del Juego
 		 * 				dentro del while  se muestra el tablero, se entrega una carta al jugador en turno,
@@ -56,7 +57,6 @@ public:
 	*/
     void jugar();
 
-private:
 
     /*
 	 * Pre: recibe una matriz de enteros "jugadaActual" donde se cargara -1
@@ -105,7 +105,7 @@ private:
 	 */
 	void entregarCarta();
 
-
+private:
 
     /*
      * Pre: recibe el numero de jugador al que corresponde el nombre, por ejemplo:

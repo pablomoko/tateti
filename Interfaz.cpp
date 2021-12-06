@@ -206,8 +206,8 @@ void Interfaz::preguntarNroCarta() {
 }
 
 
-void Interfaz::tocaPonerFicha(std::string nombreJugador, char simbolo) {
-    std::cout << "\nJugador: "<< nombreJugador<<" te toca poner una ficha (usas la "<<simbolo<<")." << std::endl;
+void Interfaz::tocaPonerFicha(std::string nombreJugador, char simbolo, int cantidadFichas) {
+    std::cout << "\nJugador: "<< nombreJugador<<" te toca poner una ficha, tenes "<<cantidadFichas<<" (usas la "<<simbolo<<")." << std::endl;
 }
 
 

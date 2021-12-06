@@ -4,37 +4,33 @@
 
 Juego::Juego() {
 
-    this->interfaz = new Interfaz();    //Se crea objeto interfaz con el que se interactuara
-    this->ganador = NULL;   // Como recien empieza el juego, se crea en nulo
+    this->interfaz = new Interfaz();
+    this->ganador = NULL;
+    this->jugadorAnterior = NULL;
 
 
-    /* Antes que nada se piden la cantidad de jugadores y fichas al usuario
-     * para luego poder generar la lista de jugadores */
     unsigned int cantidadJugadores = pedirCantidadJugadores();
     unsigned int cantidadFichas = pedirCantidadFichas();
 
 
-    //Se crea la lista de jugadores con sus respectivos nombres y fichas
     this->jugadores = new Lista < Jugador * >;
     for (unsigned int i = 0; i < cantidadJugadores; i++) {
-        std::string nombre = pedirNombre(i + 1); // i + 1 es el número de jugador al que corresponde el nombre
-        Ficha * ficha = new Ficha('A' + i); //'A' + i para recorrer la tabla ASCII y asignar distintos caracteres
+        std::string nombre = pedirNombre(i + 1);
+        Ficha * ficha = new Ficha('A' + i);
         Jugador * nuevoJugador = new Jugador(nombre, ficha, cantidadFichas);
         this->jugadores->altaFinal(nuevoJugador);
     }
-    this->jugadorEnTurno = this->jugadores->obtener(1); //Se establece el jugador 1 como el jugador en turno
+    this->jugadorEnTurno = this->jugadores->obtener(1);
 
 
-    //Se pide al usuario las dimensiones deseadas para cada plano del tablero y se crea uno con las mismas
     unsigned int * dimensiones = new unsigned int [3];
     pedirDimensionesTablero(cantidadJugadores, cantidadFichas, dimensiones);
     this->tablero = new Tablero(dimensiones[0], dimensiones[1], dimensiones[2]);
     delete []dimensiones;
 
-    //Se pide al usuario la cantidad maxima de cartas que se puede tener en mano
+
     this->cantidadMaximaCartas = pedirCantidadCartasPorJugador();
 
-    //Se crea el mazo con una cola de cartas ordenadas (no disponemos del uso del módulo random)
     this->mazo = new Cola < Carta * >;
     for (unsigned int i = 0; i < cantidadJugadores*cantidadMaximaCartas*2; i++) {
         funcion_t funcionalidad = getFuncionalidad(i % 6);
@@ -42,7 +38,6 @@ Juego::Juego() {
         this->mazo->push(nuevaCarta);
     }
 
-    //Se declaran las coordenadas de la ultima jugada con valores invalidos
     this->jugadaAnterior[0][0] = -1;this->jugadaAnterior[0][1] = -1;this->jugadaAnterior[0][2] = -1;
     this->jugadaAnterior[1][0] = -1;this->jugadaAnterior[1][1] = -1;this->jugadaAnterior[1][2] = -1;
 }
@@ -68,14 +63,18 @@ Juego::~Juego() {
 
 void Juego::cambiarTurno() {
 
-  // inicia el cursor en nulo
-  this->jugadores->iniciarCursor();
-  // itero la lista en busca del jugador en turno
+	this->jugadorAnterior = this->jugadorEnTurno;
+
+	if ( this->jugadorEnTurno->getNumeroDeTurnos() == 2 ) {
+		this->jugadorEnTurno->unTurno();
+		return;
+	}
+
+	this->jugadores->iniciarCursor();
+
   while ( this->jugadores->avanzarCursor() ) {
-    // apunto al primer jugador
 
     if( this->jugadorEnTurno == jugadores->obtenerCursor() ) {
-      // si es el jugador en turno, avanzo uno mas (si llega al final empiezo de nuevo)
 
       if ( !(jugadores->avanzarCursor() ) ) {
         this->jugadores->iniciarCursor();
@@ -83,7 +82,6 @@ void Juego::cambiarTurno() {
       }
 
       if ( jugadores->obtenerCursor()->getNumeroDeTurnos() == 0 ) {
-        //si el sig jugador esta bloqueado, avanzo uno mas, y lo desbloqueo para la proxima
         jugadores->obtenerCursor()->unTurno();
         jugadores->avanzarCursor();
       }
@@ -96,12 +94,9 @@ void Juego::cambiarTurno() {
         this->jugadorEnTurno = jugadores->obtenerCursor();
       }
 
-
       return;
     }
   }
-  // con esta solucion se itera la lista cada vez que se cambia el turno.
-  // no es gran problema porque la cantidad de jugadores va a ser 2,3,4,5... a lo sumo 10
 }
 
 
@@ -181,17 +176,20 @@ void Juego::activarCarta( funcion_t funcionalidad ) {
 void Juego::saltearSiguienteJugador() {
 
     this->jugadores->iniciarCursor();
+    bool encontrado = false;
 
-    while( this->jugadores->avanzarCursor() ) {
+    while( this->jugadores->avanzarCursor() && !encontrado ) {
 
         if ( this->jugadorEnTurno == this->jugadores->obtenerCursor() ) {
 
             if ( this->jugadores->avanzarCursor() ) {
                 this->jugadores->obtenerCursor()->saltear();
+                encontrado = true;
             } else {
                 this->jugadores->iniciarCursor();
                 this->jugadores->avanzarCursor();
                 this->jugadores->obtenerCursor()->saltear();
+                encontrado = true;
             }
         }
     }
@@ -201,7 +199,6 @@ void Juego::saltearSiguienteJugador() {
 void Juego::volverJugadaAtras() {
 
     if ( this->jugadaAnterior[1][0] == -1 ) {
-        // NO hubo jugadas, recien inicia el juego
         return;
     }
 
@@ -223,25 +220,17 @@ void Juego::volverJugadaAtras() {
         	this->tablero->getCasillero(x1, y1, z1)->setFicha(ficha);
         }
         catch (...) {
-        	delete ficha;
+
         	devolverFichaAJugadorAnterior();
         }
     }
+    delete ficha;
 }
 
 
 void Juego::devolverFichaAJugadorAnterior() {
 
-    int indice = 0;
-    this->jugadores->iniciarCursor();
-    this->jugadores->avanzarCursor();
-    while ( this->jugadores->obtenerCursor() != this->jugadorEnTurno ) {
-        this->jugadores->avanzarCursor();
-        ++indice;
-    }
-
-    Jugador * jugadorAnterior = this->jugadores->obtener(indice);
-    jugadorAnterior->incrementarCantidadFichas();
+	this->jugadorAnterior->incrementarCantidadFichas();
 }
 
 
@@ -510,12 +499,10 @@ void Juego::ponerFicha( int ** jugadaActual ) {
         jugadaActual[0][0] = -1 ;jugadaActual[0][1] = -1; jugadaActual[0][2] = -1;
         Ficha * nuevaFicha;
         try {
-        	nuevaFicha = new Ficha( this->jugadorEnTurno->getFicha() );
-            casilleroDestino->setFicha( nuevaFicha );
-
+        	nuevaFicha = this->jugadorEnTurno->getFicha();
+        	casilleroDestino->setFicha( nuevaFicha );
             coordenadas_validas = true;
         } catch (...) {
-        	delete nuevaFicha;
             this->interfaz->informarCasilleroNoDisponible();
         }
     }
@@ -534,7 +521,7 @@ void Juego::moverFicha( int ** jugadaActual ) {
     while (!coordenadas_validas) {
 
         this->interfaz->pedirCoordOrigenMoverFicha();
-        casilleroOrigen = this->pedirCoordenadasB( jugadaActual[0] ); // casillero existente
+        casilleroOrigen = this->pedirCoordenadasB( jugadaActual[0] );
         try {
 
             ficha = casilleroOrigen->getFicha();
@@ -551,7 +538,7 @@ void Juego::moverFicha( int ** jugadaActual ) {
         }
 
         this->interfaz->pedirCoordDestinoMoverFicha();
-        Casillero * casilleroDestino = this->pedirCoordenadasB( jugadaActual[1] ); // casillero existente
+        Casillero * casilleroDestino = this->pedirCoordenadasB( jugadaActual[1] );
 
         try {
             if ( ! casilleroOrigen->esAdyacenteLineal(casilleroDestino) ) {
@@ -560,13 +547,11 @@ void Juego::moverFicha( int ** jugadaActual ) {
             casilleroDestino->setFicha( ficha );
 
         } catch (...) {
-        	delete ficha;
             this->interfaz->informarCasilleroNoDisponible();
-
             continue;
         }
 
-        casilleroOrigen->quitarFicha();
+        delete casilleroOrigen->quitarFicha();
 
         coordenadas_validas = true;
     }
@@ -594,7 +579,7 @@ void Juego::usarCarta() {
         std::cin>>numeroCarta;
 
         try {
-        	this->activarCarta( this->getFuncionalidad(numeroCarta-1) ); //lanza error si elije una carta que no tiene
+        	this->activarCarta( this->getFuncionalidad(numeroCarta-1) );
         }
         catch (...) {
         	this->interfaz->jugadorNoTieneCartaElegida();
@@ -660,7 +645,8 @@ void Juego::jugar() {
         this->entregarCarta();
 
         if ( this->jugadorEnTurno->getCantidadFichas() > 0 ) {
-            this->interfaz->tocaPonerFicha( this->jugadorEnTurno->getNombre(), this->jugadorEnTurno->getFicha()->getSimbolo() );
+            this->interfaz->tocaPonerFicha( this->jugadorEnTurno->getNombre(), this->jugadorEnTurno->getFicha()->getSimbolo(),
+            								this->jugadorEnTurno->getCantidadFichas() );
             this->ponerFicha( jugadaActual );
         }
 
@@ -689,11 +675,7 @@ void Juego::jugar() {
             }
         }
 
-        if ( jugadorEnTurno->getNumeroDeTurnos() == 1 ) {
-            this->cambiarTurno();
-        } else {
-            jugadorEnTurno->unTurno();
-        }
+        this->cambiarTurno();
 
     }
 
