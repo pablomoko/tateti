@@ -16,6 +16,7 @@ private:
 
     std::string nombreJugador;
     Ficha * ficha;
+    std::string color;
     int cantidadFichas;
     Lista<Carta *> * cartas;
     int turnos;
@@ -27,7 +28,7 @@ public:
          * Pre: recibe un string, una ficha valida, y un entero mayor a cero
          * Post: inicializa atributos, toma memoria del heap para lista de cartas
          */
-        Jugador(std::string nombreJugador, Ficha * fichas, int cantidadFichas);
+        Jugador(std::string nombreJugador, Ficha * ficha, int cantidadFichas, std::string color);
 
 
         /*
@@ -136,6 +137,11 @@ public:
          * devuelve una ficha del jugador
         */
         Ficha * getFicha();
+
+
+        /*
+         */
+        std::string getColor();
 };
 
 

@@ -1,7 +1,7 @@
 #ifndef FICHA_H_
 #define FICHA_H_
 
-
+#include "EasyBMP/EasyBMP.h"
 #include "Constantes.h"
 
 class Ficha{
@@ -9,6 +9,7 @@ class Ficha{
 private:
     char simbolo;
     EstadoFicha estado;
+    RGBApixel color;
 
 
 public:
@@ -16,7 +17,7 @@ public:
     /* Pre: Recibe una char que representara el simbolo de la ficha
      * Post: crea una ficha con el simbolo indicado y estado desbloqueado
      * */
-    Ficha(char simbolo);
+    Ficha(char simbolo, RGBApixel color);
 
 
     /* Pre: la fichaOriginal debe ser valida
@@ -61,6 +62,11 @@ public:
      *Post: devuelve true si atributo estado == bloqueado
      */
     bool estaBloqueada();
+
+
+    /*
+     */
+    RGBApixel getColor();
 
 
 private:

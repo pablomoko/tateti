@@ -1,16 +1,18 @@
 #include "Ficha.h"
 #include <string>
 
-Ficha::Ficha(char simbolo){
+Ficha::Ficha(char simbolo, RGBApixel color){
     this->validar(simbolo);
     this->simbolo = simbolo;
     this->estado = FICHA_DESBLOQUEADA;
+    this->color = color;
 }
 
 
 Ficha::Ficha(Ficha* ficha) {
     this->simbolo = ficha->getSimbolo();
     this->estado = FICHA_DESBLOQUEADA;
+    this->color = ficha->color;
 }
 
 
@@ -61,3 +63,6 @@ void Ficha::desbloquear() {
 }
 
 
+RGBApixel Ficha::getColor() {
+    return this->color;
+}

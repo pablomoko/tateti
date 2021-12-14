@@ -1,12 +1,15 @@
 CFLAGS=-g -pedantic -Wall
 CC=g++
 
-all: tp2 clear
+all: tp2 clear 
 
 #Make Main
 
-tp2: carta.o ficha.o casillero.o tablero.o jugador.o juego.o interfaz.o main.o
-	$(CC) $(CFLAGS) -o tp2 interfaz.o juego.o casillero.o tablero.o jugador.o carta.o ficha.o main.o
+run: tp2
+	./tp2
+
+tp2: carta.o ficha.o casillero.o tablero.o jugador.o juego.o interfaz.o main.o easyBMP.o
+	$(CC) $(CFLAGS) -o tp2 interfaz.o juego.o casillero.o tablero.o jugador.o carta.o ficha.o EasyBMP.o  main.o
 
 #Make Obj
 
@@ -33,6 +36,10 @@ ficha.o: Ficha.cpp  Ficha.h
 
 carta.o: Carta.cpp  Carta.h
 	$(CC) $(CFLAGS) -o carta.o  -c Carta.cpp
+
+easyBMP.o: 
+	$(CC) $(CFLAGS) -o EasyBMP.o -c EasyBMP/EasyBMP.cpp 
+
 
 #Make Clear
 

@@ -12,7 +12,7 @@
 #include "Cola.h"
 #include "Interfaz.h"
 #include "Constantes.h"
-
+#include "EasyBMP/EasyBMP.h"
 
 
 class Juego {
@@ -28,6 +28,7 @@ private:
     Interfaz * interfaz;
     unsigned int cantidadMaximaCartas;
   	int jugadaAnterior[2][3];
+
 
 public:
 	/*
@@ -193,6 +194,23 @@ private:
      * con el mismo tipo de ficha
      */
     bool hayTateti(Casillero * casilleroOrigen);
+
+
+    /*
+     */
+    void crearColores( Lista < RGBApixel > * colores, Lista < std::string > * strColores );
+
+    /*
+     */
+    void crearBitmap();
+    
+    /*
+     */
+    void borrarFichaBitmap( int i, int j, int k );
+
+    /*
+     */
+    void escribirFichaBitmap( int i, int j, int k );
 
 };
 

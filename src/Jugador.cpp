@@ -1,9 +1,10 @@
 #include "Jugador.h"
 
 
-Jugador::Jugador(std::string nombreJugador,Ficha * ficha,int cantidadFichas){
+Jugador::Jugador(std::string nombreJugador, Ficha * ficha, int cantidadFichas, std::string color){
     this->nombreJugador= nombreJugador;
     this->ficha = ficha;
+    this->color = color;
     this->cantidadFichas = cantidadFichas;
     this->turnos = 1;
     this->cartas = new Lista<Carta *>;
@@ -115,3 +116,6 @@ Ficha * Jugador::getFicha() {
 }
 
 
+std::string Jugador::getColor() {
+    return this->color;
+}

@@ -8,6 +8,10 @@ Juego::Juego() {
     this->ganador = NULL;
     this->jugadorAnterior = NULL;
 
+    // LA CANTIDAD DE COLORES DETERMINA LA CANTIDAD DE JUGADORES
+    Lista < RGBApixel > * colores = new Lista< RGBApixel >;
+    Lista < std::string > * strColores = new Lista< std::string >;
+    this->crearColores( colores, strColores );
 
     unsigned int cantidadJugadores = pedirCantidadJugadores();
     unsigned int cantidadFichas = pedirCantidadFichas();
@@ -16,11 +20,16 @@ Juego::Juego() {
     this->jugadores = new Lista < Jugador * >;
     for (unsigned int i = 0; i < cantidadJugadores; i++) {
         std::string nombre = pedirNombre(i + 1);
-        Ficha * ficha = new Ficha('A' + i);
-        Jugador * nuevoJugador = new Jugador(nombre, ficha, cantidadFichas);
+        RGBApixel color = colores->obtener(i+1);
+        std::string strColor = strColores->obtener(i+1);
+        Ficha * ficha = new Ficha('A' + i, color);
+        Jugador * nuevoJugador = new Jugador(nombre, ficha, cantidadFichas, strColor);
         this->jugadores->altaFinal(nuevoJugador);
     }
     this->jugadorEnTurno = this->jugadores->obtener(1);
+
+    delete colores;
+    delete strColores;
 
 
     unsigned int * dimensiones = new unsigned int [3];
@@ -44,6 +53,7 @@ Juego::Juego() {
 
 
 Juego::~Juego() {
+    
     delete this->tablero;
 
     this->jugadores->iniciarCursor();
@@ -198,7 +208,7 @@ void Juego::saltearSiguienteJugador() {
 
 void Juego::volverJugadaAtras() {
 
-    if ( this->jugadaAnterior[1][0] == -1 ) {
+    if ( this->jugadaAnterior[1][0] == -1 ) { //Si es el primer movimiento del juego
         return;
     }
 
@@ -207,6 +217,7 @@ void Juego::volverJugadaAtras() {
     int z2 = this->jugadaAnterior[1][2];
 
     Ficha * ficha = this->tablero->getCasillero(x2, y2, z2)->quitarFicha();
+    this->borrarFichaBitmap(x2, y2, z2);
 
     if ( this->jugadaAnterior[0][0] == -1 ) {
         devolverFichaAJugadorAnterior();
@@ -218,6 +229,7 @@ void Juego::volverJugadaAtras() {
 
         try {
         	this->tablero->getCasillero(x1, y1, z1)->setFicha(ficha);
+            this->escribirFichaBitmap(x1, y1, z1);
         }
         catch (...) {
 
@@ -628,7 +640,212 @@ bool Juego::hayTateti(Casillero * casilleroOrigen){
 // ===============================================
 // ===============================================
 
+void Juego::crearColores( Lista < RGBApixel > * colores, Lista < std::string > * strColores ) {
+
+    // LA CANTIDAD DE COLORES DETERMINA LA CANTIDAD DE JUGADORES
+
+    RGBApixel red;
+	red.Red = 255; red.Green = 0; red.Blue = 0; red.Alpha = 0;
+	RGBApixel blue;
+	blue.Red = 0; blue.Green = 0; blue.Blue = 255; blue.Alpha = 0;
+	RGBApixel yellow;
+	yellow.Red = 255; yellow.Green = 255; yellow.Blue = 0; yellow.Alpha = 0;
+	RGBApixel green;
+	green.Red = 70; green.Green = 200; green.Blue = 60; green.Alpha = 0;
+	RGBApixel orange;
+	orange.Red = 255; orange.Green = 120; orange.Blue = 0; orange.Alpha = 0;
+	RGBApixel violet;
+	violet.Red = 110; violet.Green = 80; violet.Blue = 150; violet.Alpha = 0;
+
+    colores->altaFinal(red);
+    std::string color = "rojo";
+    strColores->altaFinal(color);
+    colores->altaFinal(blue);
+    color = "azul";
+    strColores->altaFinal(color);
+    colores->altaFinal(yellow);
+    color = "amarillo";
+    strColores->altaFinal(color);
+    colores->altaFinal(green);
+    color = "verde";
+    strColores->altaFinal(color);
+    colores->altaFinal(orange);
+    color = "naranja";
+    strColores->altaFinal(color);
+    colores->altaFinal(violet);
+    color = "violeta";
+    strColores->altaFinal(color);
+}
+
+
+void Juego::crearBitmap() {
+    
+    int ancho = this->tablero->getDimensiones()[0];
+    int alto = this->tablero->getDimensiones()[1];
+    int profundo = this->tablero->getDimensiones()[2];
+
+    int dimensionCasillero = 50;
+    
+    int width = dimensionCasillero * ancho * profundo;
+    int height = dimensionCasillero * alto;
+
+	BMP image;
+	image.SetSize(width,height);
+	// Set its color depth to 8-bits	
+	image.SetBitDepth(8);
+
+	RGBApixel grey;
+	grey.Red = 150; grey.Green = 150; grey.Blue = 150; grey.Alpha = 0;
+	RGBApixel black;
+	black.Red = 0; black.Green = 0; black.Blue = 0; black.Alpha = 0;
+    RGBApixel white;
+    white.Red = 255; white.Green = 255; white.Blue = 255; white.Alpha = 0;
+
+
+	// Pintar toda la imagen de gris
+	for ( int y=0; y<height; ++y ) {
+		for ( int x=0; x<width ; ++x ) {
+			image.SetPixel(x, y, grey);
+		}
+	}
+
+
+	// Pintar las lineas separadoras
+	for ( int y=0; y<height; ++y ) {
+
+        image.SetPixel(0, y, black);
+        image.SetPixel(1, y, black);
+        image.SetPixel(width-2, y, black);
+        image.SetPixel(width-1, y, black);
+
+		for ( int x=0; x<width ; ++x ) {
+
+            image.SetPixel(x, 0, black);
+            image.SetPixel(x, 1, black);
+            image.SetPixel(x, height-2, black);
+            image.SetPixel(x, height-1, black);
+
+			if ( y%dimensionCasillero==0 || x%dimensionCasillero==0 ) {
+                image.SetPixel(x, y, black);
+            }
+            if ( (x!=0) && (x%(dimensionCasillero*ancho) == 0) ) {
+                image.SetPixel(x-1, y, black);
+                image.SetPixel(x+1, y, black);
+                image.SetPixel(x+2, y, black);
+            }
+		}
+	}
+
+    image.WriteToFile("image.bmp");
+}
+
+
+void Juego::borrarFichaBitmap( int i, int j, int k ) {
+
+    BMP image;
+    image.ReadFromFile("image.bmp");
+
+    int ancho = this->tablero->getDimensiones()[0];
+
+    int dimensionCasillero = 50;
+
+    RGBApixel grey;
+    grey.Red = 150; grey.Green = 150; grey.Blue = 150; grey.Alpha = 0;
+
+    int min_y = dimensionCasillero*j+1;
+    int max_y = dimensionCasillero*(j+1);
+
+    if ( j==0 ) {
+        min_y += 1;
+    } else if ( j== (this->tablero->getDimensiones()[1]-1) ) {
+        max_y -= 2;
+    }
+    
+    for ( int y=min_y; y<max_y; ++y ) {
+        
+        int min_x = dimensionCasillero*i+1+(dimensionCasillero*ancho*k);
+        int max_x = dimensionCasillero*(i+1)+(dimensionCasillero*ancho*k);
+
+        if ( i==0 ) {
+            min_x += 1;
+            if ( k!=0 ) {
+                min_x += 1;
+            }
+        } else if ( i == (this->tablero->getDimensiones()[0]-1) ) {
+            max_x -= 1;
+
+            if (k == (this->tablero->getDimensiones()[2]-1) ) {
+                max_x -= 1;
+            }
+        }
+        
+        for ( int x=min_x; x<max_x; ++x) {
+            image.SetPixel(x, y, grey);
+        }
+    }
+
+    image.WriteToFile("image.bmp");
+}
+
+
+void Juego::escribirFichaBitmap( int i, int j, int k ) {
+
+    BMP image;
+    image.ReadFromFile("image.bmp");
+
+    int ancho = this->tablero->getDimensiones()[0];
+
+    int dimensionCasillero = 50;
+
+
+    // pinto el casillero a donde se puso una ficha
+
+    Casillero * casillero = this->tablero->getCasillero(i, j, k);
+    RGBApixel color = casillero->getFicha()->getColor();
+
+    int min_y = dimensionCasillero*j+1;
+    int max_y = dimensionCasillero*(j+1);
+
+    if ( j==0 ) {
+        min_y += 1;
+    } else if ( j== (this->tablero->getDimensiones()[1]-1) ) {
+        max_y -= 2;
+    }
+    
+    for ( int y=min_y; y<max_y; ++y ) {
+        
+        int min_x = dimensionCasillero*i+1+(dimensionCasillero*ancho*k);
+        int max_x = dimensionCasillero*(i+1)+(dimensionCasillero*ancho*k);
+
+        if ( i==0 ) {
+            min_x += 1;
+            if ( k!=0 ) {
+                min_x += 1;
+            }
+        } else if ( i == (this->tablero->getDimensiones()[0]-1) ) {
+            max_x -= 1;
+
+            if (k == (this->tablero->getDimensiones()[2]-1) ) {
+                max_x -= 1;
+            }
+        }
+        
+        for ( int x=min_x; x<max_x; ++x) {
+            image.SetPixel(x, y, color);
+        }
+    }
+
+	image.WriteToFile("image.bmp");
+}
+
+
+
+// ===============================================
+// ===============================================
+
 void Juego::jugar() {
+
+    this->crearBitmap();
 
 	this->interfaz->mostrarPantallaInicial();
 
@@ -646,13 +863,17 @@ void Juego::jugar() {
 
         if ( this->jugadorEnTurno->getCantidadFichas() > 0 ) {
             this->interfaz->tocaPonerFicha( this->jugadorEnTurno->getNombre(), this->jugadorEnTurno->getFicha()->getSimbolo(),
-            								this->jugadorEnTurno->getCantidadFichas() );
+            								this->jugadorEnTurno->getCantidadFichas(), this->jugadorEnTurno->getColor() );
             this->ponerFicha( jugadaActual );
+            this->escribirFichaBitmap( jugadaActual[1][0], jugadaActual[1][1], jugadaActual[1][2] );
         }
 
         else {
-            this->interfaz->tocaMoverFicha( this->jugadorEnTurno->getNombre(), this->jugadorEnTurno->getFicha()->getSimbolo() );
+            this->interfaz->tocaMoverFicha( this->jugadorEnTurno->getNombre(), this->jugadorEnTurno->getFicha()->getSimbolo(),
+                                            this->jugadorEnTurno->getColor() );
             this->moverFicha( jugadaActual );
+            this->borrarFichaBitmap( jugadaActual[0][0], jugadaActual[0][1], jugadaActual[0][2] );
+            this->escribirFichaBitmap( jugadaActual[1][0], jugadaActual[1][1], jugadaActual[1][2] );
         }
 
         this->interfaz->mostrarTablero(this->tablero);
@@ -685,7 +906,6 @@ void Juego::jugar() {
     delete [] jugadaActual[0];
     delete [] jugadaActual[1];
     delete [] jugadaActual;
-
 }
 
 
